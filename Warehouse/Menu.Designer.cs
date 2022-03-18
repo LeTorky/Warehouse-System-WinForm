@@ -51,11 +51,12 @@
             this.WarehouseList = new System.Windows.Forms.ComboBox();
             this.WarehouseGridView = new System.Windows.Forms.DataGridView();
             this.ProductTab = new System.Windows.Forms.TabPage();
-            this.SupplierPage = new System.Windows.Forms.TabPage();
-            this.CustomerTab = new System.Windows.Forms.TabPage();
-            this.SupplyTab = new System.Windows.Forms.TabPage();
-            this.SaleTab = new System.Windows.Forms.TabPage();
-            this.ReportTab = new System.Windows.Forms.TabPage();
+            this.ProductAddBox = new System.Windows.Forms.GroupBox();
+            this.ProductExpiryLabelInput = new System.Windows.Forms.Label();
+            this.ProductExpiryInput = new System.Windows.Forms.TextBox();
+            this.ProductAddBtn = new System.Windows.Forms.Button();
+            this.ProductNameLabelInput = new System.Windows.Forms.Label();
+            this.ProductNameInput = new System.Windows.Forms.TextBox();
             this.ProductEditBox = new System.Windows.Forms.GroupBox();
             this.ProductExpiryLabelOutput = new System.Windows.Forms.Label();
             this.ProductExpiryOutput = new System.Windows.Forms.TextBox();
@@ -66,21 +67,20 @@
             this.ProductIDOutput = new System.Windows.Forms.TextBox();
             this.ProductList = new System.Windows.Forms.ComboBox();
             this.ProductGridView = new System.Windows.Forms.DataGridView();
-            this.ProductAddBox = new System.Windows.Forms.GroupBox();
-            this.ProductExpiryLabelInput = new System.Windows.Forms.Label();
-            this.ProductExpiryInput = new System.Windows.Forms.TextBox();
-            this.ProductAddBtn = new System.Windows.Forms.Button();
-            this.ProductNameLabelInput = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.SupplierPage = new System.Windows.Forms.TabPage();
+            this.CustomerTab = new System.Windows.Forms.TabPage();
+            this.SupplyTab = new System.Windows.Forms.TabPage();
+            this.SaleTab = new System.Windows.Forms.TabPage();
+            this.ReportTab = new System.Windows.Forms.TabPage();
             this.TabMenu.SuspendLayout();
             this.WarehouseTab.SuspendLayout();
             this.WarehouseAddBox.SuspendLayout();
             this.WarehouseEditBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WarehouseGridView)).BeginInit();
             this.ProductTab.SuspendLayout();
+            this.ProductAddBox.SuspendLayout();
             this.ProductEditBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ProductGridView)).BeginInit();
-            this.ProductAddBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // TabMenu
@@ -313,6 +313,159 @@
             this.ProductTab.Text = "Product";
             this.ProductTab.Enter += new System.EventHandler(this.ProductTab_Enter);
             // 
+            // ProductAddBox
+            // 
+            this.ProductAddBox.Controls.Add(this.ProductExpiryLabelInput);
+            this.ProductAddBox.Controls.Add(this.ProductExpiryInput);
+            this.ProductAddBox.Controls.Add(this.ProductAddBtn);
+            this.ProductAddBox.Controls.Add(this.ProductNameLabelInput);
+            this.ProductAddBox.Controls.Add(this.ProductNameInput);
+            this.ProductAddBox.Location = new System.Drawing.Point(41, 277);
+            this.ProductAddBox.Name = "ProductAddBox";
+            this.ProductAddBox.Size = new System.Drawing.Size(714, 117);
+            this.ProductAddBox.TabIndex = 2;
+            this.ProductAddBox.TabStop = false;
+            this.ProductAddBox.Text = "Add Product";
+            // 
+            // ProductExpiryLabelInput
+            // 
+            this.ProductExpiryLabelInput.AutoSize = true;
+            this.ProductExpiryLabelInput.Location = new System.Drawing.Point(248, 35);
+            this.ProductExpiryLabelInput.Name = "ProductExpiryLabelInput";
+            this.ProductExpiryLabelInput.Size = new System.Drawing.Size(52, 17);
+            this.ProductExpiryLabelInput.TabIndex = 10;
+            this.ProductExpiryLabelInput.Text = "Expiry:";
+            // 
+            // ProductExpiryInput
+            // 
+            this.ProductExpiryInput.Location = new System.Drawing.Point(302, 31);
+            this.ProductExpiryInput.Name = "ProductExpiryInput";
+            this.ProductExpiryInput.Size = new System.Drawing.Size(149, 24);
+            this.ProductExpiryInput.TabIndex = 9;
+            // 
+            // ProductAddBtn
+            // 
+            this.ProductAddBtn.Location = new System.Drawing.Point(21, 74);
+            this.ProductAddBtn.Name = "ProductAddBtn";
+            this.ProductAddBtn.Size = new System.Drawing.Size(681, 23);
+            this.ProductAddBtn.TabIndex = 7;
+            this.ProductAddBtn.Text = "Add";
+            this.ProductAddBtn.UseVisualStyleBackColor = true;
+            this.ProductAddBtn.Click += new System.EventHandler(this.ProductAddBtn_Click);
+            // 
+            // ProductNameLabelInput
+            // 
+            this.ProductNameLabelInput.AutoSize = true;
+            this.ProductNameLabelInput.Location = new System.Drawing.Point(18, 35);
+            this.ProductNameLabelInput.Name = "ProductNameLabelInput";
+            this.ProductNameLabelInput.Size = new System.Drawing.Size(48, 17);
+            this.ProductNameLabelInput.TabIndex = 8;
+            this.ProductNameLabelInput.Text = "Name:";
+            // 
+            // ProductNameInput
+            // 
+            this.ProductNameInput.Location = new System.Drawing.Point(69, 31);
+            this.ProductNameInput.Name = "ProductNameInput";
+            this.ProductNameInput.Size = new System.Drawing.Size(154, 24);
+            this.ProductNameInput.TabIndex = 7;
+            // 
+            // ProductEditBox
+            // 
+            this.ProductEditBox.Controls.Add(this.ProductExpiryLabelOutput);
+            this.ProductEditBox.Controls.Add(this.ProductExpiryOutput);
+            this.ProductEditBox.Controls.Add(this.ProductEditBtn);
+            this.ProductEditBox.Controls.Add(this.ProductNameLabelOutput);
+            this.ProductEditBox.Controls.Add(this.ProductIDLabelOutput);
+            this.ProductEditBox.Controls.Add(this.ProductNameOutput);
+            this.ProductEditBox.Controls.Add(this.ProductIDOutput);
+            this.ProductEditBox.Controls.Add(this.ProductList);
+            this.ProductEditBox.Controls.Add(this.ProductGridView);
+            this.ProductEditBox.Location = new System.Drawing.Point(41, 28);
+            this.ProductEditBox.Name = "ProductEditBox";
+            this.ProductEditBox.Size = new System.Drawing.Size(714, 231);
+            this.ProductEditBox.TabIndex = 1;
+            this.ProductEditBox.TabStop = false;
+            this.ProductEditBox.Text = "Edit Product";
+            // 
+            // ProductExpiryLabelOutput
+            // 
+            this.ProductExpiryLabelOutput.AutoSize = true;
+            this.ProductExpiryLabelOutput.Location = new System.Drawing.Point(32, 134);
+            this.ProductExpiryLabelOutput.Name = "ProductExpiryLabelOutput";
+            this.ProductExpiryLabelOutput.Size = new System.Drawing.Size(52, 17);
+            this.ProductExpiryLabelOutput.TabIndex = 8;
+            this.ProductExpiryLabelOutput.Text = "Expiry:";
+            // 
+            // ProductExpiryOutput
+            // 
+            this.ProductExpiryOutput.Location = new System.Drawing.Point(91, 130);
+            this.ProductExpiryOutput.Name = "ProductExpiryOutput";
+            this.ProductExpiryOutput.Size = new System.Drawing.Size(132, 24);
+            this.ProductExpiryOutput.TabIndex = 7;
+            // 
+            // ProductEditBtn
+            // 
+            this.ProductEditBtn.Location = new System.Drawing.Point(11, 192);
+            this.ProductEditBtn.Name = "ProductEditBtn";
+            this.ProductEditBtn.Size = new System.Drawing.Size(212, 23);
+            this.ProductEditBtn.TabIndex = 6;
+            this.ProductEditBtn.Text = "Edit";
+            this.ProductEditBtn.UseVisualStyleBackColor = true;
+            this.ProductEditBtn.Click += new System.EventHandler(this.ProductEditBtn_Click);
+            // 
+            // ProductNameLabelOutput
+            // 
+            this.ProductNameLabelOutput.AutoSize = true;
+            this.ProductNameLabelOutput.Location = new System.Drawing.Point(36, 104);
+            this.ProductNameLabelOutput.Name = "ProductNameLabelOutput";
+            this.ProductNameLabelOutput.Size = new System.Drawing.Size(48, 17);
+            this.ProductNameLabelOutput.TabIndex = 5;
+            this.ProductNameLabelOutput.Text = "Name:";
+            // 
+            // ProductIDLabelOutput
+            // 
+            this.ProductIDLabelOutput.AutoSize = true;
+            this.ProductIDLabelOutput.Location = new System.Drawing.Point(57, 73);
+            this.ProductIDLabelOutput.Name = "ProductIDLabelOutput";
+            this.ProductIDLabelOutput.Size = new System.Drawing.Size(27, 17);
+            this.ProductIDLabelOutput.TabIndex = 4;
+            this.ProductIDLabelOutput.Text = "ID:";
+            // 
+            // ProductNameOutput
+            // 
+            this.ProductNameOutput.Location = new System.Drawing.Point(91, 100);
+            this.ProductNameOutput.Name = "ProductNameOutput";
+            this.ProductNameOutput.Size = new System.Drawing.Size(132, 24);
+            this.ProductNameOutput.TabIndex = 2;
+            // 
+            // ProductIDOutput
+            // 
+            this.ProductIDOutput.Enabled = false;
+            this.ProductIDOutput.Location = new System.Drawing.Point(91, 69);
+            this.ProductIDOutput.Name = "ProductIDOutput";
+            this.ProductIDOutput.Size = new System.Drawing.Size(132, 24);
+            this.ProductIDOutput.TabIndex = 3;
+            // 
+            // ProductList
+            // 
+            this.ProductList.FormattingEnabled = true;
+            this.ProductList.Location = new System.Drawing.Point(11, 37);
+            this.ProductList.Name = "ProductList";
+            this.ProductList.Size = new System.Drawing.Size(212, 24);
+            this.ProductList.TabIndex = 1;
+            this.ProductList.SelectedIndexChanged += new System.EventHandler(this.ProductList_SelectedIndexChanged);
+            // 
+            // ProductGridView
+            // 
+            this.ProductGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ProductGridView.Location = new System.Drawing.Point(302, 37);
+            this.ProductGridView.Name = "ProductGridView";
+            this.ProductGridView.RowHeadersWidth = 51;
+            this.ProductGridView.RowTemplate.Height = 26;
+            this.ProductGridView.Size = new System.Drawing.Size(400, 176);
+            this.ProductGridView.TabIndex = 0;
+            this.ProductGridView.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.ProductGridView_RowHeaderMouseClick);
+            // 
             // SupplierPage
             // 
             this.SupplierPage.BackColor = System.Drawing.SystemColors.Control;
@@ -364,155 +517,6 @@
             this.ReportTab.TabIndex = 4;
             this.ReportTab.Text = "Report";
             // 
-            // ProductEditBox
-            // 
-            this.ProductEditBox.Controls.Add(this.ProductExpiryLabelOutput);
-            this.ProductEditBox.Controls.Add(this.ProductExpiryOutput);
-            this.ProductEditBox.Controls.Add(this.ProductEditBtn);
-            this.ProductEditBox.Controls.Add(this.ProductNameLabelOutput);
-            this.ProductEditBox.Controls.Add(this.ProductIDLabelOutput);
-            this.ProductEditBox.Controls.Add(this.ProductNameOutput);
-            this.ProductEditBox.Controls.Add(this.ProductIDOutput);
-            this.ProductEditBox.Controls.Add(this.ProductList);
-            this.ProductEditBox.Controls.Add(this.ProductGridView);
-            this.ProductEditBox.Location = new System.Drawing.Point(41, 28);
-            this.ProductEditBox.Name = "ProductEditBox";
-            this.ProductEditBox.Size = new System.Drawing.Size(714, 231);
-            this.ProductEditBox.TabIndex = 1;
-            this.ProductEditBox.TabStop = false;
-            this.ProductEditBox.Text = "Edit Product";
-            // 
-            // ProductExpiryLabelOutput
-            // 
-            this.ProductExpiryLabelOutput.AutoSize = true;
-            this.ProductExpiryLabelOutput.Location = new System.Drawing.Point(32, 134);
-            this.ProductExpiryLabelOutput.Name = "ProductExpiryLabelOutput";
-            this.ProductExpiryLabelOutput.Size = new System.Drawing.Size(52, 17);
-            this.ProductExpiryLabelOutput.TabIndex = 8;
-            this.ProductExpiryLabelOutput.Text = "Expiry:";
-            // 
-            // ProductExpiryOutput
-            // 
-            this.ProductExpiryOutput.Location = new System.Drawing.Point(91, 130);
-            this.ProductExpiryOutput.Name = "ProductExpiryOutput";
-            this.ProductExpiryOutput.Size = new System.Drawing.Size(132, 24);
-            this.ProductExpiryOutput.TabIndex = 7;
-            // 
-            // ProductEditBtn
-            // 
-            this.ProductEditBtn.Location = new System.Drawing.Point(11, 192);
-            this.ProductEditBtn.Name = "ProductEditBtn";
-            this.ProductEditBtn.Size = new System.Drawing.Size(212, 23);
-            this.ProductEditBtn.TabIndex = 6;
-            this.ProductEditBtn.Text = "Edit";
-            this.ProductEditBtn.UseVisualStyleBackColor = true;
-            // 
-            // ProductNameLabelOutput
-            // 
-            this.ProductNameLabelOutput.AutoSize = true;
-            this.ProductNameLabelOutput.Location = new System.Drawing.Point(36, 104);
-            this.ProductNameLabelOutput.Name = "ProductNameLabelOutput";
-            this.ProductNameLabelOutput.Size = new System.Drawing.Size(48, 17);
-            this.ProductNameLabelOutput.TabIndex = 5;
-            this.ProductNameLabelOutput.Text = "Name:";
-            // 
-            // ProductIDLabelOutput
-            // 
-            this.ProductIDLabelOutput.AutoSize = true;
-            this.ProductIDLabelOutput.Location = new System.Drawing.Point(57, 73);
-            this.ProductIDLabelOutput.Name = "ProductIDLabelOutput";
-            this.ProductIDLabelOutput.Size = new System.Drawing.Size(27, 17);
-            this.ProductIDLabelOutput.TabIndex = 4;
-            this.ProductIDLabelOutput.Text = "ID:";
-            // 
-            // ProductNameOutput
-            // 
-            this.ProductNameOutput.Location = new System.Drawing.Point(91, 100);
-            this.ProductNameOutput.Name = "ProductNameOutput";
-            this.ProductNameOutput.Size = new System.Drawing.Size(132, 24);
-            this.ProductNameOutput.TabIndex = 2;
-            // 
-            // ProductIDOutput
-            // 
-            this.ProductIDOutput.Enabled = false;
-            this.ProductIDOutput.Location = new System.Drawing.Point(91, 69);
-            this.ProductIDOutput.Name = "ProductIDOutput";
-            this.ProductIDOutput.Size = new System.Drawing.Size(132, 24);
-            this.ProductIDOutput.TabIndex = 3;
-            // 
-            // ProductList
-            // 
-            this.ProductList.FormattingEnabled = true;
-            this.ProductList.Location = new System.Drawing.Point(11, 37);
-            this.ProductList.Name = "ProductList";
-            this.ProductList.Size = new System.Drawing.Size(212, 24);
-            this.ProductList.TabIndex = 1;
-            // 
-            // ProductGridView
-            // 
-            this.ProductGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ProductGridView.Location = new System.Drawing.Point(302, 37);
-            this.ProductGridView.Name = "ProductGridView";
-            this.ProductGridView.RowHeadersWidth = 51;
-            this.ProductGridView.RowTemplate.Height = 26;
-            this.ProductGridView.Size = new System.Drawing.Size(400, 176);
-            this.ProductGridView.TabIndex = 0;
-            // 
-            // ProductAddBox
-            // 
-            this.ProductAddBox.Controls.Add(this.ProductExpiryLabelInput);
-            this.ProductAddBox.Controls.Add(this.ProductExpiryInput);
-            this.ProductAddBox.Controls.Add(this.ProductAddBtn);
-            this.ProductAddBox.Controls.Add(this.ProductNameLabelInput);
-            this.ProductAddBox.Controls.Add(this.textBox7);
-            this.ProductAddBox.Location = new System.Drawing.Point(41, 277);
-            this.ProductAddBox.Name = "ProductAddBox";
-            this.ProductAddBox.Size = new System.Drawing.Size(714, 117);
-            this.ProductAddBox.TabIndex = 2;
-            this.ProductAddBox.TabStop = false;
-            this.ProductAddBox.Text = "Add Product";
-            // 
-            // ProductExpiryLabelInput
-            // 
-            this.ProductExpiryLabelInput.AutoSize = true;
-            this.ProductExpiryLabelInput.Location = new System.Drawing.Point(248, 35);
-            this.ProductExpiryLabelInput.Name = "ProductExpiryLabelInput";
-            this.ProductExpiryLabelInput.Size = new System.Drawing.Size(52, 17);
-            this.ProductExpiryLabelInput.TabIndex = 10;
-            this.ProductExpiryLabelInput.Text = "Expiry:";
-            // 
-            // ProductExpiryInput
-            // 
-            this.ProductExpiryInput.Location = new System.Drawing.Point(302, 31);
-            this.ProductExpiryInput.Name = "ProductExpiryInput";
-            this.ProductExpiryInput.Size = new System.Drawing.Size(149, 24);
-            this.ProductExpiryInput.TabIndex = 9;
-            // 
-            // ProductAddBtn
-            // 
-            this.ProductAddBtn.Location = new System.Drawing.Point(21, 74);
-            this.ProductAddBtn.Name = "ProductAddBtn";
-            this.ProductAddBtn.Size = new System.Drawing.Size(681, 23);
-            this.ProductAddBtn.TabIndex = 7;
-            this.ProductAddBtn.Text = "Add";
-            this.ProductAddBtn.UseVisualStyleBackColor = true;
-            // 
-            // ProductNameLabelInput
-            // 
-            this.ProductNameLabelInput.AutoSize = true;
-            this.ProductNameLabelInput.Location = new System.Drawing.Point(18, 35);
-            this.ProductNameLabelInput.Name = "ProductNameLabelInput";
-            this.ProductNameLabelInput.Size = new System.Drawing.Size(48, 17);
-            this.ProductNameLabelInput.TabIndex = 8;
-            this.ProductNameLabelInput.Text = "Name:";
-            // 
-            // textBox7
-            // 
-            this.textBox7.Location = new System.Drawing.Point(69, 31);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(154, 24);
-            this.textBox7.TabIndex = 7;
-            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -532,11 +536,11 @@
             this.WarehouseEditBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WarehouseGridView)).EndInit();
             this.ProductTab.ResumeLayout(false);
+            this.ProductAddBox.ResumeLayout(false);
+            this.ProductAddBox.PerformLayout();
             this.ProductEditBox.ResumeLayout(false);
             this.ProductEditBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ProductGridView)).EndInit();
-            this.ProductAddBox.ResumeLayout(false);
-            this.ProductAddBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -576,7 +580,7 @@
         private System.Windows.Forms.TextBox ProductExpiryInput;
         private System.Windows.Forms.Button ProductAddBtn;
         private System.Windows.Forms.Label ProductNameLabelInput;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox ProductNameInput;
         private System.Windows.Forms.GroupBox ProductEditBox;
         private System.Windows.Forms.Label ProductExpiryLabelOutput;
         private System.Windows.Forms.TextBox ProductExpiryOutput;

@@ -167,9 +167,11 @@ namespace Warehouse
         #region Warehouse DataGrid Row Selected
         private void WarehouseGridView_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            WarehouseSelect(WH => WH.ID == IndexList[e.RowIndex]);
+            if(WarehouseIDOutput.Text == String.Empty)
+            {
+                WarehouseSelect(WH => WH.ID == IndexList[e.RowIndex]);
+            }
         }
-
         #endregion
 
         #region Warehouse Add Button
@@ -200,8 +202,70 @@ namespace Warehouse
         }
         #endregion
 
+        #region DataGrid Row Selected
+        private void ProductGridView_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (ProductIDOutput.Text == String.Empty)
+            {
+                ProductSelect(PD => PD.Code == IndexList[e.RowIndex]);
+            }
+        }
+        #endregion
+
+        #region Product List Selected
+        private void ProductList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox List = (ComboBox)sender;
+            if (List.SelectedIndex != 0)
+            {
+                ProductSelect(PD => PD.Code == IndexList[List.SelectedIndex - 1]);
+            }
+            else
+            {
+                ProductSelect(null);
+            }
+        }
+        #endregion
+
+        #region Product Edit Button
+        private void ProductEditBtn_Click(object sender, EventArgs e)
+        {
+            if (ProductIDOutput.Text != String.Empty)
+            {
+                int ID = int.Parse(ProductIDOutput.Text);
+                Product EditPD = Entries.Products.Where(PD => PD.Code == ID).First();
+                EditPD.Name = ProductNameOutput.Text != String.Empty ? ProductNameOutput.Text : EditPD.Name;
+                EditPD.ExpPeriod = ProductExpiryOutput.Text != String.Empty ? int.Parse(ProductExpiryOutput.Text) : EditPD.ExpPeriod;
+                Entries.SaveChanges();
+                ProductSelect(null);
+            }
+            else
+            {
+                MessageBox.Show("Please choose a Product to Edit!");
+            }
+        }
+        #endregion
+
+        #region Product Add Button
+        private void ProductAddBtn_Click(object sender, EventArgs e)
+        {
+            if (ProductNameLabelInput.Text != String.Empty && ProductExpiryInput.Text != String.Empty)
+            {
+                int ID = Entries.Products.Max(PD => PD.Code);
+                Entries.Products.Add(new Product() { Code = ID, Name = ProductNameInput.Text, ExpPeriod = int.Parse(ProductExpiryInput.Text) });
+                Entries.SaveChanges();
+                ProductSelect(null);
+            }
+            else
+            {
+                MessageBox.Show("Please enter all Product Fields!");
+            }
+        }
         #endregion
 
         #endregion
+
+        #endregion
+
     }
 }
