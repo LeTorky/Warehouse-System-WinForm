@@ -14,7 +14,9 @@ namespace Warehouse
     public partial class GetDetailedQty_Result
     {
         public Nullable<int> Warehouse_ID { get; set; }
+        public string Name { get; set; }
         public Nullable<int> Product_ID { get; set; }
+        public string Name1 { get; set; }
         public Nullable<System.DateTime> Prod_Date { get; set; }
         public Nullable<int> Qty { get; set; }
     }

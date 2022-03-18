@@ -715,7 +715,7 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="WareHouseDBEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="WareHouseDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="Sale_Permit" EntityType="Self.Sale_Permit" />
@@ -818,13 +818,17 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
         </EntityContainer>
         <ComplexType Name="GetDetailedQty_Result">
           <Property Type="Int32" Name="Warehouse_ID" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="Product_ID" Nullable="true" />
+          <Property Type="String" Name="Name1" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="Prod_Date" Nullable="true" />
           <Property Type="Int32" Name="Qty" Nullable="true" />
         </ComplexType>
         <ComplexType Name="GetTotalQty_Result">
           <Property Type="Int32" Name="Warehouse_ID" Nullable="true" />
+          <Property Type="String" Name="Warehouse_Name" Nullable="true" MaxLength="100" />
           <Property Type="Int32" Name="Product_ID" Nullable="true" />
+          <Property Type="String" Name="Product_Name" Nullable="true" MaxLength="100" />
           <Property Type="Int32" Name="Total_Qty" Nullable="true" />
         </ComplexType>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -843,7 +847,7 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="WareHouseDBModelStoreContainer" CdmEntityContainer="WareHouseDBEntities1">
+        <EntityContainerMapping StorageEntityContainer="WareHouseDBModelStoreContainer" CdmEntityContainer="WareHouseDBEntities">
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="WareHouseDBModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
@@ -964,7 +968,9 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
             <ResultMapping>
               <ComplexTypeMapping TypeName="WareHouseDBModel.GetDetailedQty_Result">
                 <ScalarProperty Name="Warehouse_ID" ColumnName="Warehouse_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+                <ScalarProperty Name="Name1" ColumnName="Name1" />
                 <ScalarProperty Name="Prod_Date" ColumnName="Prod_Date" />
                 <ScalarProperty Name="Qty" ColumnName="Qty" />
               </ComplexTypeMapping>
@@ -974,7 +980,9 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
             <ResultMapping>
               <ComplexTypeMapping TypeName="WareHouseDBModel.GetTotalQty_Result">
                 <ScalarProperty Name="Warehouse_ID" ColumnName="Warehouse_ID" />
+                <ScalarProperty Name="Warehouse_Name" ColumnName="Warehouse_Name" />
                 <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+                <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
                 <ScalarProperty Name="Total_Qty" ColumnName="Total_Qty" />
               </ComplexTypeMapping>
             </ResultMapping>

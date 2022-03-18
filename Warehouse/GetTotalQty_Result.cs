@@ -14,7 +14,9 @@ namespace Warehouse
     public partial class GetTotalQty_Result
     {
         public Nullable<int> Warehouse_ID { get; set; }
+        public string Warehouse_Name { get; set; }
         public Nullable<int> Product_ID { get; set; }
+        public string Product_Name { get; set; }
         public Nullable<int> Total_Qty { get; set; }
     }
 }

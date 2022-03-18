@@ -18,7 +18,7 @@ namespace Warehouse
     public partial class WareHouseDBEntities : DbContext
     {
         public WareHouseDBEntities()
-            : base("name=WareHouseDBEntities1")
+            : base("name=WareHouseDBEntities")
         {
         }
     
