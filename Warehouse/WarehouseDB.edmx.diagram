@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7391bd16dd524d88a134c1ccf7be783f" Name="Diagram1">
+        <EntityTypeShape EntityType="WareHouseDBModel.Customer" Width="1.5" PointX="0.75" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WareHouseDBModel.Product" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WareHouseDBModel.Sale_Permit" Width="1.5" PointX="0.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WareHouseDBModel.Sale" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WareHouseDBModel.Supplier" Width="1.5" PointX="3.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WareHouseDBModel.Supply" Width="1.5" PointX="6" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WareHouseDBModel.Supply_Permit" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WareHouseDBModel.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WareHouseDBModel.Unit" Width="1.5" PointX="3" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WareHouseDBModel.Warehouse" Width="1.5" PointX="0.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="WareHouseDBModel.Movement" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <AssociationConnector Association="WareHouseDBModel.Sales_Customer_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="WareHouseDBModel.Movement_Product_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="WareHouseDBModel.Sales_Product_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="WareHouseDBModel.Supplies_Product_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="WareHouseDBModel.Unit_Product_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="WareHouseDBModel.Sales_Product_Sale_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="WareHouseDBModel.Sales_Product_Supply_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="WareHouseDBModel.Sales_Warehouse_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="WareHouseDBModel.Supplies_Supplier_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="WareHouseDBModel.Supplies_Product_Supply_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="WareHouseDBModel.Supplies_Warehouse_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="WareHouseDBModel.Warehouses_Moves_Product_Supply_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="WareHouseDBModel.Warehouses_Moves_Products_From_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="WareHouseDBModel.Warehouses_Moves_Products_To_FK" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
