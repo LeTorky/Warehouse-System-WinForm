@@ -25,7 +25,7 @@ namespace Warehouse
     
         public int Code { get; set; }
         public string Name { get; set; }
-        public Nullable<int> ExpPeriod { get; set; }
+        public int ExpPeriod { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Movement> Movements { get; set; }

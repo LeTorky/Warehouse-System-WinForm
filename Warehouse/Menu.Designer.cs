@@ -69,6 +69,12 @@
             this.ProductGridView = new System.Windows.Forms.DataGridView();
             this.SupplierPage = new System.Windows.Forms.TabPage();
             this.SupplierAddBox = new System.Windows.Forms.GroupBox();
+            this.SupplierFaxLabelAdd = new System.Windows.Forms.Label();
+            this.SupplierFaxInput = new System.Windows.Forms.TextBox();
+            this.SupplierSiteLabelAdd = new System.Windows.Forms.Label();
+            this.SupplierSiteInput = new System.Windows.Forms.TextBox();
+            this.SupplierMailLabelAdd = new System.Windows.Forms.Label();
+            this.SupplierMailInput = new System.Windows.Forms.TextBox();
             this.SupplierTeleLabelAdd = new System.Windows.Forms.Label();
             this.SupplierTeleInput = new System.Windows.Forms.TextBox();
             this.SupplierMobileLabelAdd = new System.Windows.Forms.Label();
@@ -77,6 +83,12 @@
             this.SupplierNameLabelAdd = new System.Windows.Forms.Label();
             this.SupplierNameInput = new System.Windows.Forms.TextBox();
             this.SupplierEditBox = new System.Windows.Forms.GroupBox();
+            this.SupplierFaxLabelEdit = new System.Windows.Forms.Label();
+            this.SupplierFaxOutput = new System.Windows.Forms.TextBox();
+            this.SupplierSiteLabelEdit = new System.Windows.Forms.Label();
+            this.SupplierSiteOutput = new System.Windows.Forms.TextBox();
+            this.SupplierMailLabelEdit = new System.Windows.Forms.Label();
+            this.SupplierMailOutput = new System.Windows.Forms.TextBox();
             this.SupplierTeleLabelEdit = new System.Windows.Forms.Label();
             this.SupplierTeleOutput = new System.Windows.Forms.TextBox();
             this.SupplierMobileLabelEdit = new System.Windows.Forms.Label();
@@ -89,21 +101,42 @@
             this.SupplierList = new System.Windows.Forms.ComboBox();
             this.SupplierDataGrid = new System.Windows.Forms.DataGridView();
             this.CustomerTab = new System.Windows.Forms.TabPage();
+            this.CustomerAddBox = new System.Windows.Forms.GroupBox();
+            this.CustomerFaxLabelAdd = new System.Windows.Forms.Label();
+            this.CustomerFaxInput = new System.Windows.Forms.TextBox();
+            this.CustomerSiteLabelAdd = new System.Windows.Forms.Label();
+            this.CustomerSiteInput = new System.Windows.Forms.TextBox();
+            this.CustomerMailLabelAdd = new System.Windows.Forms.Label();
+            this.CustomerMailInput = new System.Windows.Forms.TextBox();
+            this.CustomerTeleLabelAdd = new System.Windows.Forms.Label();
+            this.CustomerTeleInput = new System.Windows.Forms.TextBox();
+            this.CustomerMobileLabelAdd = new System.Windows.Forms.Label();
+            this.CustomerMobileInput = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.CustomerNameLabelAdd = new System.Windows.Forms.Label();
+            this.CustomerNameInput = new System.Windows.Forms.TextBox();
+            this.CustomerEditBox = new System.Windows.Forms.GroupBox();
+            this.CustomerFaxLabelEdit = new System.Windows.Forms.Label();
+            this.CustomerFaxOutput = new System.Windows.Forms.TextBox();
+            this.CustomerSiteLabelEdit = new System.Windows.Forms.Label();
+            this.CustomerSiteOutput = new System.Windows.Forms.TextBox();
+            this.CustomerMailLabelEdit = new System.Windows.Forms.Label();
+            this.CustomerMailOutput = new System.Windows.Forms.TextBox();
+            this.CustomerTeleLabelEdit = new System.Windows.Forms.Label();
+            this.CustomerTeleOutput = new System.Windows.Forms.TextBox();
+            this.CustomerMobileLabelEdit = new System.Windows.Forms.Label();
+            this.CustomerMobileOutput = new System.Windows.Forms.TextBox();
+            this.CustomerEditBtn = new System.Windows.Forms.Button();
+            this.CustomerNameLabelEdit = new System.Windows.Forms.Label();
+            this.CustomerIDLabelEdit = new System.Windows.Forms.Label();
+            this.CustomerNameOutput = new System.Windows.Forms.TextBox();
+            this.CustomerIDOutput = new System.Windows.Forms.TextBox();
+            this.CustomerList = new System.Windows.Forms.ComboBox();
+            this.CustomerDataGrid = new System.Windows.Forms.DataGridView();
             this.SupplyTab = new System.Windows.Forms.TabPage();
             this.SaleTab = new System.Windows.Forms.TabPage();
+            this.MovementTab = new System.Windows.Forms.TabPage();
             this.ReportTab = new System.Windows.Forms.TabPage();
-            this.SupplierFaxLabelEdit = new System.Windows.Forms.Label();
-            this.SupplierFaxOutput = new System.Windows.Forms.TextBox();
-            this.SupplierSiteLabelEdit = new System.Windows.Forms.Label();
-            this.SupplierSiteOutput = new System.Windows.Forms.TextBox();
-            this.SupplierMailLabelEdit = new System.Windows.Forms.Label();
-            this.SupplierMailOutput = new System.Windows.Forms.TextBox();
-            this.SupplierFaxLabelAdd = new System.Windows.Forms.Label();
-            this.SupplierFaxInput = new System.Windows.Forms.TextBox();
-            this.SupplierSiteLabelAdd = new System.Windows.Forms.Label();
-            this.SupplierSiteInput = new System.Windows.Forms.TextBox();
-            this.SupplierMailLabelAdd = new System.Windows.Forms.Label();
-            this.SupplierMailInput = new System.Windows.Forms.TextBox();
             this.TabMenu.SuspendLayout();
             this.WarehouseTab.SuspendLayout();
             this.WarehouseAddBox.SuspendLayout();
@@ -117,6 +150,10 @@
             this.SupplierAddBox.SuspendLayout();
             this.SupplierEditBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SupplierDataGrid)).BeginInit();
+            this.CustomerTab.SuspendLayout();
+            this.CustomerAddBox.SuspendLayout();
+            this.CustomerEditBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CustomerDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // TabMenu
@@ -127,6 +164,7 @@
             this.TabMenu.Controls.Add(this.CustomerTab);
             this.TabMenu.Controls.Add(this.SupplyTab);
             this.TabMenu.Controls.Add(this.SaleTab);
+            this.TabMenu.Controls.Add(this.MovementTab);
             this.TabMenu.Controls.Add(this.ReportTab);
             this.TabMenu.Location = new System.Drawing.Point(1, -1);
             this.TabMenu.Name = "TabMenu";
@@ -537,6 +575,54 @@
             this.SupplierAddBox.TabStop = false;
             this.SupplierAddBox.Text = "Add Supplier";
             // 
+            // SupplierFaxLabelAdd
+            // 
+            this.SupplierFaxLabelAdd.AutoSize = true;
+            this.SupplierFaxLabelAdd.Location = new System.Drawing.Point(481, 66);
+            this.SupplierFaxLabelAdd.Name = "SupplierFaxLabelAdd";
+            this.SupplierFaxLabelAdd.Size = new System.Drawing.Size(35, 17);
+            this.SupplierFaxLabelAdd.TabIndex = 18;
+            this.SupplierFaxLabelAdd.Text = "Fax:";
+            // 
+            // SupplierFaxInput
+            // 
+            this.SupplierFaxInput.Location = new System.Drawing.Point(548, 61);
+            this.SupplierFaxInput.Name = "SupplierFaxInput";
+            this.SupplierFaxInput.Size = new System.Drawing.Size(154, 24);
+            this.SupplierFaxInput.TabIndex = 17;
+            // 
+            // SupplierSiteLabelAdd
+            // 
+            this.SupplierSiteLabelAdd.AutoSize = true;
+            this.SupplierSiteLabelAdd.Location = new System.Drawing.Point(239, 65);
+            this.SupplierSiteLabelAdd.Name = "SupplierSiteLabelAdd";
+            this.SupplierSiteLabelAdd.Size = new System.Drawing.Size(35, 17);
+            this.SupplierSiteLabelAdd.TabIndex = 16;
+            this.SupplierSiteLabelAdd.Text = "Site:";
+            // 
+            // SupplierSiteInput
+            // 
+            this.SupplierSiteInput.Location = new System.Drawing.Point(302, 61);
+            this.SupplierSiteInput.Name = "SupplierSiteInput";
+            this.SupplierSiteInput.Size = new System.Drawing.Size(149, 24);
+            this.SupplierSiteInput.TabIndex = 15;
+            // 
+            // SupplierMailLabelAdd
+            // 
+            this.SupplierMailLabelAdd.AutoSize = true;
+            this.SupplierMailLabelAdd.Location = new System.Drawing.Point(18, 65);
+            this.SupplierMailLabelAdd.Name = "SupplierMailLabelAdd";
+            this.SupplierMailLabelAdd.Size = new System.Drawing.Size(34, 17);
+            this.SupplierMailLabelAdd.TabIndex = 14;
+            this.SupplierMailLabelAdd.Text = "Mail:";
+            // 
+            // SupplierMailInput
+            // 
+            this.SupplierMailInput.Location = new System.Drawing.Point(69, 61);
+            this.SupplierMailInput.Name = "SupplierMailInput";
+            this.SupplierMailInput.Size = new System.Drawing.Size(154, 24);
+            this.SupplierMailInput.TabIndex = 13;
+            // 
             // SupplierTeleLabelAdd
             // 
             this.SupplierTeleLabelAdd.AutoSize = true;
@@ -620,6 +706,54 @@
             this.SupplierEditBox.TabIndex = 2;
             this.SupplierEditBox.TabStop = false;
             this.SupplierEditBox.Text = "Edit Supplier";
+            // 
+            // SupplierFaxLabelEdit
+            // 
+            this.SupplierFaxLabelEdit.AutoSize = true;
+            this.SupplierFaxLabelEdit.Location = new System.Drawing.Point(137, 168);
+            this.SupplierFaxLabelEdit.Name = "SupplierFaxLabelEdit";
+            this.SupplierFaxLabelEdit.Size = new System.Drawing.Size(35, 17);
+            this.SupplierFaxLabelEdit.TabIndex = 16;
+            this.SupplierFaxLabelEdit.Text = "Fax:";
+            // 
+            // SupplierFaxOutput
+            // 
+            this.SupplierFaxOutput.Location = new System.Drawing.Point(178, 162);
+            this.SupplierFaxOutput.Name = "SupplierFaxOutput";
+            this.SupplierFaxOutput.Size = new System.Drawing.Size(74, 24);
+            this.SupplierFaxOutput.TabIndex = 15;
+            // 
+            // SupplierSiteLabelEdit
+            // 
+            this.SupplierSiteLabelEdit.AutoSize = true;
+            this.SupplierSiteLabelEdit.Location = new System.Drawing.Point(138, 134);
+            this.SupplierSiteLabelEdit.Name = "SupplierSiteLabelEdit";
+            this.SupplierSiteLabelEdit.Size = new System.Drawing.Size(35, 17);
+            this.SupplierSiteLabelEdit.TabIndex = 14;
+            this.SupplierSiteLabelEdit.Text = "Site:";
+            // 
+            // SupplierSiteOutput
+            // 
+            this.SupplierSiteOutput.Location = new System.Drawing.Point(178, 132);
+            this.SupplierSiteOutput.Name = "SupplierSiteOutput";
+            this.SupplierSiteOutput.Size = new System.Drawing.Size(74, 24);
+            this.SupplierSiteOutput.TabIndex = 13;
+            // 
+            // SupplierMailLabelEdit
+            // 
+            this.SupplierMailLabelEdit.AutoSize = true;
+            this.SupplierMailLabelEdit.Location = new System.Drawing.Point(138, 104);
+            this.SupplierMailLabelEdit.Name = "SupplierMailLabelEdit";
+            this.SupplierMailLabelEdit.Size = new System.Drawing.Size(34, 17);
+            this.SupplierMailLabelEdit.TabIndex = 12;
+            this.SupplierMailLabelEdit.Text = "Mail:";
+            // 
+            // SupplierMailOutput
+            // 
+            this.SupplierMailOutput.Location = new System.Drawing.Point(178, 102);
+            this.SupplierMailOutput.Name = "SupplierMailOutput";
+            this.SupplierMailOutput.Size = new System.Drawing.Size(74, 24);
+            this.SupplierMailOutput.TabIndex = 11;
             // 
             // SupplierTeleLabelEdit
             // 
@@ -719,12 +853,312 @@
             // CustomerTab
             // 
             this.CustomerTab.BackColor = System.Drawing.SystemColors.Control;
+            this.CustomerTab.Controls.Add(this.CustomerAddBox);
+            this.CustomerTab.Controls.Add(this.CustomerEditBox);
             this.CustomerTab.Location = new System.Drawing.Point(4, 25);
             this.CustomerTab.Name = "CustomerTab";
             this.CustomerTab.Padding = new System.Windows.Forms.Padding(3);
             this.CustomerTab.Size = new System.Drawing.Size(791, 423);
             this.CustomerTab.TabIndex = 1;
             this.CustomerTab.Text = "Customer";
+            this.CustomerTab.Enter += new System.EventHandler(this.CustomerTab_Enter);
+            // 
+            // CustomerAddBox
+            // 
+            this.CustomerAddBox.Controls.Add(this.CustomerFaxLabelAdd);
+            this.CustomerAddBox.Controls.Add(this.CustomerFaxInput);
+            this.CustomerAddBox.Controls.Add(this.CustomerSiteLabelAdd);
+            this.CustomerAddBox.Controls.Add(this.CustomerSiteInput);
+            this.CustomerAddBox.Controls.Add(this.CustomerMailLabelAdd);
+            this.CustomerAddBox.Controls.Add(this.CustomerMailInput);
+            this.CustomerAddBox.Controls.Add(this.CustomerTeleLabelAdd);
+            this.CustomerAddBox.Controls.Add(this.CustomerTeleInput);
+            this.CustomerAddBox.Controls.Add(this.CustomerMobileLabelAdd);
+            this.CustomerAddBox.Controls.Add(this.CustomerMobileInput);
+            this.CustomerAddBox.Controls.Add(this.button1);
+            this.CustomerAddBox.Controls.Add(this.CustomerNameLabelAdd);
+            this.CustomerAddBox.Controls.Add(this.CustomerNameInput);
+            this.CustomerAddBox.Location = new System.Drawing.Point(41, 277);
+            this.CustomerAddBox.Name = "CustomerAddBox";
+            this.CustomerAddBox.Size = new System.Drawing.Size(714, 126);
+            this.CustomerAddBox.TabIndex = 5;
+            this.CustomerAddBox.TabStop = false;
+            this.CustomerAddBox.Text = "Add Customer";
+            // 
+            // CustomerFaxLabelAdd
+            // 
+            this.CustomerFaxLabelAdd.AutoSize = true;
+            this.CustomerFaxLabelAdd.Location = new System.Drawing.Point(481, 66);
+            this.CustomerFaxLabelAdd.Name = "CustomerFaxLabelAdd";
+            this.CustomerFaxLabelAdd.Size = new System.Drawing.Size(35, 17);
+            this.CustomerFaxLabelAdd.TabIndex = 18;
+            this.CustomerFaxLabelAdd.Text = "Fax:";
+            // 
+            // CustomerFaxInput
+            // 
+            this.CustomerFaxInput.Location = new System.Drawing.Point(548, 61);
+            this.CustomerFaxInput.Name = "CustomerFaxInput";
+            this.CustomerFaxInput.Size = new System.Drawing.Size(154, 24);
+            this.CustomerFaxInput.TabIndex = 17;
+            // 
+            // CustomerSiteLabelAdd
+            // 
+            this.CustomerSiteLabelAdd.AutoSize = true;
+            this.CustomerSiteLabelAdd.Location = new System.Drawing.Point(239, 65);
+            this.CustomerSiteLabelAdd.Name = "CustomerSiteLabelAdd";
+            this.CustomerSiteLabelAdd.Size = new System.Drawing.Size(35, 17);
+            this.CustomerSiteLabelAdd.TabIndex = 16;
+            this.CustomerSiteLabelAdd.Text = "Site:";
+            // 
+            // CustomerSiteInput
+            // 
+            this.CustomerSiteInput.Location = new System.Drawing.Point(302, 61);
+            this.CustomerSiteInput.Name = "CustomerSiteInput";
+            this.CustomerSiteInput.Size = new System.Drawing.Size(149, 24);
+            this.CustomerSiteInput.TabIndex = 15;
+            // 
+            // CustomerMailLabelAdd
+            // 
+            this.CustomerMailLabelAdd.AutoSize = true;
+            this.CustomerMailLabelAdd.Location = new System.Drawing.Point(18, 65);
+            this.CustomerMailLabelAdd.Name = "CustomerMailLabelAdd";
+            this.CustomerMailLabelAdd.Size = new System.Drawing.Size(34, 17);
+            this.CustomerMailLabelAdd.TabIndex = 14;
+            this.CustomerMailLabelAdd.Text = "Mail:";
+            // 
+            // CustomerMailInput
+            // 
+            this.CustomerMailInput.Location = new System.Drawing.Point(69, 61);
+            this.CustomerMailInput.Name = "CustomerMailInput";
+            this.CustomerMailInput.Size = new System.Drawing.Size(154, 24);
+            this.CustomerMailInput.TabIndex = 13;
+            // 
+            // CustomerTeleLabelAdd
+            // 
+            this.CustomerTeleLabelAdd.AutoSize = true;
+            this.CustomerTeleLabelAdd.Location = new System.Drawing.Point(481, 36);
+            this.CustomerTeleLabelAdd.Name = "CustomerTeleLabelAdd";
+            this.CustomerTeleLabelAdd.Size = new System.Drawing.Size(37, 17);
+            this.CustomerTeleLabelAdd.TabIndex = 12;
+            this.CustomerTeleLabelAdd.Text = "Tele:";
+            // 
+            // CustomerTeleInput
+            // 
+            this.CustomerTeleInput.Location = new System.Drawing.Point(548, 31);
+            this.CustomerTeleInput.Name = "CustomerTeleInput";
+            this.CustomerTeleInput.Size = new System.Drawing.Size(154, 24);
+            this.CustomerTeleInput.TabIndex = 11;
+            // 
+            // CustomerMobileLabelAdd
+            // 
+            this.CustomerMobileLabelAdd.AutoSize = true;
+            this.CustomerMobileLabelAdd.Location = new System.Drawing.Point(239, 35);
+            this.CustomerMobileLabelAdd.Name = "CustomerMobileLabelAdd";
+            this.CustomerMobileLabelAdd.Size = new System.Drawing.Size(50, 17);
+            this.CustomerMobileLabelAdd.TabIndex = 10;
+            this.CustomerMobileLabelAdd.Text = "Mobile:";
+            // 
+            // CustomerMobileInput
+            // 
+            this.CustomerMobileInput.Location = new System.Drawing.Point(302, 31);
+            this.CustomerMobileInput.Name = "CustomerMobileInput";
+            this.CustomerMobileInput.Size = new System.Drawing.Size(149, 24);
+            this.CustomerMobileInput.TabIndex = 9;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(21, 93);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(681, 23);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "Add";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.CustomerAddBtn_Click);
+            // 
+            // CustomerNameLabelAdd
+            // 
+            this.CustomerNameLabelAdd.AutoSize = true;
+            this.CustomerNameLabelAdd.Location = new System.Drawing.Point(18, 35);
+            this.CustomerNameLabelAdd.Name = "CustomerNameLabelAdd";
+            this.CustomerNameLabelAdd.Size = new System.Drawing.Size(48, 17);
+            this.CustomerNameLabelAdd.TabIndex = 8;
+            this.CustomerNameLabelAdd.Text = "Name:";
+            // 
+            // CustomerNameInput
+            // 
+            this.CustomerNameInput.Location = new System.Drawing.Point(69, 31);
+            this.CustomerNameInput.Name = "CustomerNameInput";
+            this.CustomerNameInput.Size = new System.Drawing.Size(154, 24);
+            this.CustomerNameInput.TabIndex = 7;
+            // 
+            // CustomerEditBox
+            // 
+            this.CustomerEditBox.Controls.Add(this.CustomerFaxLabelEdit);
+            this.CustomerEditBox.Controls.Add(this.CustomerFaxOutput);
+            this.CustomerEditBox.Controls.Add(this.CustomerSiteLabelEdit);
+            this.CustomerEditBox.Controls.Add(this.CustomerSiteOutput);
+            this.CustomerEditBox.Controls.Add(this.CustomerMailLabelEdit);
+            this.CustomerEditBox.Controls.Add(this.CustomerMailOutput);
+            this.CustomerEditBox.Controls.Add(this.CustomerTeleLabelEdit);
+            this.CustomerEditBox.Controls.Add(this.CustomerTeleOutput);
+            this.CustomerEditBox.Controls.Add(this.CustomerMobileLabelEdit);
+            this.CustomerEditBox.Controls.Add(this.CustomerMobileOutput);
+            this.CustomerEditBox.Controls.Add(this.CustomerEditBtn);
+            this.CustomerEditBox.Controls.Add(this.CustomerNameLabelEdit);
+            this.CustomerEditBox.Controls.Add(this.CustomerIDLabelEdit);
+            this.CustomerEditBox.Controls.Add(this.CustomerNameOutput);
+            this.CustomerEditBox.Controls.Add(this.CustomerIDOutput);
+            this.CustomerEditBox.Controls.Add(this.CustomerList);
+            this.CustomerEditBox.Controls.Add(this.CustomerDataGrid);
+            this.CustomerEditBox.Location = new System.Drawing.Point(41, 28);
+            this.CustomerEditBox.Name = "CustomerEditBox";
+            this.CustomerEditBox.Size = new System.Drawing.Size(714, 231);
+            this.CustomerEditBox.TabIndex = 4;
+            this.CustomerEditBox.TabStop = false;
+            this.CustomerEditBox.Text = "Edit Customer";
+            // 
+            // CustomerFaxLabelEdit
+            // 
+            this.CustomerFaxLabelEdit.AutoSize = true;
+            this.CustomerFaxLabelEdit.Location = new System.Drawing.Point(137, 168);
+            this.CustomerFaxLabelEdit.Name = "CustomerFaxLabelEdit";
+            this.CustomerFaxLabelEdit.Size = new System.Drawing.Size(35, 17);
+            this.CustomerFaxLabelEdit.TabIndex = 16;
+            this.CustomerFaxLabelEdit.Text = "Fax:";
+            // 
+            // CustomerFaxOutput
+            // 
+            this.CustomerFaxOutput.Location = new System.Drawing.Point(178, 162);
+            this.CustomerFaxOutput.Name = "CustomerFaxOutput";
+            this.CustomerFaxOutput.Size = new System.Drawing.Size(74, 24);
+            this.CustomerFaxOutput.TabIndex = 15;
+            // 
+            // CustomerSiteLabelEdit
+            // 
+            this.CustomerSiteLabelEdit.AutoSize = true;
+            this.CustomerSiteLabelEdit.Location = new System.Drawing.Point(138, 134);
+            this.CustomerSiteLabelEdit.Name = "CustomerSiteLabelEdit";
+            this.CustomerSiteLabelEdit.Size = new System.Drawing.Size(35, 17);
+            this.CustomerSiteLabelEdit.TabIndex = 14;
+            this.CustomerSiteLabelEdit.Text = "Site:";
+            // 
+            // CustomerSiteOutput
+            // 
+            this.CustomerSiteOutput.Location = new System.Drawing.Point(178, 132);
+            this.CustomerSiteOutput.Name = "CustomerSiteOutput";
+            this.CustomerSiteOutput.Size = new System.Drawing.Size(74, 24);
+            this.CustomerSiteOutput.TabIndex = 13;
+            // 
+            // CustomerMailLabelEdit
+            // 
+            this.CustomerMailLabelEdit.AutoSize = true;
+            this.CustomerMailLabelEdit.Location = new System.Drawing.Point(138, 104);
+            this.CustomerMailLabelEdit.Name = "CustomerMailLabelEdit";
+            this.CustomerMailLabelEdit.Size = new System.Drawing.Size(34, 17);
+            this.CustomerMailLabelEdit.TabIndex = 12;
+            this.CustomerMailLabelEdit.Text = "Mail:";
+            // 
+            // CustomerMailOutput
+            // 
+            this.CustomerMailOutput.Location = new System.Drawing.Point(178, 102);
+            this.CustomerMailOutput.Name = "CustomerMailOutput";
+            this.CustomerMailOutput.Size = new System.Drawing.Size(74, 24);
+            this.CustomerMailOutput.TabIndex = 11;
+            // 
+            // CustomerTeleLabelEdit
+            // 
+            this.CustomerTeleLabelEdit.AutoSize = true;
+            this.CustomerTeleLabelEdit.Location = new System.Drawing.Point(20, 168);
+            this.CustomerTeleLabelEdit.Name = "CustomerTeleLabelEdit";
+            this.CustomerTeleLabelEdit.Size = new System.Drawing.Size(37, 17);
+            this.CustomerTeleLabelEdit.TabIndex = 10;
+            this.CustomerTeleLabelEdit.Text = "Tele:";
+            // 
+            // CustomerTeleOutput
+            // 
+            this.CustomerTeleOutput.Location = new System.Drawing.Point(64, 161);
+            this.CustomerTeleOutput.Name = "CustomerTeleOutput";
+            this.CustomerTeleOutput.Size = new System.Drawing.Size(68, 24);
+            this.CustomerTeleOutput.TabIndex = 9;
+            // 
+            // CustomerMobileLabelEdit
+            // 
+            this.CustomerMobileLabelEdit.AutoSize = true;
+            this.CustomerMobileLabelEdit.Location = new System.Drawing.Point(7, 137);
+            this.CustomerMobileLabelEdit.Name = "CustomerMobileLabelEdit";
+            this.CustomerMobileLabelEdit.Size = new System.Drawing.Size(50, 17);
+            this.CustomerMobileLabelEdit.TabIndex = 8;
+            this.CustomerMobileLabelEdit.Text = "Mobile:";
+            // 
+            // CustomerMobileOutput
+            // 
+            this.CustomerMobileOutput.Location = new System.Drawing.Point(64, 131);
+            this.CustomerMobileOutput.Name = "CustomerMobileOutput";
+            this.CustomerMobileOutput.Size = new System.Drawing.Size(68, 24);
+            this.CustomerMobileOutput.TabIndex = 7;
+            // 
+            // CustomerEditBtn
+            // 
+            this.CustomerEditBtn.Location = new System.Drawing.Point(11, 192);
+            this.CustomerEditBtn.Name = "CustomerEditBtn";
+            this.CustomerEditBtn.Size = new System.Drawing.Size(241, 23);
+            this.CustomerEditBtn.TabIndex = 6;
+            this.CustomerEditBtn.Text = "Edit";
+            this.CustomerEditBtn.UseVisualStyleBackColor = true;
+            this.CustomerEditBtn.Click += new System.EventHandler(this.CustomerEditBtn_Click);
+            // 
+            // CustomerNameLabelEdit
+            // 
+            this.CustomerNameLabelEdit.AutoSize = true;
+            this.CustomerNameLabelEdit.Location = new System.Drawing.Point(9, 105);
+            this.CustomerNameLabelEdit.Name = "CustomerNameLabelEdit";
+            this.CustomerNameLabelEdit.Size = new System.Drawing.Size(48, 17);
+            this.CustomerNameLabelEdit.TabIndex = 5;
+            this.CustomerNameLabelEdit.Text = "Name:";
+            // 
+            // CustomerIDLabelEdit
+            // 
+            this.CustomerIDLabelEdit.AutoSize = true;
+            this.CustomerIDLabelEdit.Location = new System.Drawing.Point(30, 74);
+            this.CustomerIDLabelEdit.Name = "CustomerIDLabelEdit";
+            this.CustomerIDLabelEdit.Size = new System.Drawing.Size(27, 17);
+            this.CustomerIDLabelEdit.TabIndex = 4;
+            this.CustomerIDLabelEdit.Text = "ID:";
+            // 
+            // CustomerNameOutput
+            // 
+            this.CustomerNameOutput.Location = new System.Drawing.Point(64, 101);
+            this.CustomerNameOutput.Name = "CustomerNameOutput";
+            this.CustomerNameOutput.Size = new System.Drawing.Size(68, 24);
+            this.CustomerNameOutput.TabIndex = 2;
+            // 
+            // CustomerIDOutput
+            // 
+            this.CustomerIDOutput.Enabled = false;
+            this.CustomerIDOutput.Location = new System.Drawing.Point(64, 70);
+            this.CustomerIDOutput.Name = "CustomerIDOutput";
+            this.CustomerIDOutput.Size = new System.Drawing.Size(188, 24);
+            this.CustomerIDOutput.TabIndex = 3;
+            // 
+            // CustomerList
+            // 
+            this.CustomerList.FormattingEnabled = true;
+            this.CustomerList.Location = new System.Drawing.Point(11, 37);
+            this.CustomerList.Name = "CustomerList";
+            this.CustomerList.Size = new System.Drawing.Size(241, 24);
+            this.CustomerList.TabIndex = 1;
+            this.CustomerList.SelectedIndexChanged += new System.EventHandler(this.CustomerList_SelectedIndexChanged);
+            // 
+            // CustomerDataGrid
+            // 
+            this.CustomerDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.CustomerDataGrid.Location = new System.Drawing.Point(302, 37);
+            this.CustomerDataGrid.Name = "CustomerDataGrid";
+            this.CustomerDataGrid.RowHeadersWidth = 51;
+            this.CustomerDataGrid.RowTemplate.Height = 26;
+            this.CustomerDataGrid.Size = new System.Drawing.Size(400, 176);
+            this.CustomerDataGrid.TabIndex = 0;
+            this.CustomerDataGrid.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.CustomerDataGrid_RowHeaderMouseClick);
             // 
             // SupplyTab
             // 
@@ -747,111 +1181,25 @@
             this.SaleTab.TabIndex = 3;
             this.SaleTab.Text = "Sale Permit";
             // 
+            // MovementTab
+            // 
+            this.MovementTab.BackColor = System.Drawing.SystemColors.Control;
+            this.MovementTab.Location = new System.Drawing.Point(4, 25);
+            this.MovementTab.Name = "MovementTab";
+            this.MovementTab.Padding = new System.Windows.Forms.Padding(3);
+            this.MovementTab.Size = new System.Drawing.Size(791, 423);
+            this.MovementTab.TabIndex = 4;
+            this.MovementTab.Text = "Movement ";
+            // 
             // ReportTab
             // 
-            this.ReportTab.BackColor = System.Drawing.SystemColors.Control;
             this.ReportTab.Location = new System.Drawing.Point(4, 25);
             this.ReportTab.Name = "ReportTab";
             this.ReportTab.Padding = new System.Windows.Forms.Padding(3);
             this.ReportTab.Size = new System.Drawing.Size(791, 423);
-            this.ReportTab.TabIndex = 4;
+            this.ReportTab.TabIndex = 5;
             this.ReportTab.Text = "Report";
-            // 
-            // SupplierFaxLabelEdit
-            // 
-            this.SupplierFaxLabelEdit.AutoSize = true;
-            this.SupplierFaxLabelEdit.Location = new System.Drawing.Point(137, 168);
-            this.SupplierFaxLabelEdit.Name = "SupplierFaxLabelEdit";
-            this.SupplierFaxLabelEdit.Size = new System.Drawing.Size(35, 17);
-            this.SupplierFaxLabelEdit.TabIndex = 16;
-            this.SupplierFaxLabelEdit.Text = "Fax:";
-            // 
-            // SupplierFaxOutput
-            // 
-            this.SupplierFaxOutput.Location = new System.Drawing.Point(178, 162);
-            this.SupplierFaxOutput.Name = "SupplierFaxOutput";
-            this.SupplierFaxOutput.Size = new System.Drawing.Size(74, 24);
-            this.SupplierFaxOutput.TabIndex = 15;
-            // 
-            // SupplierSiteLabelEdit
-            // 
-            this.SupplierSiteLabelEdit.AutoSize = true;
-            this.SupplierSiteLabelEdit.Location = new System.Drawing.Point(138, 134);
-            this.SupplierSiteLabelEdit.Name = "SupplierSiteLabelEdit";
-            this.SupplierSiteLabelEdit.Size = new System.Drawing.Size(35, 17);
-            this.SupplierSiteLabelEdit.TabIndex = 14;
-            this.SupplierSiteLabelEdit.Text = "Site:";
-            // 
-            // SupplierSiteOutput
-            // 
-            this.SupplierSiteOutput.Location = new System.Drawing.Point(178, 132);
-            this.SupplierSiteOutput.Name = "SupplierSiteOutput";
-            this.SupplierSiteOutput.Size = new System.Drawing.Size(74, 24);
-            this.SupplierSiteOutput.TabIndex = 13;
-            // 
-            // SupplierMailLabelEdit
-            // 
-            this.SupplierMailLabelEdit.AutoSize = true;
-            this.SupplierMailLabelEdit.Location = new System.Drawing.Point(138, 104);
-            this.SupplierMailLabelEdit.Name = "SupplierMailLabelEdit";
-            this.SupplierMailLabelEdit.Size = new System.Drawing.Size(34, 17);
-            this.SupplierMailLabelEdit.TabIndex = 12;
-            this.SupplierMailLabelEdit.Text = "Mail:";
-            // 
-            // SupplierMailOutput
-            // 
-            this.SupplierMailOutput.Location = new System.Drawing.Point(178, 102);
-            this.SupplierMailOutput.Name = "SupplierMailOutput";
-            this.SupplierMailOutput.Size = new System.Drawing.Size(74, 24);
-            this.SupplierMailOutput.TabIndex = 11;
-            // 
-            // SupplierFaxLabelAdd
-            // 
-            this.SupplierFaxLabelAdd.AutoSize = true;
-            this.SupplierFaxLabelAdd.Location = new System.Drawing.Point(481, 66);
-            this.SupplierFaxLabelAdd.Name = "SupplierFaxLabelAdd";
-            this.SupplierFaxLabelAdd.Size = new System.Drawing.Size(35, 17);
-            this.SupplierFaxLabelAdd.TabIndex = 18;
-            this.SupplierFaxLabelAdd.Text = "Fax:";
-            // 
-            // SupplierFaxInput
-            // 
-            this.SupplierFaxInput.Location = new System.Drawing.Point(548, 61);
-            this.SupplierFaxInput.Name = "SupplierFaxInput";
-            this.SupplierFaxInput.Size = new System.Drawing.Size(154, 24);
-            this.SupplierFaxInput.TabIndex = 17;
-            // 
-            // SupplierSiteLabelAdd
-            // 
-            this.SupplierSiteLabelAdd.AutoSize = true;
-            this.SupplierSiteLabelAdd.Location = new System.Drawing.Point(239, 65);
-            this.SupplierSiteLabelAdd.Name = "SupplierSiteLabelAdd";
-            this.SupplierSiteLabelAdd.Size = new System.Drawing.Size(35, 17);
-            this.SupplierSiteLabelAdd.TabIndex = 16;
-            this.SupplierSiteLabelAdd.Text = "Site:";
-            // 
-            // SupplierSiteInput
-            // 
-            this.SupplierSiteInput.Location = new System.Drawing.Point(302, 61);
-            this.SupplierSiteInput.Name = "SupplierSiteInput";
-            this.SupplierSiteInput.Size = new System.Drawing.Size(149, 24);
-            this.SupplierSiteInput.TabIndex = 15;
-            // 
-            // SupplierMailLabelAdd
-            // 
-            this.SupplierMailLabelAdd.AutoSize = true;
-            this.SupplierMailLabelAdd.Location = new System.Drawing.Point(18, 65);
-            this.SupplierMailLabelAdd.Name = "SupplierMailLabelAdd";
-            this.SupplierMailLabelAdd.Size = new System.Drawing.Size(34, 17);
-            this.SupplierMailLabelAdd.TabIndex = 14;
-            this.SupplierMailLabelAdd.Text = "Mail:";
-            // 
-            // SupplierMailInput
-            // 
-            this.SupplierMailInput.Location = new System.Drawing.Point(69, 61);
-            this.SupplierMailInput.Name = "SupplierMailInput";
-            this.SupplierMailInput.Size = new System.Drawing.Size(154, 24);
-            this.SupplierMailInput.TabIndex = 13;
+            this.ReportTab.UseVisualStyleBackColor = true;
             // 
             // Menu
             // 
@@ -883,6 +1231,12 @@
             this.SupplierEditBox.ResumeLayout(false);
             this.SupplierEditBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SupplierDataGrid)).EndInit();
+            this.CustomerTab.ResumeLayout(false);
+            this.CustomerAddBox.ResumeLayout(false);
+            this.CustomerAddBox.PerformLayout();
+            this.CustomerEditBox.ResumeLayout(false);
+            this.CustomerEditBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CustomerDataGrid)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -896,7 +1250,7 @@
         private System.Windows.Forms.TabPage CustomerTab;
         private System.Windows.Forms.TabPage SupplyTab;
         private System.Windows.Forms.TabPage SaleTab;
-        private System.Windows.Forms.TabPage ReportTab;
+        private System.Windows.Forms.TabPage MovementTab;
         private System.Windows.Forms.GroupBox WarehouseAddBox;
         private System.Windows.Forms.GroupBox WarehouseEditBox;
         private System.Windows.Forms.Label WarehouseNameEditLabel;
@@ -965,6 +1319,39 @@
         private System.Windows.Forms.TextBox SupplierSiteInput;
         private System.Windows.Forms.Label SupplierMailLabelAdd;
         private System.Windows.Forms.TextBox SupplierMailInput;
+        private System.Windows.Forms.GroupBox CustomerAddBox;
+        private System.Windows.Forms.Label CustomerFaxLabelAdd;
+        private System.Windows.Forms.TextBox CustomerFaxInput;
+        private System.Windows.Forms.Label CustomerSiteLabelAdd;
+        private System.Windows.Forms.TextBox CustomerSiteInput;
+        private System.Windows.Forms.Label CustomerMailLabelAdd;
+        private System.Windows.Forms.TextBox CustomerMailInput;
+        private System.Windows.Forms.Label CustomerTeleLabelAdd;
+        private System.Windows.Forms.TextBox CustomerTeleInput;
+        private System.Windows.Forms.Label CustomerMobileLabelAdd;
+        private System.Windows.Forms.TextBox CustomerMobileInput;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label CustomerNameLabelAdd;
+        private System.Windows.Forms.TextBox CustomerNameInput;
+        private System.Windows.Forms.GroupBox CustomerEditBox;
+        private System.Windows.Forms.Label CustomerFaxLabelEdit;
+        private System.Windows.Forms.TextBox CustomerFaxOutput;
+        private System.Windows.Forms.Label CustomerSiteLabelEdit;
+        private System.Windows.Forms.TextBox CustomerSiteOutput;
+        private System.Windows.Forms.Label CustomerMailLabelEdit;
+        private System.Windows.Forms.TextBox CustomerMailOutput;
+        private System.Windows.Forms.Label CustomerTeleLabelEdit;
+        private System.Windows.Forms.TextBox CustomerTeleOutput;
+        private System.Windows.Forms.Label CustomerMobileLabelEdit;
+        private System.Windows.Forms.TextBox CustomerMobileOutput;
+        private System.Windows.Forms.Button CustomerEditBtn;
+        private System.Windows.Forms.Label CustomerNameLabelEdit;
+        private System.Windows.Forms.Label CustomerIDLabelEdit;
+        private System.Windows.Forms.TextBox CustomerNameOutput;
+        private System.Windows.Forms.TextBox CustomerIDOutput;
+        private System.Windows.Forms.ComboBox CustomerList;
+        private System.Windows.Forms.DataGridView CustomerDataGrid;
+        private System.Windows.Forms.TabPage ReportTab;
     }
 }
 

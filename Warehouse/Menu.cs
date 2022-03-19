@@ -164,6 +164,52 @@ namespace Warehouse
         }
         #endregion
 
+        #region Customer Select Method
+        private void CustomerSelect(Func<Customer, bool> Criteria)
+        {
+            List<Customer> AllCustomers = Entries.Customers.ToList<Customer>();
+            List<Customer> FilteredCustomers;
+            Customer FilteredCustomer;
+            if (Criteria == null)
+            {
+                FilteredCustomers = AllCustomers;
+                CustomerIDOutput.Text = String.Empty;
+                CustomerNameOutput.Text = String.Empty;
+                CustomerMobileOutput.Text = String.Empty;
+                CustomerTeleOutput.Text = String.Empty;
+                CustomerMailOutput.Text = String.Empty;
+                CustomerSiteOutput.Text = String.Empty;
+                CustomerFaxOutput.Text = String.Empty;
+            }
+            else
+            {
+                FilteredCustomers = Entries.Customers.Where(Criteria).ToList<Customer>();
+                FilteredCustomer = FilteredCustomers.FirstOrDefault<Customer>();
+                CustomerIDOutput.Text = FilteredCustomer.ID.ToString();
+                CustomerNameOutput.Text = FilteredCustomer.Name;
+                CustomerMobileOutput.Text = FilteredCustomer.MobileNo.ToString();
+                CustomerTeleOutput.Text = FilteredCustomer.TeleNo.ToString();
+                CustomerMailOutput.Text = FilteredCustomer.Mail;
+                CustomerSiteOutput.Text = FilteredCustomer.Site;
+                CustomerFaxOutput.Text = FilteredCustomer.Fax.ToString();
+            }
+            CustomerDataGrid.DataSource = FilteredCustomers;
+            int ColumnsCount = CustomerDataGrid.Columns.Count;
+            for (int i = 7; i < ColumnsCount; i++) //Removes Navigation Columns.
+            {
+                CustomerDataGrid.Columns.RemoveAt(7);
+            }
+            CustomerList.Items.Clear();
+            CustomerList.Items.Add("All");
+            IndexList.Clear();
+            foreach (Customer CS in AllCustomers)
+            {
+                CustomerList.Items.Add(CS.Name);
+                IndexList.Add(CS.ID);
+            }
+        }
+        #endregion
+
         #endregion
 
         #endregion
@@ -393,7 +439,92 @@ namespace Warehouse
 
         #endregion
 
+        #region Customer Events
+
+        #region Customer Tab Active
+        private void CustomerTab_Enter(object sender, EventArgs e)
+        {
+            CustomerSelect(null);
+        }
         #endregion
 
+        #region Customer DateGrid Row Selected
+        private void CustomerDataGrid_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (CustomerIDOutput.Text == String.Empty)
+            {
+                CustomerSelect(CS => CS.ID == IndexList[e.RowIndex]);
+            }
+        }
+        #endregion
+
+        #region Customer List Selected
+        private void CustomerList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox List = (ComboBox)sender;
+            if (List.SelectedIndex != 0)
+            {
+                CustomerSelect(CS => CS.ID == IndexList[List.SelectedIndex - 1]);
+            }
+            else
+            {
+                CustomerSelect(null);
+            }
+        }
+        #endregion
+
+        #region Customer Edit Button
+        private void CustomerEditBtn_Click(object sender, EventArgs e)
+        {
+            if (CustomerIDOutput.Text != String.Empty)
+            {
+                int ID = int.Parse(CustomerIDOutput.Text);
+                Customer EditCS = Entries.Customers.Where(CS => CS.ID == ID).First();
+                EditCS.Name = CustomerNameOutput.Text != String.Empty ? CustomerNameOutput.Text : EditCS.Name;
+                EditCS.MobileNo = CustomerMobileOutput.Text != String.Empty ? int.Parse(CustomerMobileOutput.Text) : EditCS.MobileNo;
+                EditCS.TeleNo = CustomerNameOutput.Text != String.Empty ? int.Parse(CustomerTeleOutput.Text) : EditCS.TeleNo;
+                EditCS.Mail = CustomerMailOutput.Text != String.Empty ? CustomerMailOutput.Text : EditCS.Mail;
+                EditCS.Site = CustomerSiteOutput.Text != String.Empty ? CustomerSiteOutput.Text : EditCS.Site;
+                EditCS.Fax = CustomerFaxOutput.Text != String.Empty ? int.Parse(CustomerFaxOutput.Text) : EditCS.Fax;
+                Entries.SaveChanges();
+                CustomerSelect(null);
+            }
+            else
+            {
+                MessageBox.Show("Please choose a Customer to Edit!");
+            }
+        }
+        #endregion
+
+        #region Customer Add Button
+        private void CustomerAddBtn_Click(object sender, EventArgs e)
+        {
+            if (CustomerNameInput.Text != String.Empty && CustomerMobileInput.Text != String.Empty && CustomerTeleInput.Text != String.Empty
+                && CustomerMailInput.Text != String.Empty && CustomerSiteInput.Text != String.Empty && CustomerFaxInput.Text != String.Empty)
+            {
+                int ID = Entries.Customers.Max(CS => CS.ID);
+                Entries.Customers.Add(new Customer()
+                {
+                    ID = ID + 1,
+                    Name = CustomerNameInput.Text,
+                    MobileNo = int.Parse(CustomerMobileInput.Text),
+                    TeleNo = int.Parse(CustomerTeleInput.Text),
+                    Mail = CustomerMailInput.Text,
+                    Site = CustomerSiteInput.Text,
+                    Fax = int.Parse(CustomerFaxInput.Text)
+                });
+                Entries.SaveChanges();
+                CustomerSelect(null);
+            }
+            else
+            {
+                MessageBox.Show("Please enter all Customer Fields!");
+            }
+        }
+        #endregion
+
+        #endregion
+
+        #endregion
     }
 }

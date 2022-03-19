@@ -22,11 +22,11 @@ namespace Warehouse
     
         public int ID { get; set; }
         public string Name { get; set; }
-        public Nullable<int> MobileNo { get; set; }
-        public Nullable<int> TeleNo { get; set; }
+        public int MobileNo { get; set; }
+        public int TeleNo { get; set; }
         public string Mail { get; set; }
         public string Site { get; set; }
-        public Nullable<int> Fax { get; set; }
+        public int Fax { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sale> Sales { get; set; }

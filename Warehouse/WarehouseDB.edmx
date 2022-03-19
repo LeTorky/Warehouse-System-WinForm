@@ -10,12 +10,12 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" />
-          <Property Name="MobileNo" Type="int" />
-          <Property Name="TeleNo" Type="int" />
-          <Property Name="Mail" Type="varchar" MaxLength="50" />
-          <Property Name="Site" Type="varchar" MaxLength="100" />
-          <Property Name="Fax" Type="int" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MobileNo" Type="int" Nullable="false" />
+          <Property Name="TeleNo" Type="int" Nullable="false" />
+          <Property Name="Mail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Site" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Fax" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -40,15 +40,15 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
             <PropertyRef Name="Code" />
           </Key>
           <Property Name="Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" />
-          <Property Name="ExpPeriod" Type="int" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ExpPeriod" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Sale_Permit">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Date" Type="date" />
+          <Property Name="Date" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Sales">
           <Key>
@@ -68,31 +68,32 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" />
-          <Property Name="MobileNo" Type="int" />
-          <Property Name="TeleNo" Type="int" />
-          <Property Name="Mail" Type="varchar" MaxLength="50" />
-          <Property Name="Site" Type="varchar" MaxLength="100" />
-          <Property Name="Fax" Type="int" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MobileNo" Type="int" Nullable="false" />
+          <Property Name="TeleNo" Type="int" Nullable="false" />
+          <Property Name="Mail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Site" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Fax" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Supplies">
           <Key>
+            <PropertyRef Name="Warehouse_FK" />
             <PropertyRef Name="Product_FK" />
             <PropertyRef Name="Product_Supply_FK" />
           </Key>
-          <Property Name="Warehouse_FK" Type="int" />
-          <Property Name="Supplier_FK" Type="int" />
+          <Property Name="Warehouse_FK" Type="int" Nullable="false" />
+          <Property Name="Supplier_FK" Type="int" Nullable="false" />
           <Property Name="Product_FK" Type="int" Nullable="false" />
           <Property Name="Product_Supply_FK" Type="int" Nullable="false" />
-          <Property Name="Qty" Type="int" />
-          <Property Name="ProDate" Type="date" />
+          <Property Name="Qty" Type="int" Nullable="false" />
+          <Property Name="ProDate" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Supply_Permit">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Date" Type="date" />
+          <Property Name="Date" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -117,9 +118,9 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" />
-          <Property Name="Address" Type="varchar" MaxLength="100" />
-          <Property Name="Supervisor" Type="varchar" MaxLength="50" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Supervisor" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="Movement_Product_FK">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
@@ -218,7 +219,7 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
           </ReferentialConstraint>
         </Association>
         <Association Name="Supplies_Supplier_FK">
-          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
           <End Role="Supplies" Type="Self.Supplies" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Supplier">
@@ -230,7 +231,7 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
           </ReferentialConstraint>
         </Association>
         <Association Name="Supplies_Warehouse_FK">
-          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="0..1" />
+          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="1" />
           <End Role="Supplies" Type="Self.Supplies" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Warehouse">
@@ -410,12 +411,12 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MobileNo" Type="Int32" />
-          <Property Name="TeleNo" Type="Int32" />
-          <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Site" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Fax" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MobileNo" Type="Int32" Nullable="false" />
+          <Property Name="TeleNo" Type="Int32" Nullable="false" />
+          <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Site" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fax" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Sales" Relationship="Self.Sales_Customer_FK" FromRole="Customer" ToRole="Sales" />
         </EntityType>
         <EntityType Name="Product">
@@ -423,8 +424,8 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
             <PropertyRef Name="Code" />
           </Key>
           <Property Name="Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ExpPeriod" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ExpPeriod" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Movements" Relationship="Self.Movement_Product_FK" FromRole="Product" ToRole="Movement" />
           <NavigationProperty Name="Sales" Relationship="Self.Sales_Product_FK" FromRole="Product" ToRole="Sales" />
           <NavigationProperty Name="Supplies" Relationship="Self.Supplies_Product_FK" FromRole="Product" ToRole="Supplies" />
@@ -435,7 +436,7 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Sales" Relationship="Self.Sales_Product_Sale_FK" FromRole="Sale_Permit" ToRole="Sales" />
         </EntityType>
         <EntityType Name="Sale">
@@ -461,25 +462,26 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MobileNo" Type="Int32" />
-          <Property Name="TeleNo" Type="Int32" />
-          <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Site" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Fax" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MobileNo" Type="Int32" Nullable="false" />
+          <Property Name="TeleNo" Type="Int32" Nullable="false" />
+          <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Site" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fax" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Supplies" Relationship="Self.Supplies_Supplier_FK" FromRole="Supplier" ToRole="Supplies" />
         </EntityType>
         <EntityType Name="Supply">
           <Key>
+            <PropertyRef Name="Warehouse_FK" />
             <PropertyRef Name="Product_FK" />
             <PropertyRef Name="Product_Supply_FK" />
           </Key>
-          <Property Name="Warehouse_FK" Type="Int32" />
-          <Property Name="Supplier_FK" Type="Int32" />
+          <Property Name="Warehouse_FK" Type="Int32" Nullable="false" />
+          <Property Name="Supplier_FK" Type="Int32" Nullable="false" />
           <Property Name="Product_FK" Type="Int32" Nullable="false" />
           <Property Name="Product_Supply_FK" Type="Int32" Nullable="false" />
-          <Property Name="Qty" Type="Int32" />
-          <Property Name="ProDate" Type="DateTime" Precision="0" />
+          <Property Name="Qty" Type="Int32" Nullable="false" />
+          <Property Name="ProDate" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Product" Relationship="Self.Supplies_Product_FK" FromRole="Supplies" ToRole="Product" />
           <NavigationProperty Name="Supplier" Relationship="Self.Supplies_Supplier_FK" FromRole="Supplies" ToRole="Supplier" />
           <NavigationProperty Name="Supply_Permit" Relationship="Self.Supplies_Product_Supply_FK" FromRole="Supplies" ToRole="Supply_Permit" />
@@ -490,7 +492,7 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Sales" Relationship="Self.Sales_Product_Supply_FK" FromRole="Supply_Permit" ToRole="Sales" />
           <NavigationProperty Name="Supplies" Relationship="Self.Supplies_Product_Supply_FK" FromRole="Supply_Permit" ToRole="Supplies" />
           <NavigationProperty Name="Movements" Relationship="Self.Warehouses_Moves_Product_Supply_FK" FromRole="Supply_Permit" ToRole="Movement" />
@@ -519,9 +521,9 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Supervisor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Supervisor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Sales" Relationship="Self.Sales_Warehouse_FK" FromRole="Warehouse" ToRole="Sales" />
           <NavigationProperty Name="Supplies" Relationship="Self.Supplies_Warehouse_FK" FromRole="Warehouse" ToRole="Supplies" />
           <NavigationProperty Name="Movements" Relationship="Self.Warehouses_Moves_Products_From_FK" FromRole="Warehouse" ToRole="Movement" />
@@ -644,7 +646,7 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
           </ReferentialConstraint>
         </Association>
         <Association Name="Supplies_Supplier_FK">
-          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
           <End Role="Supplies" Type="Self.Supply" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Supplier">
@@ -668,7 +670,7 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
           </ReferentialConstraint>
         </Association>
         <Association Name="Supplies_Warehouse_FK">
-          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="0..1" />
+          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="1" />
           <End Role="Supplies" Type="Self.Supply" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Warehouse">
@@ -818,9 +820,9 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
         </EntityContainer>
         <ComplexType Name="GetDetailedQty_Result">
           <Property Type="Int32" Name="Warehouse_ID" Nullable="true" />
-          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Warehouse_Name" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="Product_ID" Nullable="true" />
-          <Property Type="String" Name="Name1" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Product_Name" Nullable="false" MaxLength="50" />
           <Property Type="DateTime" Name="Prod_Date" Nullable="true" />
           <Property Type="Int32" Name="Qty" Nullable="true" />
         </ComplexType>
@@ -968,9 +970,9 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
             <ResultMapping>
               <ComplexTypeMapping TypeName="WareHouseDBModel.GetDetailedQty_Result">
                 <ScalarProperty Name="Warehouse_ID" ColumnName="Warehouse_ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Warehouse_Name" ColumnName="Warehouse_Name" />
                 <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
-                <ScalarProperty Name="Name1" ColumnName="Name1" />
+                <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
                 <ScalarProperty Name="Prod_Date" ColumnName="Prod_Date" />
                 <ScalarProperty Name="Qty" ColumnName="Qty" />
               </ComplexTypeMapping>
