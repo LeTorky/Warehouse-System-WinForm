@@ -68,10 +68,42 @@
             this.ProductList = new System.Windows.Forms.ComboBox();
             this.ProductGridView = new System.Windows.Forms.DataGridView();
             this.SupplierPage = new System.Windows.Forms.TabPage();
+            this.SupplierAddBox = new System.Windows.Forms.GroupBox();
+            this.SupplierTeleLabelAdd = new System.Windows.Forms.Label();
+            this.SupplierTeleInput = new System.Windows.Forms.TextBox();
+            this.SupplierMobileLabelAdd = new System.Windows.Forms.Label();
+            this.SupplierMobileInput = new System.Windows.Forms.TextBox();
+            this.SupplierAddBtn = new System.Windows.Forms.Button();
+            this.SupplierNameLabelAdd = new System.Windows.Forms.Label();
+            this.SupplierNameInput = new System.Windows.Forms.TextBox();
+            this.SupplierEditBox = new System.Windows.Forms.GroupBox();
+            this.SupplierTeleLabelEdit = new System.Windows.Forms.Label();
+            this.SupplierTeleOutput = new System.Windows.Forms.TextBox();
+            this.SupplierMobileLabelEdit = new System.Windows.Forms.Label();
+            this.SupplierMobileOutput = new System.Windows.Forms.TextBox();
+            this.SupplierEditBtn = new System.Windows.Forms.Button();
+            this.SupplierNameLabelEdit = new System.Windows.Forms.Label();
+            this.SupplierIDLabelEdit = new System.Windows.Forms.Label();
+            this.SupplierNameOutput = new System.Windows.Forms.TextBox();
+            this.SupplierIDOutput = new System.Windows.Forms.TextBox();
+            this.SupplierList = new System.Windows.Forms.ComboBox();
+            this.SupplierDataGrid = new System.Windows.Forms.DataGridView();
             this.CustomerTab = new System.Windows.Forms.TabPage();
             this.SupplyTab = new System.Windows.Forms.TabPage();
             this.SaleTab = new System.Windows.Forms.TabPage();
             this.ReportTab = new System.Windows.Forms.TabPage();
+            this.SupplierFaxLabelEdit = new System.Windows.Forms.Label();
+            this.SupplierFaxOutput = new System.Windows.Forms.TextBox();
+            this.SupplierSiteLabelEdit = new System.Windows.Forms.Label();
+            this.SupplierSiteOutput = new System.Windows.Forms.TextBox();
+            this.SupplierMailLabelEdit = new System.Windows.Forms.Label();
+            this.SupplierMailOutput = new System.Windows.Forms.TextBox();
+            this.SupplierFaxLabelAdd = new System.Windows.Forms.Label();
+            this.SupplierFaxInput = new System.Windows.Forms.TextBox();
+            this.SupplierSiteLabelAdd = new System.Windows.Forms.Label();
+            this.SupplierSiteInput = new System.Windows.Forms.TextBox();
+            this.SupplierMailLabelAdd = new System.Windows.Forms.Label();
+            this.SupplierMailInput = new System.Windows.Forms.TextBox();
             this.TabMenu.SuspendLayout();
             this.WarehouseTab.SuspendLayout();
             this.WarehouseAddBox.SuspendLayout();
@@ -81,6 +113,10 @@
             this.ProductAddBox.SuspendLayout();
             this.ProductEditBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ProductGridView)).BeginInit();
+            this.SupplierPage.SuspendLayout();
+            this.SupplierAddBox.SuspendLayout();
+            this.SupplierEditBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SupplierDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // TabMenu
@@ -469,12 +505,216 @@
             // SupplierPage
             // 
             this.SupplierPage.BackColor = System.Drawing.SystemColors.Control;
+            this.SupplierPage.Controls.Add(this.SupplierAddBox);
+            this.SupplierPage.Controls.Add(this.SupplierEditBox);
             this.SupplierPage.Location = new System.Drawing.Point(4, 25);
             this.SupplierPage.Name = "SupplierPage";
             this.SupplierPage.Padding = new System.Windows.Forms.Padding(3);
             this.SupplierPage.Size = new System.Drawing.Size(791, 423);
             this.SupplierPage.TabIndex = 1;
             this.SupplierPage.Text = "Supplier";
+            this.SupplierPage.Enter += new System.EventHandler(this.SupplierPage_Enter);
+            // 
+            // SupplierAddBox
+            // 
+            this.SupplierAddBox.Controls.Add(this.SupplierFaxLabelAdd);
+            this.SupplierAddBox.Controls.Add(this.SupplierFaxInput);
+            this.SupplierAddBox.Controls.Add(this.SupplierSiteLabelAdd);
+            this.SupplierAddBox.Controls.Add(this.SupplierSiteInput);
+            this.SupplierAddBox.Controls.Add(this.SupplierMailLabelAdd);
+            this.SupplierAddBox.Controls.Add(this.SupplierMailInput);
+            this.SupplierAddBox.Controls.Add(this.SupplierTeleLabelAdd);
+            this.SupplierAddBox.Controls.Add(this.SupplierTeleInput);
+            this.SupplierAddBox.Controls.Add(this.SupplierMobileLabelAdd);
+            this.SupplierAddBox.Controls.Add(this.SupplierMobileInput);
+            this.SupplierAddBox.Controls.Add(this.SupplierAddBtn);
+            this.SupplierAddBox.Controls.Add(this.SupplierNameLabelAdd);
+            this.SupplierAddBox.Controls.Add(this.SupplierNameInput);
+            this.SupplierAddBox.Location = new System.Drawing.Point(41, 277);
+            this.SupplierAddBox.Name = "SupplierAddBox";
+            this.SupplierAddBox.Size = new System.Drawing.Size(714, 126);
+            this.SupplierAddBox.TabIndex = 3;
+            this.SupplierAddBox.TabStop = false;
+            this.SupplierAddBox.Text = "Add Supplier";
+            // 
+            // SupplierTeleLabelAdd
+            // 
+            this.SupplierTeleLabelAdd.AutoSize = true;
+            this.SupplierTeleLabelAdd.Location = new System.Drawing.Point(481, 36);
+            this.SupplierTeleLabelAdd.Name = "SupplierTeleLabelAdd";
+            this.SupplierTeleLabelAdd.Size = new System.Drawing.Size(37, 17);
+            this.SupplierTeleLabelAdd.TabIndex = 12;
+            this.SupplierTeleLabelAdd.Text = "Tele:";
+            // 
+            // SupplierTeleInput
+            // 
+            this.SupplierTeleInput.Location = new System.Drawing.Point(548, 31);
+            this.SupplierTeleInput.Name = "SupplierTeleInput";
+            this.SupplierTeleInput.Size = new System.Drawing.Size(154, 24);
+            this.SupplierTeleInput.TabIndex = 11;
+            // 
+            // SupplierMobileLabelAdd
+            // 
+            this.SupplierMobileLabelAdd.AutoSize = true;
+            this.SupplierMobileLabelAdd.Location = new System.Drawing.Point(239, 35);
+            this.SupplierMobileLabelAdd.Name = "SupplierMobileLabelAdd";
+            this.SupplierMobileLabelAdd.Size = new System.Drawing.Size(50, 17);
+            this.SupplierMobileLabelAdd.TabIndex = 10;
+            this.SupplierMobileLabelAdd.Text = "Mobile:";
+            // 
+            // SupplierMobileInput
+            // 
+            this.SupplierMobileInput.Location = new System.Drawing.Point(302, 31);
+            this.SupplierMobileInput.Name = "SupplierMobileInput";
+            this.SupplierMobileInput.Size = new System.Drawing.Size(149, 24);
+            this.SupplierMobileInput.TabIndex = 9;
+            // 
+            // SupplierAddBtn
+            // 
+            this.SupplierAddBtn.Location = new System.Drawing.Point(21, 93);
+            this.SupplierAddBtn.Name = "SupplierAddBtn";
+            this.SupplierAddBtn.Size = new System.Drawing.Size(681, 23);
+            this.SupplierAddBtn.TabIndex = 7;
+            this.SupplierAddBtn.Text = "Add";
+            this.SupplierAddBtn.UseVisualStyleBackColor = true;
+            this.SupplierAddBtn.Click += new System.EventHandler(this.SupplierAddBtn_Click);
+            // 
+            // SupplierNameLabelAdd
+            // 
+            this.SupplierNameLabelAdd.AutoSize = true;
+            this.SupplierNameLabelAdd.Location = new System.Drawing.Point(18, 35);
+            this.SupplierNameLabelAdd.Name = "SupplierNameLabelAdd";
+            this.SupplierNameLabelAdd.Size = new System.Drawing.Size(48, 17);
+            this.SupplierNameLabelAdd.TabIndex = 8;
+            this.SupplierNameLabelAdd.Text = "Name:";
+            // 
+            // SupplierNameInput
+            // 
+            this.SupplierNameInput.Location = new System.Drawing.Point(69, 31);
+            this.SupplierNameInput.Name = "SupplierNameInput";
+            this.SupplierNameInput.Size = new System.Drawing.Size(154, 24);
+            this.SupplierNameInput.TabIndex = 7;
+            // 
+            // SupplierEditBox
+            // 
+            this.SupplierEditBox.Controls.Add(this.SupplierFaxLabelEdit);
+            this.SupplierEditBox.Controls.Add(this.SupplierFaxOutput);
+            this.SupplierEditBox.Controls.Add(this.SupplierSiteLabelEdit);
+            this.SupplierEditBox.Controls.Add(this.SupplierSiteOutput);
+            this.SupplierEditBox.Controls.Add(this.SupplierMailLabelEdit);
+            this.SupplierEditBox.Controls.Add(this.SupplierMailOutput);
+            this.SupplierEditBox.Controls.Add(this.SupplierTeleLabelEdit);
+            this.SupplierEditBox.Controls.Add(this.SupplierTeleOutput);
+            this.SupplierEditBox.Controls.Add(this.SupplierMobileLabelEdit);
+            this.SupplierEditBox.Controls.Add(this.SupplierMobileOutput);
+            this.SupplierEditBox.Controls.Add(this.SupplierEditBtn);
+            this.SupplierEditBox.Controls.Add(this.SupplierNameLabelEdit);
+            this.SupplierEditBox.Controls.Add(this.SupplierIDLabelEdit);
+            this.SupplierEditBox.Controls.Add(this.SupplierNameOutput);
+            this.SupplierEditBox.Controls.Add(this.SupplierIDOutput);
+            this.SupplierEditBox.Controls.Add(this.SupplierList);
+            this.SupplierEditBox.Controls.Add(this.SupplierDataGrid);
+            this.SupplierEditBox.Location = new System.Drawing.Point(41, 28);
+            this.SupplierEditBox.Name = "SupplierEditBox";
+            this.SupplierEditBox.Size = new System.Drawing.Size(714, 231);
+            this.SupplierEditBox.TabIndex = 2;
+            this.SupplierEditBox.TabStop = false;
+            this.SupplierEditBox.Text = "Edit Supplier";
+            // 
+            // SupplierTeleLabelEdit
+            // 
+            this.SupplierTeleLabelEdit.AutoSize = true;
+            this.SupplierTeleLabelEdit.Location = new System.Drawing.Point(20, 168);
+            this.SupplierTeleLabelEdit.Name = "SupplierTeleLabelEdit";
+            this.SupplierTeleLabelEdit.Size = new System.Drawing.Size(37, 17);
+            this.SupplierTeleLabelEdit.TabIndex = 10;
+            this.SupplierTeleLabelEdit.Text = "Tele:";
+            // 
+            // SupplierTeleOutput
+            // 
+            this.SupplierTeleOutput.Location = new System.Drawing.Point(64, 161);
+            this.SupplierTeleOutput.Name = "SupplierTeleOutput";
+            this.SupplierTeleOutput.Size = new System.Drawing.Size(68, 24);
+            this.SupplierTeleOutput.TabIndex = 9;
+            // 
+            // SupplierMobileLabelEdit
+            // 
+            this.SupplierMobileLabelEdit.AutoSize = true;
+            this.SupplierMobileLabelEdit.Location = new System.Drawing.Point(7, 137);
+            this.SupplierMobileLabelEdit.Name = "SupplierMobileLabelEdit";
+            this.SupplierMobileLabelEdit.Size = new System.Drawing.Size(50, 17);
+            this.SupplierMobileLabelEdit.TabIndex = 8;
+            this.SupplierMobileLabelEdit.Text = "Mobile:";
+            // 
+            // SupplierMobileOutput
+            // 
+            this.SupplierMobileOutput.Location = new System.Drawing.Point(64, 131);
+            this.SupplierMobileOutput.Name = "SupplierMobileOutput";
+            this.SupplierMobileOutput.Size = new System.Drawing.Size(68, 24);
+            this.SupplierMobileOutput.TabIndex = 7;
+            // 
+            // SupplierEditBtn
+            // 
+            this.SupplierEditBtn.Location = new System.Drawing.Point(11, 192);
+            this.SupplierEditBtn.Name = "SupplierEditBtn";
+            this.SupplierEditBtn.Size = new System.Drawing.Size(241, 23);
+            this.SupplierEditBtn.TabIndex = 6;
+            this.SupplierEditBtn.Text = "Edit";
+            this.SupplierEditBtn.UseVisualStyleBackColor = true;
+            this.SupplierEditBtn.Click += new System.EventHandler(this.SupplierEditBtn_Click);
+            // 
+            // SupplierNameLabelEdit
+            // 
+            this.SupplierNameLabelEdit.AutoSize = true;
+            this.SupplierNameLabelEdit.Location = new System.Drawing.Point(9, 105);
+            this.SupplierNameLabelEdit.Name = "SupplierNameLabelEdit";
+            this.SupplierNameLabelEdit.Size = new System.Drawing.Size(48, 17);
+            this.SupplierNameLabelEdit.TabIndex = 5;
+            this.SupplierNameLabelEdit.Text = "Name:";
+            // 
+            // SupplierIDLabelEdit
+            // 
+            this.SupplierIDLabelEdit.AutoSize = true;
+            this.SupplierIDLabelEdit.Location = new System.Drawing.Point(30, 74);
+            this.SupplierIDLabelEdit.Name = "SupplierIDLabelEdit";
+            this.SupplierIDLabelEdit.Size = new System.Drawing.Size(27, 17);
+            this.SupplierIDLabelEdit.TabIndex = 4;
+            this.SupplierIDLabelEdit.Text = "ID:";
+            // 
+            // SupplierNameOutput
+            // 
+            this.SupplierNameOutput.Location = new System.Drawing.Point(64, 101);
+            this.SupplierNameOutput.Name = "SupplierNameOutput";
+            this.SupplierNameOutput.Size = new System.Drawing.Size(68, 24);
+            this.SupplierNameOutput.TabIndex = 2;
+            // 
+            // SupplierIDOutput
+            // 
+            this.SupplierIDOutput.Enabled = false;
+            this.SupplierIDOutput.Location = new System.Drawing.Point(64, 70);
+            this.SupplierIDOutput.Name = "SupplierIDOutput";
+            this.SupplierIDOutput.Size = new System.Drawing.Size(188, 24);
+            this.SupplierIDOutput.TabIndex = 3;
+            // 
+            // SupplierList
+            // 
+            this.SupplierList.FormattingEnabled = true;
+            this.SupplierList.Location = new System.Drawing.Point(11, 37);
+            this.SupplierList.Name = "SupplierList";
+            this.SupplierList.Size = new System.Drawing.Size(241, 24);
+            this.SupplierList.TabIndex = 1;
+            this.SupplierList.SelectedIndexChanged += new System.EventHandler(this.SupplierList_SelectedIndexChanged);
+            // 
+            // SupplierDataGrid
+            // 
+            this.SupplierDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.SupplierDataGrid.Location = new System.Drawing.Point(302, 37);
+            this.SupplierDataGrid.Name = "SupplierDataGrid";
+            this.SupplierDataGrid.RowHeadersWidth = 51;
+            this.SupplierDataGrid.RowTemplate.Height = 26;
+            this.SupplierDataGrid.Size = new System.Drawing.Size(400, 176);
+            this.SupplierDataGrid.TabIndex = 0;
+            this.SupplierDataGrid.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.SupplierDataGrid_RowHeaderMouseClick);
             // 
             // CustomerTab
             // 
@@ -517,6 +757,102 @@
             this.ReportTab.TabIndex = 4;
             this.ReportTab.Text = "Report";
             // 
+            // SupplierFaxLabelEdit
+            // 
+            this.SupplierFaxLabelEdit.AutoSize = true;
+            this.SupplierFaxLabelEdit.Location = new System.Drawing.Point(137, 168);
+            this.SupplierFaxLabelEdit.Name = "SupplierFaxLabelEdit";
+            this.SupplierFaxLabelEdit.Size = new System.Drawing.Size(35, 17);
+            this.SupplierFaxLabelEdit.TabIndex = 16;
+            this.SupplierFaxLabelEdit.Text = "Fax:";
+            // 
+            // SupplierFaxOutput
+            // 
+            this.SupplierFaxOutput.Location = new System.Drawing.Point(178, 162);
+            this.SupplierFaxOutput.Name = "SupplierFaxOutput";
+            this.SupplierFaxOutput.Size = new System.Drawing.Size(74, 24);
+            this.SupplierFaxOutput.TabIndex = 15;
+            // 
+            // SupplierSiteLabelEdit
+            // 
+            this.SupplierSiteLabelEdit.AutoSize = true;
+            this.SupplierSiteLabelEdit.Location = new System.Drawing.Point(138, 134);
+            this.SupplierSiteLabelEdit.Name = "SupplierSiteLabelEdit";
+            this.SupplierSiteLabelEdit.Size = new System.Drawing.Size(35, 17);
+            this.SupplierSiteLabelEdit.TabIndex = 14;
+            this.SupplierSiteLabelEdit.Text = "Site:";
+            // 
+            // SupplierSiteOutput
+            // 
+            this.SupplierSiteOutput.Location = new System.Drawing.Point(178, 132);
+            this.SupplierSiteOutput.Name = "SupplierSiteOutput";
+            this.SupplierSiteOutput.Size = new System.Drawing.Size(74, 24);
+            this.SupplierSiteOutput.TabIndex = 13;
+            // 
+            // SupplierMailLabelEdit
+            // 
+            this.SupplierMailLabelEdit.AutoSize = true;
+            this.SupplierMailLabelEdit.Location = new System.Drawing.Point(138, 104);
+            this.SupplierMailLabelEdit.Name = "SupplierMailLabelEdit";
+            this.SupplierMailLabelEdit.Size = new System.Drawing.Size(34, 17);
+            this.SupplierMailLabelEdit.TabIndex = 12;
+            this.SupplierMailLabelEdit.Text = "Mail:";
+            // 
+            // SupplierMailOutput
+            // 
+            this.SupplierMailOutput.Location = new System.Drawing.Point(178, 102);
+            this.SupplierMailOutput.Name = "SupplierMailOutput";
+            this.SupplierMailOutput.Size = new System.Drawing.Size(74, 24);
+            this.SupplierMailOutput.TabIndex = 11;
+            // 
+            // SupplierFaxLabelAdd
+            // 
+            this.SupplierFaxLabelAdd.AutoSize = true;
+            this.SupplierFaxLabelAdd.Location = new System.Drawing.Point(481, 66);
+            this.SupplierFaxLabelAdd.Name = "SupplierFaxLabelAdd";
+            this.SupplierFaxLabelAdd.Size = new System.Drawing.Size(35, 17);
+            this.SupplierFaxLabelAdd.TabIndex = 18;
+            this.SupplierFaxLabelAdd.Text = "Fax:";
+            // 
+            // SupplierFaxInput
+            // 
+            this.SupplierFaxInput.Location = new System.Drawing.Point(548, 61);
+            this.SupplierFaxInput.Name = "SupplierFaxInput";
+            this.SupplierFaxInput.Size = new System.Drawing.Size(154, 24);
+            this.SupplierFaxInput.TabIndex = 17;
+            // 
+            // SupplierSiteLabelAdd
+            // 
+            this.SupplierSiteLabelAdd.AutoSize = true;
+            this.SupplierSiteLabelAdd.Location = new System.Drawing.Point(239, 65);
+            this.SupplierSiteLabelAdd.Name = "SupplierSiteLabelAdd";
+            this.SupplierSiteLabelAdd.Size = new System.Drawing.Size(35, 17);
+            this.SupplierSiteLabelAdd.TabIndex = 16;
+            this.SupplierSiteLabelAdd.Text = "Site:";
+            // 
+            // SupplierSiteInput
+            // 
+            this.SupplierSiteInput.Location = new System.Drawing.Point(302, 61);
+            this.SupplierSiteInput.Name = "SupplierSiteInput";
+            this.SupplierSiteInput.Size = new System.Drawing.Size(149, 24);
+            this.SupplierSiteInput.TabIndex = 15;
+            // 
+            // SupplierMailLabelAdd
+            // 
+            this.SupplierMailLabelAdd.AutoSize = true;
+            this.SupplierMailLabelAdd.Location = new System.Drawing.Point(18, 65);
+            this.SupplierMailLabelAdd.Name = "SupplierMailLabelAdd";
+            this.SupplierMailLabelAdd.Size = new System.Drawing.Size(34, 17);
+            this.SupplierMailLabelAdd.TabIndex = 14;
+            this.SupplierMailLabelAdd.Text = "Mail:";
+            // 
+            // SupplierMailInput
+            // 
+            this.SupplierMailInput.Location = new System.Drawing.Point(69, 61);
+            this.SupplierMailInput.Name = "SupplierMailInput";
+            this.SupplierMailInput.Size = new System.Drawing.Size(154, 24);
+            this.SupplierMailInput.TabIndex = 13;
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -541,6 +877,12 @@
             this.ProductEditBox.ResumeLayout(false);
             this.ProductEditBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ProductGridView)).EndInit();
+            this.SupplierPage.ResumeLayout(false);
+            this.SupplierAddBox.ResumeLayout(false);
+            this.SupplierAddBox.PerformLayout();
+            this.SupplierEditBox.ResumeLayout(false);
+            this.SupplierEditBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SupplierDataGrid)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -591,6 +933,38 @@
         private System.Windows.Forms.TextBox ProductIDOutput;
         private System.Windows.Forms.ComboBox ProductList;
         private System.Windows.Forms.DataGridView ProductGridView;
+        private System.Windows.Forms.GroupBox SupplierAddBox;
+        private System.Windows.Forms.Label SupplierTeleLabelAdd;
+        private System.Windows.Forms.TextBox SupplierTeleInput;
+        private System.Windows.Forms.Label SupplierMobileLabelAdd;
+        private System.Windows.Forms.TextBox SupplierMobileInput;
+        private System.Windows.Forms.Button SupplierAddBtn;
+        private System.Windows.Forms.Label SupplierNameLabelAdd;
+        private System.Windows.Forms.TextBox SupplierNameInput;
+        private System.Windows.Forms.GroupBox SupplierEditBox;
+        private System.Windows.Forms.Label SupplierTeleLabelEdit;
+        private System.Windows.Forms.TextBox SupplierTeleOutput;
+        private System.Windows.Forms.Label SupplierMobileLabelEdit;
+        private System.Windows.Forms.TextBox SupplierMobileOutput;
+        private System.Windows.Forms.Button SupplierEditBtn;
+        private System.Windows.Forms.Label SupplierNameLabelEdit;
+        private System.Windows.Forms.Label SupplierIDLabelEdit;
+        private System.Windows.Forms.TextBox SupplierNameOutput;
+        private System.Windows.Forms.TextBox SupplierIDOutput;
+        private System.Windows.Forms.ComboBox SupplierList;
+        private System.Windows.Forms.DataGridView SupplierDataGrid;
+        private System.Windows.Forms.Label SupplierFaxLabelEdit;
+        private System.Windows.Forms.TextBox SupplierFaxOutput;
+        private System.Windows.Forms.Label SupplierSiteLabelEdit;
+        private System.Windows.Forms.TextBox SupplierSiteOutput;
+        private System.Windows.Forms.Label SupplierMailLabelEdit;
+        private System.Windows.Forms.TextBox SupplierMailOutput;
+        private System.Windows.Forms.Label SupplierFaxLabelAdd;
+        private System.Windows.Forms.TextBox SupplierFaxInput;
+        private System.Windows.Forms.Label SupplierSiteLabelAdd;
+        private System.Windows.Forms.TextBox SupplierSiteInput;
+        private System.Windows.Forms.Label SupplierMailLabelAdd;
+        private System.Windows.Forms.TextBox SupplierMailInput;
     }
 }
 
