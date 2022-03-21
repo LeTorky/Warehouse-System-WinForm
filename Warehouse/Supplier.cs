@@ -17,7 +17,7 @@ namespace Warehouse
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Supplier()
         {
-            this.Supplies = new HashSet<Supply>();
+            this.Supply_Permit = new HashSet<Supply_Permit>();
         }
     
         public int ID { get; set; }
@@ -29,6 +29,10 @@ namespace Warehouse
         public int Fax { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Supply> Supplies { get; set; }
+        public virtual ICollection<Supply_Permit> Supply_Permit { get; set; }
+        public override string ToString()
+        {
+            return this.Name;
+        }
     }
 }

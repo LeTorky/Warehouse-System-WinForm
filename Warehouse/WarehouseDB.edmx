@@ -23,14 +23,14 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
           <Key>
             <PropertyRef Name="Warehouse_From_FK" />
             <PropertyRef Name="Warehouse_To_FK" />
-            <PropertyRef Name="Product_Supply_FK" />
+            <PropertyRef Name="Supply_Permit_FK" />
             <PropertyRef Name="Qty" />
             <PropertyRef Name="Date" />
             <PropertyRef Name="Product_FK" />
           </Key>
           <Property Name="Warehouse_From_FK" Type="int" Nullable="false" />
           <Property Name="Warehouse_To_FK" Type="int" Nullable="false" />
-          <Property Name="Product_Supply_FK" Type="int" Nullable="false" />
+          <Property Name="Supply_Permit_FK" Type="int" Nullable="false" />
           <Property Name="Qty" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="Product_FK" Type="int" Nullable="false" />
@@ -49,17 +49,16 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Customer_FK" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Sales">
           <Key>
-            <PropertyRef Name="Product_Sale_FK" />
-            <PropertyRef Name="Product_Supply_FK" />
+            <PropertyRef Name="Sale_Permit_FK" />
+            <PropertyRef Name="Supply_Permit_FK" />
             <PropertyRef Name="Product_FK" />
           </Key>
-          <Property Name="Warehouse_FK" Type="int" Nullable="false" />
-          <Property Name="Customer_FK" Type="int" Nullable="false" />
-          <Property Name="Product_Sale_FK" Type="int" Nullable="false" />
-          <Property Name="Product_Supply_FK" Type="int" Nullable="false" />
+          <Property Name="Sale_Permit_FK" Type="int" Nullable="false" />
+          <Property Name="Supply_Permit_FK" Type="int" Nullable="false" />
           <Property Name="Qty" Type="int" Nullable="false" />
           <Property Name="Product_FK" Type="int" Nullable="false" />
         </EntityType>
@@ -77,14 +76,11 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
         </EntityType>
         <EntityType Name="Supplies">
           <Key>
-            <PropertyRef Name="Warehouse_FK" />
             <PropertyRef Name="Product_FK" />
-            <PropertyRef Name="Product_Supply_FK" />
+            <PropertyRef Name="Supply_Permit_FK" />
           </Key>
-          <Property Name="Warehouse_FK" Type="int" Nullable="false" />
-          <Property Name="Supplier_FK" Type="int" Nullable="false" />
           <Property Name="Product_FK" Type="int" Nullable="false" />
-          <Property Name="Product_Supply_FK" Type="int" Nullable="false" />
+          <Property Name="Supply_Permit_FK" Type="int" Nullable="false" />
           <Property Name="Qty" Type="int" Nullable="false" />
           <Property Name="ProDate" Type="date" Nullable="false" />
         </EntityType>
@@ -94,6 +90,8 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Supplier_FK" Type="int" Nullable="false" />
+          <Property Name="Warehouse_FK" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -134,15 +132,15 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Sales_Customer_FK">
+        <Association Name="Sale_Permit_Customer_FK">
           <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
-          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <End Role="Sale_Permit" Type="Self.Sale_Permit" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Customer">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Sales">
-              <PropertyRef Name="Customer_FK" />
+            <Dependent Role="Sale_Permit">
+              <PropertyRef Name="ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -166,7 +164,7 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Sales">
-              <PropertyRef Name="Product_Sale_FK" />
+              <PropertyRef Name="Sale_Permit_FK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -178,19 +176,7 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Sales">
-              <PropertyRef Name="Product_Supply_FK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Sales_Warehouse_FK">
-          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="1" />
-          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Warehouse">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Sales">
-              <PropertyRef Name="Warehouse_FK" />
+              <PropertyRef Name="Supply_Permit_FK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -214,30 +200,30 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Supplies">
-              <PropertyRef Name="Product_Supply_FK" />
+              <PropertyRef Name="Supply_Permit_FK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="Supplies_Supplier_FK">
           <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
-          <End Role="Supplies" Type="Self.Supplies" Multiplicity="*" />
+          <End Role="Supply_Permit" Type="Self.Supply_Permit" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Supplier">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Supplies">
+            <Dependent Role="Supply_Permit">
               <PropertyRef Name="Supplier_FK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Supplies_Warehouse_FK">
+        <Association Name="Supply_Permit_Warehouse_FK">
           <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="1" />
-          <End Role="Supplies" Type="Self.Supplies" Multiplicity="*" />
+          <End Role="Supply_Permit" Type="Self.Supply_Permit" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Warehouse">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Supplies">
+            <Dependent Role="Supply_Permit">
               <PropertyRef Name="Warehouse_FK" />
             </Dependent>
           </ReferentialConstraint>
@@ -262,7 +248,7 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Movement">
-              <PropertyRef Name="Product_Supply_FK" />
+              <PropertyRef Name="Supply_Permit_FK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -338,7 +324,7 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
             <DefiningQuery>SELECT 
     [Movement].[Warehouse_From_FK] AS [Warehouse_From_FK], 
     [Movement].[Warehouse_To_FK] AS [Warehouse_To_FK], 
-    [Movement].[Product_Supply_FK] AS [Product_Supply_FK], 
+    [Movement].[Supply_Permit_FK] AS [Supply_Permit_FK], 
     [Movement].[Qty] AS [Qty], 
     [Movement].[Date] AS [Date], 
     [Movement].[Product_FK] AS [Product_FK]
@@ -348,9 +334,9 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
             <End Role="Product" EntitySet="Product" />
             <End Role="Movement" EntitySet="Movement" />
           </AssociationSet>
-          <AssociationSet Name="Sales_Customer_FK" Association="Self.Sales_Customer_FK">
+          <AssociationSet Name="Sale_Permit_Customer_FK" Association="Self.Sale_Permit_Customer_FK">
             <End Role="Customer" EntitySet="Customer" />
-            <End Role="Sales" EntitySet="Sales" />
+            <End Role="Sale_Permit" EntitySet="Sale_Permit" />
           </AssociationSet>
           <AssociationSet Name="Sales_Product_FK" Association="Self.Sales_Product_FK">
             <End Role="Product" EntitySet="Product" />
@@ -364,10 +350,6 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
             <End Role="Supply_Permit" EntitySet="Supply_Permit" />
             <End Role="Sales" EntitySet="Sales" />
           </AssociationSet>
-          <AssociationSet Name="Sales_Warehouse_FK" Association="Self.Sales_Warehouse_FK">
-            <End Role="Warehouse" EntitySet="Warehouse" />
-            <End Role="Sales" EntitySet="Sales" />
-          </AssociationSet>
           <AssociationSet Name="Supplies_Product_FK" Association="Self.Supplies_Product_FK">
             <End Role="Product" EntitySet="Product" />
             <End Role="Supplies" EntitySet="Supplies" />
@@ -378,11 +360,11 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
           </AssociationSet>
           <AssociationSet Name="Supplies_Supplier_FK" Association="Self.Supplies_Supplier_FK">
             <End Role="Supplier" EntitySet="Supplier" />
-            <End Role="Supplies" EntitySet="Supplies" />
+            <End Role="Supply_Permit" EntitySet="Supply_Permit" />
           </AssociationSet>
-          <AssociationSet Name="Supplies_Warehouse_FK" Association="Self.Supplies_Warehouse_FK">
+          <AssociationSet Name="Supply_Permit_Warehouse_FK" Association="Self.Supply_Permit_Warehouse_FK">
             <End Role="Warehouse" EntitySet="Warehouse" />
-            <End Role="Supplies" EntitySet="Supplies" />
+            <End Role="Supply_Permit" EntitySet="Supply_Permit" />
           </AssociationSet>
           <AssociationSet Name="Unit_Product_FK" Association="Self.Unit_Product_FK">
             <End Role="Product" EntitySet="Product" />
@@ -417,7 +399,7 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
           <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Site" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Fax" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Sales" Relationship="Self.Sales_Customer_FK" FromRole="Customer" ToRole="Sales" />
+          <NavigationProperty Name="Sale_Permit" Relationship="Self.Sale_Permit_Customer_FK" FromRole="Customer" ToRole="Sale_Permit" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -437,25 +419,23 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Customer_FK" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.Sale_Permit_Customer_FK" FromRole="Sale_Permit" ToRole="Customer" />
           <NavigationProperty Name="Sales" Relationship="Self.Sales_Product_Sale_FK" FromRole="Sale_Permit" ToRole="Sales" />
         </EntityType>
         <EntityType Name="Sale">
           <Key>
-            <PropertyRef Name="Product_Sale_FK" />
-            <PropertyRef Name="Product_Supply_FK" />
+            <PropertyRef Name="Sale_Permit_FK" />
+            <PropertyRef Name="Supply_Permit_FK" />
             <PropertyRef Name="Product_FK" />
           </Key>
-          <Property Name="Warehouse_FK" Type="Int32" Nullable="false" />
-          <Property Name="Customer_FK" Type="Int32" Nullable="false" />
-          <Property Name="Product_Sale_FK" Type="Int32" Nullable="false" />
-          <Property Name="Product_Supply_FK" Type="Int32" Nullable="false" />
+          <Property Name="Sale_Permit_FK" Type="Int32" Nullable="false" />
+          <Property Name="Supply_Permit_FK" Type="Int32" Nullable="false" />
           <Property Name="Qty" Type="Int32" Nullable="false" />
           <Property Name="Product_FK" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Customer" Relationship="Self.Sales_Customer_FK" FromRole="Sales" ToRole="Customer" />
           <NavigationProperty Name="Product" Relationship="Self.Sales_Product_FK" FromRole="Sales" ToRole="Product" />
           <NavigationProperty Name="Sale_Permit" Relationship="Self.Sales_Product_Sale_FK" FromRole="Sales" ToRole="Sale_Permit" />
           <NavigationProperty Name="Supply_Permit" Relationship="Self.Sales_Product_Supply_FK" FromRole="Sales" ToRole="Supply_Permit" />
-          <NavigationProperty Name="Warehouse" Relationship="Self.Sales_Warehouse_FK" FromRole="Sales" ToRole="Warehouse" />
         </EntityType>
         <EntityType Name="Supplier">
           <Key>
@@ -468,24 +448,19 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
           <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Site" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Fax" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Supplies" Relationship="Self.Supplies_Supplier_FK" FromRole="Supplier" ToRole="Supplies" />
+          <NavigationProperty Name="Supply_Permit" Relationship="Self.Supplies_Supplier_FK" FromRole="Supplier" ToRole="Supply_Permit" />
         </EntityType>
         <EntityType Name="Supply">
           <Key>
-            <PropertyRef Name="Warehouse_FK" />
             <PropertyRef Name="Product_FK" />
-            <PropertyRef Name="Product_Supply_FK" />
+            <PropertyRef Name="Supply_Permit_FK" />
           </Key>
-          <Property Name="Warehouse_FK" Type="Int32" Nullable="false" />
-          <Property Name="Supplier_FK" Type="Int32" Nullable="false" />
           <Property Name="Product_FK" Type="Int32" Nullable="false" />
-          <Property Name="Product_Supply_FK" Type="Int32" Nullable="false" />
+          <Property Name="Supply_Permit_FK" Type="Int32" Nullable="false" />
           <Property Name="Qty" Type="Int32" Nullable="false" />
           <Property Name="ProDate" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Product" Relationship="Self.Supplies_Product_FK" FromRole="Supplies" ToRole="Product" />
-          <NavigationProperty Name="Supplier" Relationship="Self.Supplies_Supplier_FK" FromRole="Supplies" ToRole="Supplier" />
           <NavigationProperty Name="Supply_Permit" Relationship="Self.Supplies_Product_Supply_FK" FromRole="Supplies" ToRole="Supply_Permit" />
-          <NavigationProperty Name="Warehouse" Relationship="Self.Supplies_Warehouse_FK" FromRole="Supplies" ToRole="Warehouse" />
         </EntityType>
         <EntityType Name="Supply_Permit">
           <Key>
@@ -493,8 +468,12 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Supplier_FK" Type="Int32" Nullable="false" />
+          <Property Name="Warehouse_FK" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Sales" Relationship="Self.Sales_Product_Supply_FK" FromRole="Supply_Permit" ToRole="Sales" />
+          <NavigationProperty Name="Supplier" Relationship="Self.Supplies_Supplier_FK" FromRole="Supply_Permit" ToRole="Supplier" />
           <NavigationProperty Name="Supplies" Relationship="Self.Supplies_Product_Supply_FK" FromRole="Supply_Permit" ToRole="Supplies" />
+          <NavigationProperty Name="Warehouse" Relationship="Self.Supply_Permit_Warehouse_FK" FromRole="Supply_Permit" ToRole="Warehouse" />
           <NavigationProperty Name="Movements" Relationship="Self.Warehouses_Moves_Product_Supply_FK" FromRole="Supply_Permit" ToRole="Movement" />
         </EntityType>
         <EntityType Name="sysdiagram">
@@ -524,8 +503,7 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Supervisor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Sales" Relationship="Self.Sales_Warehouse_FK" FromRole="Warehouse" ToRole="Sales" />
-          <NavigationProperty Name="Supplies" Relationship="Self.Supplies_Warehouse_FK" FromRole="Warehouse" ToRole="Supplies" />
+          <NavigationProperty Name="Supply_Permit" Relationship="Self.Supply_Permit_Warehouse_FK" FromRole="Warehouse" ToRole="Supply_Permit" />
           <NavigationProperty Name="Movements" Relationship="Self.Warehouses_Moves_Products_From_FK" FromRole="Warehouse" ToRole="Movement" />
           <NavigationProperty Name="Movements1" Relationship="Self.Warehouses_Moves_Products_To_FK" FromRole="Warehouse" ToRole="Movement" />
         </EntityType>
@@ -533,14 +511,14 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
           <Key>
             <PropertyRef Name="Warehouse_From_FK" />
             <PropertyRef Name="Warehouse_To_FK" />
-            <PropertyRef Name="Product_Supply_FK" />
+            <PropertyRef Name="Supply_Permit_FK" />
             <PropertyRef Name="Qty" />
             <PropertyRef Name="Date" />
             <PropertyRef Name="Product_FK" />
           </Key>
           <Property Name="Warehouse_From_FK" Type="Int32" Nullable="false" />
           <Property Name="Warehouse_To_FK" Type="Int32" Nullable="false" />
-          <Property Name="Product_Supply_FK" Type="Int32" Nullable="false" />
+          <Property Name="Supply_Permit_FK" Type="Int32" Nullable="false" />
           <Property Name="Qty" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Product_FK" Type="Int32" Nullable="false" />
@@ -549,15 +527,15 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
           <NavigationProperty Name="Warehouse" Relationship="Self.Warehouses_Moves_Products_From_FK" FromRole="Movement" ToRole="Warehouse" />
           <NavigationProperty Name="Warehouse1" Relationship="Self.Warehouses_Moves_Products_To_FK" FromRole="Movement" ToRole="Warehouse" />
         </EntityType>
-        <Association Name="Sales_Customer_FK">
+        <Association Name="Sale_Permit_Customer_FK">
           <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
-          <End Role="Sales" Type="Self.Sale" Multiplicity="*" />
+          <End Role="Sale_Permit" Type="Self.Sale_Permit" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Customer">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Sales">
-              <PropertyRef Name="Customer_FK" />
+            <Dependent Role="Sale_Permit">
+              <PropertyRef Name="ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -617,7 +595,7 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Sales">
-              <PropertyRef Name="Product_Sale_FK" />
+              <PropertyRef Name="Sale_Permit_FK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -629,30 +607,18 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Sales">
-              <PropertyRef Name="Product_Supply_FK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Sales_Warehouse_FK">
-          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="1" />
-          <End Role="Sales" Type="Self.Sale" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Warehouse">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Sales">
-              <PropertyRef Name="Warehouse_FK" />
+              <PropertyRef Name="Supply_Permit_FK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="Supplies_Supplier_FK">
           <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
-          <End Role="Supplies" Type="Self.Supply" Multiplicity="*" />
+          <End Role="Supply_Permit" Type="Self.Supply_Permit" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Supplier">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Supplies">
+            <Dependent Role="Supply_Permit">
               <PropertyRef Name="Supplier_FK" />
             </Dependent>
           </ReferentialConstraint>
@@ -665,18 +631,18 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Supplies">
-              <PropertyRef Name="Product_Supply_FK" />
+              <PropertyRef Name="Supply_Permit_FK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Supplies_Warehouse_FK">
+        <Association Name="Supply_Permit_Warehouse_FK">
           <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="1" />
-          <End Role="Supplies" Type="Self.Supply" Multiplicity="*" />
+          <End Role="Supply_Permit" Type="Self.Supply_Permit" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Warehouse">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Supplies">
+            <Dependent Role="Supply_Permit">
               <PropertyRef Name="Warehouse_FK" />
             </Dependent>
           </ReferentialConstraint>
@@ -689,7 +655,7 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Movement">
-              <PropertyRef Name="Product_Supply_FK" />
+              <PropertyRef Name="Supply_Permit_FK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -729,9 +695,9 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
           <EntitySet Name="Units" EntityType="Self.Unit" />
           <EntitySet Name="Warehouses" EntityType="Self.Warehouse" />
           <EntitySet Name="Movements" EntityType="Self.Movement" />
-          <AssociationSet Name="Sales_Customer_FK" Association="Self.Sales_Customer_FK">
+          <AssociationSet Name="Sale_Permit_Customer_FK" Association="Self.Sale_Permit_Customer_FK">
             <End Role="Customer" EntitySet="Customers" />
-            <End Role="Sales" EntitySet="Sales" />
+            <End Role="Sale_Permit" EntitySet="Sale_Permit" />
           </AssociationSet>
           <AssociationSet Name="Movement_Product_FK" Association="Self.Movement_Product_FK">
             <End Role="Product" EntitySet="Products" />
@@ -757,21 +723,17 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
             <End Role="Supply_Permit" EntitySet="Supply_Permit" />
             <End Role="Sales" EntitySet="Sales" />
           </AssociationSet>
-          <AssociationSet Name="Sales_Warehouse_FK" Association="Self.Sales_Warehouse_FK">
-            <End Role="Warehouse" EntitySet="Warehouses" />
-            <End Role="Sales" EntitySet="Sales" />
-          </AssociationSet>
           <AssociationSet Name="Supplies_Supplier_FK" Association="Self.Supplies_Supplier_FK">
             <End Role="Supplier" EntitySet="Suppliers" />
-            <End Role="Supplies" EntitySet="Supplies" />
+            <End Role="Supply_Permit" EntitySet="Supply_Permit" />
           </AssociationSet>
           <AssociationSet Name="Supplies_Product_Supply_FK" Association="Self.Supplies_Product_Supply_FK">
             <End Role="Supply_Permit" EntitySet="Supply_Permit" />
             <End Role="Supplies" EntitySet="Supplies" />
           </AssociationSet>
-          <AssociationSet Name="Supplies_Warehouse_FK" Association="Self.Supplies_Warehouse_FK">
+          <AssociationSet Name="Supply_Permit_Warehouse_FK" Association="Self.Supply_Permit_Warehouse_FK">
             <End Role="Warehouse" EntitySet="Warehouses" />
-            <End Role="Supplies" EntitySet="Supplies" />
+            <End Role="Supply_Permit" EntitySet="Supply_Permit" />
           </AssociationSet>
           <AssociationSet Name="Warehouses_Moves_Product_Supply_FK" Association="Self.Warehouses_Moves_Product_Supply_FK">
             <End Role="Supply_Permit" EntitySet="Supply_Permit" />
@@ -877,16 +839,15 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
               <MappingFragment StoreEntitySet="Sale_Permit">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Customer_FK" ColumnName="Customer_FK" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Sales">
             <EntityTypeMapping TypeName="WareHouseDBModel.Sale">
               <MappingFragment StoreEntitySet="Sales">
-                <ScalarProperty Name="Warehouse_FK" ColumnName="Warehouse_FK" />
-                <ScalarProperty Name="Customer_FK" ColumnName="Customer_FK" />
-                <ScalarProperty Name="Product_Sale_FK" ColumnName="Product_Sale_FK" />
-                <ScalarProperty Name="Product_Supply_FK" ColumnName="Product_Supply_FK" />
+                <ScalarProperty Name="Sale_Permit_FK" ColumnName="Sale_Permit_FK" />
+                <ScalarProperty Name="Supply_Permit_FK" ColumnName="Supply_Permit_FK" />
                 <ScalarProperty Name="Qty" ColumnName="Qty" />
                 <ScalarProperty Name="Product_FK" ColumnName="Product_FK" />
               </MappingFragment>
@@ -908,10 +869,8 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
           <EntitySetMapping Name="Supplies">
             <EntityTypeMapping TypeName="WareHouseDBModel.Supply">
               <MappingFragment StoreEntitySet="Supplies">
-                <ScalarProperty Name="Warehouse_FK" ColumnName="Warehouse_FK" />
-                <ScalarProperty Name="Supplier_FK" ColumnName="Supplier_FK" />
                 <ScalarProperty Name="Product_FK" ColumnName="Product_FK" />
-                <ScalarProperty Name="Product_Supply_FK" ColumnName="Product_Supply_FK" />
+                <ScalarProperty Name="Supply_Permit_FK" ColumnName="Supply_Permit_FK" />
                 <ScalarProperty Name="Qty" ColumnName="Qty" />
                 <ScalarProperty Name="ProDate" ColumnName="ProDate" />
               </MappingFragment>
@@ -922,6 +881,8 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
               <MappingFragment StoreEntitySet="Supply_Permit">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Supplier_FK" ColumnName="Supplier_FK" />
+                <ScalarProperty Name="Warehouse_FK" ColumnName="Warehouse_FK" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -959,7 +920,7 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
               <MappingFragment StoreEntitySet="Movement">
                 <ScalarProperty Name="Warehouse_From_FK" ColumnName="Warehouse_From_FK" />
                 <ScalarProperty Name="Warehouse_To_FK" ColumnName="Warehouse_To_FK" />
-                <ScalarProperty Name="Product_Supply_FK" ColumnName="Product_Supply_FK" />
+                <ScalarProperty Name="Supply_Permit_FK" ColumnName="Supply_Permit_FK" />
                 <ScalarProperty Name="Qty" ColumnName="Qty" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Product_FK" ColumnName="Product_FK" />

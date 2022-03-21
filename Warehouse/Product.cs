@@ -35,5 +35,9 @@ namespace Warehouse
         public virtual ICollection<Supply> Supplies { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Unit> Units { get; set; }
+        public override string ToString()
+        {
+            return this.Name;
+        }
     }
 }

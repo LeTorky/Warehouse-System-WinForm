@@ -16,7 +16,7 @@ namespace Warehouse
     {
         public int Warehouse_From_FK { get; set; }
         public int Warehouse_To_FK { get; set; }
-        public int Product_Supply_FK { get; set; }
+        public int Supply_Permit_FK { get; set; }
         public int Qty { get; set; }
         public System.DateTime Date { get; set; }
         public int Product_FK { get; set; }

@@ -14,16 +14,12 @@ namespace Warehouse
     
     public partial class Supply
     {
-        public int Warehouse_FK { get; set; }
-        public int Supplier_FK { get; set; }
         public int Product_FK { get; set; }
-        public int Product_Supply_FK { get; set; }
+        public int Supply_Permit_FK { get; set; }
         public int Qty { get; set; }
         public System.DateTime ProDate { get; set; }
     
         public virtual Product Product { get; set; }
-        public virtual Supplier Supplier { get; set; }
         public virtual Supply_Permit Supply_Permit { get; set; }
-        public virtual Warehouse Warehouse { get; set; }
     }
 }

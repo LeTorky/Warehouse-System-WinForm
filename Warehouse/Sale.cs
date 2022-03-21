@@ -14,17 +14,13 @@ namespace Warehouse
     
     public partial class Sale
     {
-        public int Warehouse_FK { get; set; }
-        public int Customer_FK { get; set; }
-        public int Product_Sale_FK { get; set; }
-        public int Product_Supply_FK { get; set; }
+        public int Sale_Permit_FK { get; set; }
+        public int Supply_Permit_FK { get; set; }
         public int Qty { get; set; }
         public int Product_FK { get; set; }
     
-        public virtual Customer Customer { get; set; }
         public virtual Product Product { get; set; }
         public virtual Sale_Permit Sale_Permit { get; set; }
         public virtual Supply_Permit Supply_Permit { get; set; }
-        public virtual Warehouse Warehouse { get; set; }
     }
 }

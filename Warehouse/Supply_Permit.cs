@@ -24,12 +24,20 @@ namespace Warehouse
     
         public int ID { get; set; }
         public System.DateTime Date { get; set; }
+        public int Supplier_FK { get; set; }
+        public int Warehouse_FK { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sale> Sales { get; set; }
+        public virtual Supplier Supplier { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Supply> Supplies { get; set; }
+        public virtual Warehouse Warehouse { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Movement> Movements { get; set; }
+        public override string ToString()
+        {
+            return this.Warehouse.Name;
+        }
     }
 }
