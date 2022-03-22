@@ -18,6 +18,7 @@ namespace Warehouse
         public int Supply_Permit_FK { get; set; }
         public int Qty { get; set; }
         public int Product_FK { get; set; }
+        public System.DateTime ProDate { get; set; }
     
         public virtual Product Product { get; set; }
         public virtual Sale_Permit Sale_Permit { get; set; }

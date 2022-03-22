@@ -27,6 +27,7 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
             <PropertyRef Name="Qty" />
             <PropertyRef Name="Date" />
             <PropertyRef Name="Product_FK" />
+            <PropertyRef Name="ProDate" />
           </Key>
           <Property Name="Warehouse_From_FK" Type="int" Nullable="false" />
           <Property Name="Warehouse_To_FK" Type="int" Nullable="false" />
@@ -34,6 +35,7 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
           <Property Name="Qty" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="Product_FK" Type="int" Nullable="false" />
+          <Property Name="ProDate" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -56,11 +58,13 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
             <PropertyRef Name="Sale_Permit_FK" />
             <PropertyRef Name="Supply_Permit_FK" />
             <PropertyRef Name="Product_FK" />
+            <PropertyRef Name="ProDate" />
           </Key>
           <Property Name="Sale_Permit_FK" Type="int" Nullable="false" />
           <Property Name="Supply_Permit_FK" Type="int" Nullable="false" />
           <Property Name="Qty" Type="int" Nullable="false" />
           <Property Name="Product_FK" Type="int" Nullable="false" />
+          <Property Name="ProDate" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Supplier">
           <Key>
@@ -78,6 +82,7 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
           <Key>
             <PropertyRef Name="Product_FK" />
             <PropertyRef Name="Supply_Permit_FK" />
+            <PropertyRef Name="ProDate" />
           </Key>
           <Property Name="Product_FK" Type="int" Nullable="false" />
           <Property Name="Supply_Permit_FK" Type="int" Nullable="false" />
@@ -276,6 +281,14 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="CascadingSupplyPermit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Supply_Permit_FK" Type="int" Mode="In" />
+          <Parameter Name="Product_FK" Type="int" Mode="In" />
+          <Parameter Name="ProDate" Type="date" Mode="In" />
+          <Parameter Name="Product_FK_New" Type="int" Mode="In" />
+          <Parameter Name="ProDateNew" Type="date" Mode="In" />
+          <Parameter Name="Qty" Type="int" Mode="In" />
+        </Function>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="GetDetailedQty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetTotalQty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -327,7 +340,8 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
     [Movement].[Supply_Permit_FK] AS [Supply_Permit_FK], 
     [Movement].[Qty] AS [Qty], 
     [Movement].[Date] AS [Date], 
-    [Movement].[Product_FK] AS [Product_FK]
+    [Movement].[Product_FK] AS [Product_FK], 
+    [Movement].[ProDate] AS [ProDate]
     FROM [dbo].[Movement] AS [Movement]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="Movement_Product_FK" Association="Self.Movement_Product_FK">
@@ -428,11 +442,13 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
             <PropertyRef Name="Sale_Permit_FK" />
             <PropertyRef Name="Supply_Permit_FK" />
             <PropertyRef Name="Product_FK" />
+            <PropertyRef Name="ProDate" />
           </Key>
           <Property Name="Sale_Permit_FK" Type="Int32" Nullable="false" />
           <Property Name="Supply_Permit_FK" Type="Int32" Nullable="false" />
           <Property Name="Qty" Type="Int32" Nullable="false" />
           <Property Name="Product_FK" Type="Int32" Nullable="false" />
+          <Property Name="ProDate" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Product" Relationship="Self.Sales_Product_FK" FromRole="Sales" ToRole="Product" />
           <NavigationProperty Name="Sale_Permit" Relationship="Self.Sales_Product_Sale_FK" FromRole="Sales" ToRole="Sale_Permit" />
           <NavigationProperty Name="Supply_Permit" Relationship="Self.Sales_Product_Supply_FK" FromRole="Sales" ToRole="Supply_Permit" />
@@ -454,6 +470,7 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
           <Key>
             <PropertyRef Name="Product_FK" />
             <PropertyRef Name="Supply_Permit_FK" />
+            <PropertyRef Name="ProDate" />
           </Key>
           <Property Name="Product_FK" Type="Int32" Nullable="false" />
           <Property Name="Supply_Permit_FK" Type="Int32" Nullable="false" />
@@ -515,6 +532,7 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
             <PropertyRef Name="Qty" />
             <PropertyRef Name="Date" />
             <PropertyRef Name="Product_FK" />
+            <PropertyRef Name="ProDate" />
           </Key>
           <Property Name="Warehouse_From_FK" Type="Int32" Nullable="false" />
           <Property Name="Warehouse_To_FK" Type="Int32" Nullable="false" />
@@ -522,6 +540,7 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
           <Property Name="Qty" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Product_FK" Type="Int32" Nullable="false" />
+          <Property Name="ProDate" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Product" Relationship="Self.Movement_Product_FK" FromRole="Movement" ToRole="Product" />
           <NavigationProperty Name="Supply_Permit" Relationship="Self.Warehouses_Moves_Product_Supply_FK" FromRole="Movement" ToRole="Supply_Permit" />
           <NavigationProperty Name="Warehouse" Relationship="Self.Warehouses_Moves_Products_From_FK" FromRole="Movement" ToRole="Warehouse" />
@@ -747,6 +766,14 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
             <End Role="Warehouse" EntitySet="Warehouses" />
             <End Role="Movement" EntitySet="Movements" />
           </AssociationSet>
+          <FunctionImport Name="CascadingSupplyPermit">
+            <Parameter Name="Supply_Permit_FK" Mode="In" Type="Int32" />
+            <Parameter Name="Product_FK" Mode="In" Type="Int32" />
+            <Parameter Name="ProDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Product_FK_New" Mode="In" Type="Int32" />
+            <Parameter Name="ProDateNew" Mode="In" Type="DateTime" />
+            <Parameter Name="Qty" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="GetDetailedQty" ReturnType="Collection(WareHouseDBModel.GetDetailedQty_Result)" />
           <FunctionImport Name="GetTotalQty" ReturnType="Collection(WareHouseDBModel.GetTotalQty_Result)" />
           <FunctionImport Name="sp_alterdiagram">
@@ -850,6 +877,7 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
                 <ScalarProperty Name="Supply_Permit_FK" ColumnName="Supply_Permit_FK" />
                 <ScalarProperty Name="Qty" ColumnName="Qty" />
                 <ScalarProperty Name="Product_FK" ColumnName="Product_FK" />
+                <ScalarProperty Name="ProDate" ColumnName="ProDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -924,9 +952,11 @@ warning 6002: The table/view 'WareHouseDB.dbo.Movement' does not have a primary 
                 <ScalarProperty Name="Qty" ColumnName="Qty" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Product_FK" ColumnName="Product_FK" />
+                <ScalarProperty Name="ProDate" ColumnName="ProDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CascadingSupplyPermit" FunctionName="WareHouseDBModel.Store.CascadingSupplyPermit" />
           <FunctionImportMapping FunctionImportName="GetDetailedQty" FunctionName="WareHouseDBModel.Store.GetDetailedQty">
             <ResultMapping>
               <ComplexTypeMapping TypeName="WareHouseDBModel.GetDetailedQty_Result">

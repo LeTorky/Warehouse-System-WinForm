@@ -58,6 +58,7 @@
     <Compile Include="Customer.cs">
       <DependentUpon>WarehouseDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="DynamicControlGroups.cs" />
     <Compile Include="GetDetailedQty_Result.cs">
       <DependentUpon>WarehouseDB.tt</DependentUpon>
     </Compile>

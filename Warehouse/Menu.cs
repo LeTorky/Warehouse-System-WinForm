@@ -603,19 +603,21 @@ namespace Warehouse
             SupplyPermitList.Items.Add("All");
             SupplyPermitWarehouseOutput.Items.Clear();
             SupplyPermitProductOutput.Items.Clear();
+            SupplyPermitSupplierOutput.Items.Clear();
             IndexList.Clear();
             IndexList1.Clear();
             IndexList2.Clear();
             IndexList3.Clear();
             foreach (Supply_Permit SP in AllSupplyPermits)
             {
-                SupplyPermitList.Items.Add(SP.ID);
                 IndexList.Add(SP.ID);
+                SupplyPermitList.Items.Add(SP.ID);
             }
             foreach (Warehouse WH in AllWarehouses)
             {
                 IndexList1.Add(WH.ID);
                 SupplyPermitWarehouseOutput.Items.Add(WH.Name);
+                SupplyPermitPanelWarehouse.Items.Add(WH.Name);
             }
             foreach(Product PD in AllProducts)
             {
@@ -626,7 +628,18 @@ namespace Warehouse
             {
                 IndexList3.Add(SP.ID);
                 SupplyPermitSupplierOutput.Items.Add(SP.Name);
+                SupplyPermitPanelSupplier.Items.Add(SP.Name);
             }
+            foreach(SupplyPermitAddGroup Group in SupplyPermitAddGroup.AddGroup)
+            {
+                Group.Dispose();
+            }
+            SupplyPermitAddGroup.AddGroup.Clear();
+            SupplyPermitPanel.AutoScroll = false;
+            SupplyPermitPanel.HorizontalScroll.Enabled = false;
+            SupplyPermitPanel.HorizontalScroll.Visible = false;
+            SupplyPermitPanel.HorizontalScroll.Maximum = 0;
+            SupplyPermitPanel.AutoScroll = true;
             int ColumnsCount = SupplyPermitDataGrid.Columns.Count;
             for (int i = 4; i < ColumnsCount; i++) //Removes Navigation Columns.
             {
@@ -725,9 +738,11 @@ namespace Warehouse
             SupplyPermitSupplierOutput.Text = FilteredSupply.Supply_Permit.Supplier.Name;
             SupplyPermitWarehouseOutput.Text = FilteredSupply.Supply_Permit.Warehouse.Name;
             SupplyPermitProductOutput.Text = FilteredSupply.Product.Name;
-            SupplyPermitProDateOutput.Text = FilteredSupply.ProDate.ToShortDateString();
             SupplyPermitProductEditLocked.Text = SupplyPermitProductNewLocked.Text = FilteredSupply.Product_FK.ToString();
             SupplyPermitQtyOutput.Text = FilteredSupply.Qty.ToString();
+            SupplyPermitWarehouseNewLocked.Text = SupplyPermitWarehouseEditLocked.Text = FilteredSupply.Supply_Permit.Warehouse_FK.ToString();
+            SupplyPermitSupplierEditLocked.Text = SupplyPermitSupplierNewLocked.Text = FilteredSupply.Supply_Permit.Supplier_FK.ToString();
+            SupplyPermitProDateOutput.Text = SupplyPermitProDateEditLocked.Text = FilteredSupply.ProDate.ToShortDateString();
         }
         #endregion
 
@@ -762,9 +777,74 @@ namespace Warehouse
         }
         #endregion
 
+        #region Supply Permit Entry Edit Button
+        private void SupplyPermitEntryEditBtn_Click(object sender, EventArgs e)
+        {
+            if((SupplyPermitIDOutput.Text != String.Empty) && (SupplyPermitProductNewLocked.Text != String.Empty)
+                && (SupplyPermitProDateOutput.Text != String.Empty) && (SupplyPermitQtyOutput.Text != String.Empty))
+            {
+                DialogResult dialogResult = MessageBox.Show("These edits may have a cascading effect on Sales and Movements!", "Warning", MessageBoxButtons.OKCancel);
+                if((dialogResult == DialogResult.OK))
+                {
+                    int SupplyPermitFK = int.Parse(SupplyPermitIDOutput.Text);
+                    int SupplyPermitProductFK = int.Parse(SupplyPermitProductEditLocked.Text);
+                    DateTimeConverter Conv = new DateTimeConverter();
+                    DateTime SupplyPermitDateTime = (DateTime)Conv.ConvertFromString(SupplyPermitProDateEditLocked.Text);
+                    int NewProductFK = int.Parse(SupplyPermitProductNewLocked.Text);
+                    DateTime NewProDate = (DateTime)Conv.ConvertFromString(SupplyPermitProDateOutput.Text);
+                    int NewQty = int.Parse(SupplyPermitQtyOutput.Text);
+                    Entries.CascadingSupplyPermit(SupplyPermitFK, SupplyPermitProductFK, SupplyPermitDateTime, NewProductFK, NewProDate, NewQty);
+                    Entries.SaveChanges();
+                    SupplyPermitSelect(null);
+                }
+                else
+                {
+                    MessageBox.Show("Edit Cancelled!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please enter all fields for Supply Entry!");
+            }
+        }
+        #endregion
+
+        #region Supply Permit Panel Supplier List Select
+        private void SupplyPermitPanelSupplier_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox List = (ComboBox)sender;
+            SupplyPermitPanelSupplierLocked.Text = IndexList3[List.SelectedIndex].ToString();
+        }
+        #endregion
+
+        #region Supply Permit Panel Warehouse List Select
+        private void SupplyPermitPanelWarehouse_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox List = (ComboBox)sender;
+            SupplyPermitPanelWarehouseLocked.Text = IndexList1[List.SelectedIndex].ToString();
+        }
+        #endregion
+
+        #region Supply Permit Panel Product Add Button
+        private void SupplyPermitProductAddBtn_Click(object sender, EventArgs e)
+        {
+            SupplyPermitPanel.AddSupplyGroup(SupplyPermitProductOutput, DynamicListSelection);
+        }
+        #endregion
+
+        #region Dynamic List Selection
+        public void DynamicListSelection (object sender, EventArgs e)
+        {
+            ComboBox List = (ComboBox)sender;
+            SupplyPermitAddGroup AddGroup = SupplyPermitAddGroup.AddGroup.Where(AG => AG.ProductList == List).FirstOrDefault();
+            AddGroup.ProductID.Text = IndexList2[List.SelectedIndex].ToString();
+        }
         #endregion
 
         #endregion
+
+        #endregion
+
 
     }
 }

@@ -39,6 +39,35 @@ namespace Warehouse
         public virtual DbSet<Warehouse> Warehouses { get; set; }
         public virtual DbSet<Movement> Movements { get; set; }
     
+        public virtual int CascadingSupplyPermit(Nullable<int> supply_Permit_FK, Nullable<int> product_FK, Nullable<System.DateTime> proDate, Nullable<int> product_FK_New, Nullable<System.DateTime> proDateNew, Nullable<int> qty)
+        {
+            var supply_Permit_FKParameter = supply_Permit_FK.HasValue ?
+                new ObjectParameter("Supply_Permit_FK", supply_Permit_FK) :
+                new ObjectParameter("Supply_Permit_FK", typeof(int));
+    
+            var product_FKParameter = product_FK.HasValue ?
+                new ObjectParameter("Product_FK", product_FK) :
+                new ObjectParameter("Product_FK", typeof(int));
+    
+            var proDateParameter = proDate.HasValue ?
+                new ObjectParameter("ProDate", proDate) :
+                new ObjectParameter("ProDate", typeof(System.DateTime));
+    
+            var product_FK_NewParameter = product_FK_New.HasValue ?
+                new ObjectParameter("Product_FK_New", product_FK_New) :
+                new ObjectParameter("Product_FK_New", typeof(int));
+    
+            var proDateNewParameter = proDateNew.HasValue ?
+                new ObjectParameter("ProDateNew", proDateNew) :
+                new ObjectParameter("ProDateNew", typeof(System.DateTime));
+    
+            var qtyParameter = qty.HasValue ?
+                new ObjectParameter("Qty", qty) :
+                new ObjectParameter("Qty", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CascadingSupplyPermit", supply_Permit_FKParameter, product_FKParameter, proDateParameter, product_FK_NewParameter, proDateNewParameter, qtyParameter);
+        }
+    
         public virtual ObjectResult<GetDetailedQty_Result> GetDetailedQty()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetDetailedQty_Result>("GetDetailedQty");

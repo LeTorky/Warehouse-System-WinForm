@@ -139,13 +139,20 @@
             this.TabMenu = new System.Windows.Forms.TabControl();
             this.SupplyTab = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.SupplyPermitProductListAdd = new System.Windows.Forms.ListBox();
             this.SupplyPermitProductAddBtn = new System.Windows.Forms.Button();
             this.SupplyPermitAddBtn = new System.Windows.Forms.Button();
             this.SupplyPermitEditBox = new System.Windows.Forms.GroupBox();
+            this.SupplyPermitProDateEditLocked = new System.Windows.Forms.TextBox();
+            this.SupplyPermitDateOutput = new System.Windows.Forms.TextBox();
+            this.SupplyPermitDateLabelEdit = new System.Windows.Forms.Label();
+            this.SupplyPermitSupplierNewLocked = new System.Windows.Forms.TextBox();
+            this.SupplyPermitSupplierEditLocked = new System.Windows.Forms.TextBox();
             this.SupplyPermitProductNewLocked = new System.Windows.Forms.TextBox();
+            this.SupplyPermitWarehouseNewLocked = new System.Windows.Forms.TextBox();
             this.SupplyPermitProductEditLocked = new System.Windows.Forms.TextBox();
+            this.SupplyPermitWarehouseEditLocked = new System.Windows.Forms.TextBox();
             this.SupplyPermitProductOutput = new System.Windows.Forms.ComboBox();
+            this.SupplyPermitWarehouseOutput = new System.Windows.Forms.ComboBox();
             this.SupplyPermitEditBtn = new System.Windows.Forms.Button();
             this.SupplyPermitSupplierOutput = new System.Windows.Forms.ComboBox();
             this.SupplyPermitProductDataGrid = new System.Windows.Forms.DataGridView();
@@ -155,19 +162,21 @@
             this.SupplyPermitProDateLabelEdit = new System.Windows.Forms.Label();
             this.SupplyPermitProDateOutput = new System.Windows.Forms.TextBox();
             this.SupplyPermitProductLabelEdit = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.SupplyPermitWareHouseLabelEdit = new System.Windows.Forms.Label();
+            this.SupplyPermitEntryEditBtn = new System.Windows.Forms.Button();
             this.SupplyPermitSupplierLabelEdit = new System.Windows.Forms.Label();
             this.SupplyPermitIDLabelEdit = new System.Windows.Forms.Label();
             this.SupplyPermitIDOutput = new System.Windows.Forms.TextBox();
             this.SupplyPermitList = new System.Windows.Forms.ComboBox();
-            this.SupplyPermitSupplierNewLocked = new System.Windows.Forms.TextBox();
-            this.SupplyPermitSupplierEditLocked = new System.Windows.Forms.TextBox();
-            this.SupplyPermitDateLabelEdit = new System.Windows.Forms.Label();
-            this.SupplyPermitDateOutput = new System.Windows.Forms.TextBox();
-            this.SupplyPermitWareHouseLabelEdit = new System.Windows.Forms.Label();
-            this.SupplyPermitWarehouseOutput = new System.Windows.Forms.ComboBox();
-            this.SupplyPermitWarehouseEditLocked = new System.Windows.Forms.TextBox();
-            this.SupplyPermitWarehouseNewLocked = new System.Windows.Forms.TextBox();
+            this.SupplyPermitPanel = new System.Windows.Forms.Panel();
+            this.SupplyPermitPanelSupplier = new System.Windows.Forms.ComboBox();
+            this.SupplyPermitPanelWarehouse = new System.Windows.Forms.ComboBox();
+            this.SupplyPermitPanelWarehouseLocked = new System.Windows.Forms.TextBox();
+            this.SupplyPermitPanelSupplierLocked = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.SupplyPermitPanelDate = new System.Windows.Forms.TextBox();
             this.CustomerTab.SuspendLayout();
             this.CustomerAddBox.SuspendLayout();
             this.CustomerEditBox.SuspendLayout();
@@ -191,6 +200,7 @@
             this.SupplyPermitEditBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SupplyPermitProductDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SupplyPermitDataGrid)).BeginInit();
+            this.SupplyPermitPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // ReportTab
@@ -1255,7 +1265,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.SupplyPermitProductListAdd);
+            this.groupBox2.Controls.Add(this.SupplyPermitPanel);
             this.groupBox2.Controls.Add(this.SupplyPermitProductAddBtn);
             this.groupBox2.Controls.Add(this.SupplyPermitAddBtn);
             this.groupBox2.ForeColor = System.Drawing.Color.Black;
@@ -1266,15 +1276,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Add Supply Permit";
             // 
-            // SupplyPermitProductListAdd
-            // 
-            this.SupplyPermitProductListAdd.FormattingEnabled = true;
-            this.SupplyPermitProductListAdd.ItemHeight = 16;
-            this.SupplyPermitProductListAdd.Location = new System.Drawing.Point(12, 19);
-            this.SupplyPermitProductListAdd.Name = "SupplyPermitProductListAdd";
-            this.SupplyPermitProductListAdd.Size = new System.Drawing.Size(690, 68);
-            this.SupplyPermitProductListAdd.TabIndex = 20;
-            // 
             // SupplyPermitProductAddBtn
             // 
             this.SupplyPermitProductAddBtn.Location = new System.Drawing.Point(12, 93);
@@ -1283,6 +1284,7 @@
             this.SupplyPermitProductAddBtn.TabIndex = 19;
             this.SupplyPermitProductAddBtn.Text = "Add Product";
             this.SupplyPermitProductAddBtn.UseVisualStyleBackColor = true;
+            this.SupplyPermitProductAddBtn.Click += new System.EventHandler(this.SupplyPermitProductAddBtn_Click);
             // 
             // SupplyPermitAddBtn
             // 
@@ -1295,6 +1297,7 @@
             // 
             // SupplyPermitEditBox
             // 
+            this.SupplyPermitEditBox.Controls.Add(this.SupplyPermitProDateEditLocked);
             this.SupplyPermitEditBox.Controls.Add(this.SupplyPermitDateOutput);
             this.SupplyPermitEditBox.Controls.Add(this.SupplyPermitDateLabelEdit);
             this.SupplyPermitEditBox.Controls.Add(this.SupplyPermitSupplierNewLocked);
@@ -1315,7 +1318,7 @@
             this.SupplyPermitEditBox.Controls.Add(this.SupplyPermitProDateOutput);
             this.SupplyPermitEditBox.Controls.Add(this.SupplyPermitProductLabelEdit);
             this.SupplyPermitEditBox.Controls.Add(this.SupplyPermitWareHouseLabelEdit);
-            this.SupplyPermitEditBox.Controls.Add(this.button2);
+            this.SupplyPermitEditBox.Controls.Add(this.SupplyPermitEntryEditBtn);
             this.SupplyPermitEditBox.Controls.Add(this.SupplyPermitSupplierLabelEdit);
             this.SupplyPermitEditBox.Controls.Add(this.SupplyPermitIDLabelEdit);
             this.SupplyPermitEditBox.Controls.Add(this.SupplyPermitIDOutput);
@@ -1328,6 +1331,46 @@
             this.SupplyPermitEditBox.TabStop = false;
             this.SupplyPermitEditBox.Text = "Edit Supply Permit";
             // 
+            // SupplyPermitProDateEditLocked
+            // 
+            this.SupplyPermitProDateEditLocked.Enabled = false;
+            this.SupplyPermitProDateEditLocked.Location = new System.Drawing.Point(168, 223);
+            this.SupplyPermitProDateEditLocked.Name = "SupplyPermitProDateEditLocked";
+            this.SupplyPermitProDateEditLocked.Size = new System.Drawing.Size(56, 24);
+            this.SupplyPermitProDateEditLocked.TabIndex = 29;
+            // 
+            // SupplyPermitDateOutput
+            // 
+            this.SupplyPermitDateOutput.Location = new System.Drawing.Point(168, 70);
+            this.SupplyPermitDateOutput.Name = "SupplyPermitDateOutput";
+            this.SupplyPermitDateOutput.Size = new System.Drawing.Size(55, 24);
+            this.SupplyPermitDateOutput.TabIndex = 28;
+            // 
+            // SupplyPermitDateLabelEdit
+            // 
+            this.SupplyPermitDateLabelEdit.AutoSize = true;
+            this.SupplyPermitDateLabelEdit.Location = new System.Drawing.Point(129, 73);
+            this.SupplyPermitDateLabelEdit.Name = "SupplyPermitDateLabelEdit";
+            this.SupplyPermitDateLabelEdit.Size = new System.Drawing.Size(42, 17);
+            this.SupplyPermitDateLabelEdit.TabIndex = 27;
+            this.SupplyPermitDateLabelEdit.Text = "Date:";
+            // 
+            // SupplyPermitSupplierNewLocked
+            // 
+            this.SupplyPermitSupplierNewLocked.Enabled = false;
+            this.SupplyPermitSupplierNewLocked.Location = new System.Drawing.Point(168, 101);
+            this.SupplyPermitSupplierNewLocked.Name = "SupplyPermitSupplierNewLocked";
+            this.SupplyPermitSupplierNewLocked.Size = new System.Drawing.Size(27, 24);
+            this.SupplyPermitSupplierNewLocked.TabIndex = 26;
+            // 
+            // SupplyPermitSupplierEditLocked
+            // 
+            this.SupplyPermitSupplierEditLocked.Enabled = false;
+            this.SupplyPermitSupplierEditLocked.Location = new System.Drawing.Point(196, 101);
+            this.SupplyPermitSupplierEditLocked.Name = "SupplyPermitSupplierEditLocked";
+            this.SupplyPermitSupplierEditLocked.Size = new System.Drawing.Size(27, 24);
+            this.SupplyPermitSupplierEditLocked.TabIndex = 25;
+            // 
             // SupplyPermitProductNewLocked
             // 
             this.SupplyPermitProductNewLocked.Enabled = false;
@@ -1335,6 +1378,14 @@
             this.SupplyPermitProductNewLocked.Name = "SupplyPermitProductNewLocked";
             this.SupplyPermitProductNewLocked.Size = new System.Drawing.Size(27, 24);
             this.SupplyPermitProductNewLocked.TabIndex = 24;
+            // 
+            // SupplyPermitWarehouseNewLocked
+            // 
+            this.SupplyPermitWarehouseNewLocked.Enabled = false;
+            this.SupplyPermitWarehouseNewLocked.Location = new System.Drawing.Point(168, 132);
+            this.SupplyPermitWarehouseNewLocked.Name = "SupplyPermitWarehouseNewLocked";
+            this.SupplyPermitWarehouseNewLocked.Size = new System.Drawing.Size(27, 24);
+            this.SupplyPermitWarehouseNewLocked.TabIndex = 23;
             // 
             // SupplyPermitProductEditLocked
             // 
@@ -1344,6 +1395,14 @@
             this.SupplyPermitProductEditLocked.Size = new System.Drawing.Size(27, 24);
             this.SupplyPermitProductEditLocked.TabIndex = 22;
             // 
+            // SupplyPermitWarehouseEditLocked
+            // 
+            this.SupplyPermitWarehouseEditLocked.Enabled = false;
+            this.SupplyPermitWarehouseEditLocked.Location = new System.Drawing.Point(196, 132);
+            this.SupplyPermitWarehouseEditLocked.Name = "SupplyPermitWarehouseEditLocked";
+            this.SupplyPermitWarehouseEditLocked.Size = new System.Drawing.Size(27, 24);
+            this.SupplyPermitWarehouseEditLocked.TabIndex = 21;
+            // 
             // SupplyPermitProductOutput
             // 
             this.SupplyPermitProductOutput.FormattingEnabled = true;
@@ -1352,6 +1411,15 @@
             this.SupplyPermitProductOutput.Size = new System.Drawing.Size(70, 24);
             this.SupplyPermitProductOutput.TabIndex = 20;
             this.SupplyPermitProductOutput.SelectionChangeCommitted += new System.EventHandler(this.SupplyPermitProductOutput_SelectionChangeCommitted);
+            // 
+            // SupplyPermitWarehouseOutput
+            // 
+            this.SupplyPermitWarehouseOutput.FormattingEnabled = true;
+            this.SupplyPermitWarehouseOutput.Location = new System.Drawing.Point(95, 132);
+            this.SupplyPermitWarehouseOutput.Name = "SupplyPermitWarehouseOutput";
+            this.SupplyPermitWarehouseOutput.Size = new System.Drawing.Size(70, 24);
+            this.SupplyPermitWarehouseOutput.TabIndex = 19;
+            this.SupplyPermitWarehouseOutput.SelectionChangeCommitted += new System.EventHandler(this.SupplyPermitWarehouseOutput_SelectionChangeCommitted);
             // 
             // SupplyPermitEditBtn
             // 
@@ -1424,7 +1492,7 @@
             // 
             this.SupplyPermitProDateOutput.Location = new System.Drawing.Point(95, 223);
             this.SupplyPermitProDateOutput.Name = "SupplyPermitProDateOutput";
-            this.SupplyPermitProDateOutput.Size = new System.Drawing.Size(128, 24);
+            this.SupplyPermitProDateOutput.Size = new System.Drawing.Size(70, 24);
             this.SupplyPermitProDateOutput.TabIndex = 13;
             // 
             // SupplyPermitProductLabelEdit
@@ -1436,14 +1504,24 @@
             this.SupplyPermitProductLabelEdit.TabIndex = 12;
             this.SupplyPermitProductLabelEdit.Text = "Product:";
             // 
-            // button2
+            // SupplyPermitWareHouseLabelEdit
             // 
-            this.button2.Location = new System.Drawing.Point(12, 291);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(213, 23);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "Edit Entry";
-            this.button2.UseVisualStyleBackColor = true;
+            this.SupplyPermitWareHouseLabelEdit.AutoSize = true;
+            this.SupplyPermitWareHouseLabelEdit.Location = new System.Drawing.Point(6, 134);
+            this.SupplyPermitWareHouseLabelEdit.Name = "SupplyPermitWareHouseLabelEdit";
+            this.SupplyPermitWareHouseLabelEdit.Size = new System.Drawing.Size(83, 17);
+            this.SupplyPermitWareHouseLabelEdit.TabIndex = 10;
+            this.SupplyPermitWareHouseLabelEdit.Text = "Warehouse:";
+            // 
+            // SupplyPermitEntryEditBtn
+            // 
+            this.SupplyPermitEntryEditBtn.Location = new System.Drawing.Point(12, 291);
+            this.SupplyPermitEntryEditBtn.Name = "SupplyPermitEntryEditBtn";
+            this.SupplyPermitEntryEditBtn.Size = new System.Drawing.Size(213, 23);
+            this.SupplyPermitEntryEditBtn.TabIndex = 6;
+            this.SupplyPermitEntryEditBtn.Text = "Edit Entry";
+            this.SupplyPermitEntryEditBtn.UseVisualStyleBackColor = true;
+            this.SupplyPermitEntryEditBtn.Click += new System.EventHandler(this.SupplyPermitEntryEditBtn_Click);
             // 
             // SupplyPermitSupplierLabelEdit
             // 
@@ -1480,71 +1558,89 @@
             this.SupplyPermitList.TabIndex = 1;
             this.SupplyPermitList.SelectedIndexChanged += new System.EventHandler(this.SupplyPermitList_SelectedIndexChanged);
             // 
-            // SupplyPermitSupplierNewLocked
+            // SupplyPermitPanel
             // 
-            this.SupplyPermitSupplierNewLocked.Enabled = false;
-            this.SupplyPermitSupplierNewLocked.Location = new System.Drawing.Point(168, 101);
-            this.SupplyPermitSupplierNewLocked.Name = "SupplyPermitSupplierNewLocked";
-            this.SupplyPermitSupplierNewLocked.Size = new System.Drawing.Size(27, 24);
-            this.SupplyPermitSupplierNewLocked.TabIndex = 26;
+            this.SupplyPermitPanel.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.SupplyPermitPanel.Controls.Add(this.SupplyPermitPanelDate);
+            this.SupplyPermitPanel.Controls.Add(this.label3);
+            this.SupplyPermitPanel.Controls.Add(this.label2);
+            this.SupplyPermitPanel.Controls.Add(this.label1);
+            this.SupplyPermitPanel.Controls.Add(this.SupplyPermitPanelSupplierLocked);
+            this.SupplyPermitPanel.Controls.Add(this.SupplyPermitPanelWarehouseLocked);
+            this.SupplyPermitPanel.Controls.Add(this.SupplyPermitPanelWarehouse);
+            this.SupplyPermitPanel.Controls.Add(this.SupplyPermitPanelSupplier);
+            this.SupplyPermitPanel.Location = new System.Drawing.Point(12, 20);
+            this.SupplyPermitPanel.Name = "SupplyPermitPanel";
+            this.SupplyPermitPanel.Size = new System.Drawing.Size(690, 67);
+            this.SupplyPermitPanel.TabIndex = 7;
             // 
-            // SupplyPermitSupplierEditLocked
+            // SupplyPermitPanelSupplier
             // 
-            this.SupplyPermitSupplierEditLocked.Enabled = false;
-            this.SupplyPermitSupplierEditLocked.Location = new System.Drawing.Point(196, 101);
-            this.SupplyPermitSupplierEditLocked.Name = "SupplyPermitSupplierEditLocked";
-            this.SupplyPermitSupplierEditLocked.Size = new System.Drawing.Size(27, 24);
-            this.SupplyPermitSupplierEditLocked.TabIndex = 25;
+            this.SupplyPermitPanelSupplier.FormattingEnabled = true;
+            this.SupplyPermitPanelSupplier.Location = new System.Drawing.Point(328, 8);
+            this.SupplyPermitPanelSupplier.Name = "SupplyPermitPanelSupplier";
+            this.SupplyPermitPanelSupplier.Size = new System.Drawing.Size(102, 24);
+            this.SupplyPermitPanelSupplier.TabIndex = 0;
+            this.SupplyPermitPanelSupplier.SelectedIndexChanged += new System.EventHandler(this.SupplyPermitPanelSupplier_SelectedIndexChanged);
             // 
-            // SupplyPermitDateLabelEdit
+            // SupplyPermitPanelWarehouse
             // 
-            this.SupplyPermitDateLabelEdit.AutoSize = true;
-            this.SupplyPermitDateLabelEdit.Location = new System.Drawing.Point(129, 73);
-            this.SupplyPermitDateLabelEdit.Name = "SupplyPermitDateLabelEdit";
-            this.SupplyPermitDateLabelEdit.Size = new System.Drawing.Size(42, 17);
-            this.SupplyPermitDateLabelEdit.TabIndex = 27;
-            this.SupplyPermitDateLabelEdit.Text = "Date:";
+            this.SupplyPermitPanelWarehouse.FormattingEnabled = true;
+            this.SupplyPermitPanelWarehouse.Location = new System.Drawing.Point(104, 8);
+            this.SupplyPermitPanelWarehouse.Name = "SupplyPermitPanelWarehouse";
+            this.SupplyPermitPanelWarehouse.Size = new System.Drawing.Size(99, 24);
+            this.SupplyPermitPanelWarehouse.TabIndex = 1;
+            this.SupplyPermitPanelWarehouse.SelectedIndexChanged += new System.EventHandler(this.SupplyPermitPanelWarehouse_SelectedIndexChanged);
             // 
-            // SupplyPermitDateOutput
+            // SupplyPermitPanelWarehouseLocked
             // 
-            this.SupplyPermitDateOutput.Location = new System.Drawing.Point(168, 70);
-            this.SupplyPermitDateOutput.Name = "SupplyPermitDateOutput";
-            this.SupplyPermitDateOutput.Size = new System.Drawing.Size(55, 24);
-            this.SupplyPermitDateOutput.TabIndex = 28;
+            this.SupplyPermitPanelWarehouseLocked.Enabled = false;
+            this.SupplyPermitPanelWarehouseLocked.Location = new System.Drawing.Point(212, 8);
+            this.SupplyPermitPanelWarehouseLocked.Name = "SupplyPermitPanelWarehouseLocked";
+            this.SupplyPermitPanelWarehouseLocked.Size = new System.Drawing.Size(27, 24);
+            this.SupplyPermitPanelWarehouseLocked.TabIndex = 30;
             // 
-            // SupplyPermitWareHouseLabelEdit
+            // SupplyPermitPanelSupplierLocked
             // 
-            this.SupplyPermitWareHouseLabelEdit.AutoSize = true;
-            this.SupplyPermitWareHouseLabelEdit.Location = new System.Drawing.Point(6, 134);
-            this.SupplyPermitWareHouseLabelEdit.Name = "SupplyPermitWareHouseLabelEdit";
-            this.SupplyPermitWareHouseLabelEdit.Size = new System.Drawing.Size(83, 17);
-            this.SupplyPermitWareHouseLabelEdit.TabIndex = 10;
-            this.SupplyPermitWareHouseLabelEdit.Text = "Warehouse:";
+            this.SupplyPermitPanelSupplierLocked.Enabled = false;
+            this.SupplyPermitPanelSupplierLocked.Location = new System.Drawing.Point(436, 8);
+            this.SupplyPermitPanelSupplierLocked.Name = "SupplyPermitPanelSupplierLocked";
+            this.SupplyPermitPanelSupplierLocked.Size = new System.Drawing.Size(27, 24);
+            this.SupplyPermitPanelSupplierLocked.TabIndex = 31;
             // 
-            // SupplyPermitWarehouseOutput
+            // label1
             // 
-            this.SupplyPermitWarehouseOutput.FormattingEnabled = true;
-            this.SupplyPermitWarehouseOutput.Location = new System.Drawing.Point(95, 132);
-            this.SupplyPermitWarehouseOutput.Name = "SupplyPermitWarehouseOutput";
-            this.SupplyPermitWarehouseOutput.Size = new System.Drawing.Size(70, 24);
-            this.SupplyPermitWarehouseOutput.TabIndex = 19;
-            this.SupplyPermitWarehouseOutput.SelectionChangeCommitted += new System.EventHandler(this.SupplyPermitWarehouseOutput_SelectionChangeCommitted);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(15, 11);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(83, 17);
+            this.label1.TabIndex = 30;
+            this.label1.Text = "Warehouse:";
             // 
-            // SupplyPermitWarehouseEditLocked
+            // label2
             // 
-            this.SupplyPermitWarehouseEditLocked.Enabled = false;
-            this.SupplyPermitWarehouseEditLocked.Location = new System.Drawing.Point(196, 132);
-            this.SupplyPermitWarehouseEditLocked.Name = "SupplyPermitWarehouseEditLocked";
-            this.SupplyPermitWarehouseEditLocked.Size = new System.Drawing.Size(27, 24);
-            this.SupplyPermitWarehouseEditLocked.TabIndex = 21;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(264, 11);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(61, 17);
+            this.label2.TabIndex = 30;
+            this.label2.Text = "Supplier:";
             // 
-            // SupplyPermitWarehouseNewLocked
+            // label3
             // 
-            this.SupplyPermitWarehouseNewLocked.Enabled = false;
-            this.SupplyPermitWarehouseNewLocked.Location = new System.Drawing.Point(168, 132);
-            this.SupplyPermitWarehouseNewLocked.Name = "SupplyPermitWarehouseNewLocked";
-            this.SupplyPermitWarehouseNewLocked.Size = new System.Drawing.Size(27, 24);
-            this.SupplyPermitWarehouseNewLocked.TabIndex = 23;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(489, 11);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(42, 17);
+            this.label3.TabIndex = 32;
+            this.label3.Text = "Date:";
+            // 
+            // SupplyPermitPanelDate
+            // 
+            this.SupplyPermitPanelDate.Location = new System.Drawing.Point(537, 8);
+            this.SupplyPermitPanelDate.Name = "SupplyPermitPanelDate";
+            this.SupplyPermitPanelDate.Size = new System.Drawing.Size(135, 24);
+            this.SupplyPermitPanelDate.TabIndex = 30;
             // 
             // Menu
             // 
@@ -1589,6 +1685,8 @@
             this.SupplyPermitEditBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SupplyPermitProductDataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SupplyPermitDataGrid)).EndInit();
+            this.SupplyPermitPanel.ResumeLayout(false);
+            this.SupplyPermitPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1711,7 +1809,7 @@
         private System.Windows.Forms.Label SupplyPermitProDateLabelEdit;
         private System.Windows.Forms.TextBox SupplyPermitProDateOutput;
         private System.Windows.Forms.Label SupplyPermitProductLabelEdit;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button SupplyPermitEntryEditBtn;
         private System.Windows.Forms.Label SupplyPermitSupplierLabelEdit;
         private System.Windows.Forms.Label SupplyPermitIDLabelEdit;
         private System.Windows.Forms.TextBox SupplyPermitIDOutput;
@@ -1723,7 +1821,6 @@
         private System.Windows.Forms.Button SupplyPermitEditBtn;
         private System.Windows.Forms.ComboBox SupplyPermitSupplierOutput;
         private System.Windows.Forms.Button SupplyPermitProductAddBtn;
-        private System.Windows.Forms.ListBox SupplyPermitProductListAdd;
         private System.Windows.Forms.ComboBox SupplyPermitProductOutput;
         private System.Windows.Forms.TextBox SupplyPermitProductEditLocked;
         private System.Windows.Forms.TextBox SupplyPermitProductNewLocked;
@@ -1735,6 +1832,16 @@
         private System.Windows.Forms.TextBox SupplyPermitWarehouseEditLocked;
         private System.Windows.Forms.ComboBox SupplyPermitWarehouseOutput;
         private System.Windows.Forms.Label SupplyPermitWareHouseLabelEdit;
+        private System.Windows.Forms.TextBox SupplyPermitProDateEditLocked;
+        private System.Windows.Forms.Panel SupplyPermitPanel;
+        private System.Windows.Forms.ComboBox SupplyPermitPanelWarehouse;
+        private System.Windows.Forms.ComboBox SupplyPermitPanelSupplier;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox SupplyPermitPanelSupplierLocked;
+        private System.Windows.Forms.TextBox SupplyPermitPanelWarehouseLocked;
+        private System.Windows.Forms.TextBox SupplyPermitPanelDate;
+        private System.Windows.Forms.Label label3;
     }
 }
 
