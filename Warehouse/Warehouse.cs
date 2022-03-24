@@ -17,6 +17,7 @@ namespace Warehouse
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Warehouse()
         {
+            this.Sale_Permit = new HashSet<Sale_Permit>();
             this.Supply_Permit = new HashSet<Supply_Permit>();
             this.Movements = new HashSet<Movement>();
             this.Movements1 = new HashSet<Movement>();
@@ -28,14 +29,12 @@ namespace Warehouse
         public string Supervisor { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Sale_Permit> Sale_Permit { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Supply_Permit> Supply_Permit { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Movement> Movements { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Movement> Movements1 { get; set; }
-        public override string ToString()
-        {
-            return this.Name;
-        }
     }
 }

@@ -77,6 +77,9 @@
     <Compile Include="Product.cs">
       <DependentUpon>WarehouseDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Product_Date.cs">
+      <DependentUpon>WarehouseDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sale.cs">

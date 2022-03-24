@@ -19,5 +19,9 @@ namespace Warehouse
         public string Product_Name { get; set; }
         public Nullable<System.DateTime> Prod_Date { get; set; }
         public Nullable<int> Qty { get; set; }
+        public System.DateTime Shelf_Date { get; set; }
+        public int Supplier_FK { get; set; }
+        public string Supplier_Name { get; set; }
+        public Nullable<int> Supply_Permit_ID { get; set; }
     }
 }

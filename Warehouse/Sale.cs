@@ -20,7 +20,7 @@ namespace Warehouse
         public int Product_FK { get; set; }
         public System.DateTime ProDate { get; set; }
     
-        public virtual Product Product { get; set; }
+        public virtual Product_Date Product_Date { get; set; }
         public virtual Sale_Permit Sale_Permit { get; set; }
         public virtual Supply_Permit Supply_Permit { get; set; }
     }

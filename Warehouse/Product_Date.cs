@@ -12,22 +12,25 @@ namespace Warehouse
     using System;
     using System.Collections.Generic;
     
-    public partial class Product
+    public partial class Product_Date
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Product()
+        public Product_Date()
         {
-            this.Product_Date = new HashSet<Product_Date>();
-            this.Units = new HashSet<Unit>();
+            this.Movements = new HashSet<Movement>();
+            this.Sales = new HashSet<Sale>();
+            this.Supplies = new HashSet<Supply>();
         }
     
-        public int Code { get; set; }
-        public string Name { get; set; }
-        public int ExpPeriod { get; set; }
+        public int Product_FK { get; set; }
+        public System.DateTime Production_Date { get; set; }
     
+        public virtual Product Product { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product_Date> Product_Date { get; set; }
+        public virtual ICollection<Movement> Movements { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Unit> Units { get; set; }
+        public virtual ICollection<Sale> Sales { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Supply> Supplies { get; set; }
     }
 }

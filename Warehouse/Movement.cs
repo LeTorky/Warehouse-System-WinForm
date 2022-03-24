@@ -17,12 +17,12 @@ namespace Warehouse
         public int Warehouse_From_FK { get; set; }
         public int Warehouse_To_FK { get; set; }
         public int Supply_Permit_FK { get; set; }
-        public int Qty { get; set; }
-        public System.DateTime Date { get; set; }
         public int Product_FK { get; set; }
         public System.DateTime ProDate { get; set; }
+        public int Qty { get; set; }
+        public System.DateTime Date { get; set; }
     
-        public virtual Product Product { get; set; }
+        public virtual Product_Date Product_Date { get; set; }
         public virtual Supply_Permit Supply_Permit { get; set; }
         public virtual Warehouse Warehouse { get; set; }
         public virtual Warehouse Warehouse1 { get; set; }

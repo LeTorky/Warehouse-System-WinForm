@@ -81,6 +81,10 @@ namespace Warehouse
                 ProductIDOutput.Text = String.Empty;
                 ProductNameOutput.Text = String.Empty;
                 ProductExpiryOutput.Text = String.Empty;
+                ProductDateOutput.Text = DateEditLocked.Text = String.Empty;
+                ProductUnitOutput.Text = UnitEditLocked.Text = String.Empty;
+                ProductGridView.ClearSelection();
+                ProductGridView_SelectionChanged(new object(), null);
             }
             else
             {
@@ -179,6 +183,12 @@ namespace Warehouse
         }
         #endregion
 
+        #region Sale Permit Select Method
+        #endregion
+
+        #region Movement Select Method
+        #endregion
+
         #endregion
 
         #endregion
@@ -268,8 +278,8 @@ namespace Warehouse
                 EditWH.Address = WarehouseAddressOutput.Text != String.Empty ? WarehouseAddressOutput.Text : EditWH.Address;
                 EditWH.Supervisor = WarehouseSupervisorOutput.Text != String.Empty ? WarehouseSupervisorOutput.Text : EditWH.Supervisor;
                 Entries.SaveChanges();
+                WarehouseGridView.DataSource = Entries.Warehouses.ToList();
                 WarehouseSelect(null);
-                WarehouseGridView.Refresh();
             }
             else
             {
@@ -293,8 +303,8 @@ namespace Warehouse
                 int ID = Entries.Warehouses.Max(WH => WH.ID);
                 Entries.Warehouses.Add(new Warehouse() { ID = ID+1, Name = WarehouseNameInput.Text, Address = WarehouseAddressInput.Text, Supervisor = WarehouseSupervisorInput.Text });
                 Entries.SaveChanges();
+                WarehouseGridView.DataSource = Entries.Warehouses.ToList();
                 WarehouseSelect(null);
-                WarehouseGridView.Refresh();
             }
             else
             {
@@ -364,7 +374,7 @@ namespace Warehouse
                 EditPD.ExpPeriod = ProductExpiryOutput.Text != String.Empty ? int.Parse(ProductExpiryOutput.Text) : EditPD.ExpPeriod;
                 Entries.SaveChanges();
                 ProductSelect(null);
-                ProductGridView.Refresh();
+                ProductGridView.DataSource = Entries.Products.ToList();
             }
             else
             {
@@ -382,11 +392,154 @@ namespace Warehouse
                 Entries.Products.Add(new Product() { Code = ID+1, Name = ProductNameInput.Text, ExpPeriod = int.Parse(ProductExpiryInput.Text) });
                 Entries.SaveChanges();
                 ProductSelect(null);
-                ProductGridView.Refresh();
+                ProductGridView.DataSource = Entries.Products.ToList();
             }
             else
             {
                 MessageBox.Show("Please enter all Product Fields!");
+            }
+        }
+        #endregion
+
+        #region Product MultiSelection 
+        private void ProductGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            List<Product_Date> FilteredDates = new List<Product_Date>();
+            List<Unit> FilteredUnits = new List<Unit>();
+            if(ProductGridView.SelectedRows.Count != 0)
+            {
+                foreach(DataGridViewRow Row in ProductGridView.SelectedRows)
+                {
+                    int ID = IndexList[Row.Index];
+                    FilteredDates.AddRange(Entries.Product_Date.Where(PD => PD.Product_FK == ID).ToList());
+                    FilteredUnits.AddRange(Entries.Units.Where(UN => UN.Product_FK == ID).ToList());
+                }
+            }
+            else
+            {
+                FilteredDates = Entries.Product_Date.ToList();
+                FilteredUnits = Entries.Units.ToList();
+            }
+            ProductUnitDataGrid.DataSource = FilteredUnits.OrderBy(UN => UN.Product_FK).ToList();
+            ProductDateDataGrid.DataSource = FilteredDates.OrderBy(PD => PD.Product_FK).ToList();
+            ProductDateDataGrid.Columns["Product"].DisplayIndex = 1;
+            ProductUnitDataGrid.Columns["Product_FK"].DisplayIndex = 0;
+            ProductUnitDataGrid.Columns["Product"].DisplayIndex = 1;
+            if(ProductGridView.SelectedRows.Count == 1)
+            {
+                ProductDateDataGrid.Columns["Product_FK"].Visible = false;
+                ProductDateDataGrid.Columns["Product"].Visible = false;
+                ProductUnitDataGrid.Columns["Product"].Visible = false;
+                ProductUnitDataGrid.Columns["Product_FK"].Visible = false;
+            }
+            else
+            {
+                ProductDateDataGrid.Columns["Product_FK"].Visible = true;
+                ProductDateDataGrid.Columns["Product"].Visible = true;
+                ProductUnitDataGrid.Columns["Product_FK"].Visible = true;
+                ProductUnitDataGrid.Columns["Product"].Visible = true;
+            }
+            foreach(DataGridViewColumn Column in ProductDateDataGrid.Columns)
+            {
+                if (Column.Index > 2)
+                {
+                    Column.Visible = false;
+                }
+            }
+        }
+        #endregion
+
+        #region Product Date Selection
+        private void ProductDateDataGrid_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewRow Row = ProductDateDataGrid.Rows[e.RowIndex];
+            int ID = int.Parse(Row.Cells["Product_FK"].Value.ToString());
+            DateEditLocked.Text = ProductDateOutput.Text = Row.Cells["Production_Date"].Value.ToString();
+            ProductSelect(PD => PD.Code == ID);            
+        }
+        #endregion
+
+        #region Product Unit Selection
+        private void ProductUnitDataGrid_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewRow Row = ProductUnitDataGrid.Rows[e.RowIndex];
+            int ID = int.Parse(Row.Cells["Product_FK"].Value.ToString());
+            UnitEditLocked.Text = ProductUnitOutput.Text = Row.Cells["Name"].Value.ToString();
+            ProductSelect(PD => PD.Code == ID);
+        }
+        #endregion
+
+        #region Product Edit Date
+        private void ProductDateEditBtn_Click(object sender, EventArgs e)
+        {
+            if (ProductIDOutput.Text != String.Empty && ProductDateOutput.Text != String.Empty && DateEditLocked.Text != String.Empty)
+            {
+                int ID = int.Parse(ProductIDOutput.Text);
+                DateTimeConverter Conv = new DateTimeConverter();
+                DateTime Date = (DateTime)Conv.ConvertFromString(DateEditLocked.Text);
+                DateTime NewDate = (DateTime)Conv.ConvertFromString(ProductDateOutput.Text);
+                DbEntityEntry<Product_Date> Entry = Entries.Entry(Entries.Product_Date.Where(PD=>(PD.Product_FK==ID)&&(PD.Production_Date==Date)).FirstOrDefault());
+                Entries.CascadingProductDate(ID, Date, NewDate);
+                Entry.Reload();
+                Entries.SaveChanges();
+                ProductSelect(null);
+            }
+            else
+            {
+                MessageBox.Show("Please select a Product and enter a Production Date!");
+            }
+        }
+        #endregion
+
+        #region Product Add Date
+        private void ProductDateAddBtn_Click(object sender, EventArgs e)
+        {
+            if (ProductIDOutput.Text != String.Empty && ProductDateOutput.Text != String.Empty)
+            {
+                int ID = int.Parse(ProductIDOutput.Text);
+                DateTimeConverter Conv = new DateTimeConverter();
+                Entries.Product_Date.Add(new Product_Date() { Product_FK = ID, Production_Date = (DateTime)Conv.ConvertFromString(ProductDateOutput.Text) });
+                Entries.SaveChanges();
+                ProductSelect(null);
+            }
+            else
+            {
+                MessageBox.Show("Please select a Product and enter a Production Date!");
+            }
+        }
+        #endregion
+
+        #region Product Edit Unit
+        private void ProductUnitAddBtn_Click(object sender, EventArgs e)
+        {
+            if (ProductIDOutput.Text != String.Empty && ProductUnitOutput.Text != String.Empty)
+            {
+                int ID = int.Parse(ProductIDOutput.Text);
+                Entries.Units.Add(new Unit() { Product_FK = ID, Name = ProductUnitOutput.Text});
+                Entries.SaveChanges();
+                ProductSelect(null);
+            }
+            else
+            {
+                MessageBox.Show("Please select a Product and enter a Unit Name!");
+            }
+        }
+        #endregion
+
+        #region Product Add Unit
+        private void ProductUnitEditBtn_Click(object sender, EventArgs e)
+        {
+            if (ProductIDOutput.Text != String.Empty && ProductUnitOutput.Text != String.Empty && UnitEditLocked.Text != String.Empty)
+            {
+                int ID = int.Parse(ProductIDOutput.Text);
+                string Key = UnitEditLocked.Text.PadRight(10);
+                Entries.CascadingProductUnit(ID, UnitEditLocked.Text, ProductUnitOutput.Text);
+                Entries.SaveChanges();
+                ProductSelect(null);
+            }
+            else
+            {
+                MessageBox.Show("Please select a Product and enter a Unit Name!");
             }
         }
         #endregion
@@ -456,7 +609,7 @@ namespace Warehouse
                 EditSP.Fax = SupplierFaxOutput.Text != String.Empty ? int.Parse(SupplierFaxOutput.Text) : EditSP.Fax;
                 Entries.SaveChanges();
                 SupplierSelect(null);
-                SupplierDataGrid.Refresh();
+                SupplierDataGrid.DataSource = Entries.Suppliers.ToList();
             }
             else
             {
@@ -476,7 +629,7 @@ namespace Warehouse
                     TeleNo = int.Parse(SupplierTeleInput.Text), Mail = SupplierMailInput.Text, Site = SupplierSiteInput.Text, Fax = int.Parse(SupplierFaxInput.Text)});
                 Entries.SaveChanges();
                 SupplierSelect(null);
-                SupplierDataGrid.Refresh();
+                SupplierDataGrid.DataSource = Entries.Suppliers.ToList();
             }
             else
             {
@@ -550,7 +703,7 @@ namespace Warehouse
                 EditCS.Fax = CustomerFaxOutput.Text != String.Empty ? int.Parse(CustomerFaxOutput.Text) : EditCS.Fax;
                 Entries.SaveChanges();
                 CustomerSelect(null);
-                CustomerDataGrid.Refresh();
+                CustomerDataGrid.DataSource = Entries.Customers.ToList();
             }
             else
             {
@@ -578,7 +731,7 @@ namespace Warehouse
                 });
                 Entries.SaveChanges();
                 CustomerSelect(null);
-                CustomerDataGrid.Refresh();
+                CustomerDataGrid.DataSource = Entries.Customers.ToList();
             }
             else
             {
@@ -604,6 +757,7 @@ namespace Warehouse
             SupplyPermitWarehouseOutput.Items.Clear();
             SupplyPermitProductOutput.Items.Clear();
             SupplyPermitSupplierOutput.Items.Clear();
+            SupplyPermitPanelWarehouse.Items.Clear();
             IndexList.Clear();
             IndexList1.Clear();
             IndexList2.Clear();
@@ -711,19 +865,18 @@ namespace Warehouse
             {
                 FilteredSupplies = Entries.Supplies.ToList();
             }
-            SupplyPermitProductDataGrid.DataSource = FilteredSupplies.OrderBy(SP => SP.Supply_Permit).OrderBy(SP => SP.Product_FK).ToList();
+            SupplyPermitProductDataGrid.DataSource = FilteredSupplies.OrderBy(SP => SP.Supply_Permit_FK).OrderBy(SP => SP.Product_FK).ToList();
             SupplyPermitProductDataGrid.Columns["Supply_Permit"].HeaderText = "Warehouse";
             if (SupplyPermitDataGrid.SelectedRows.Count == 1)
             {
                 SupplyPermitProductDataGrid.Columns["Supply_Permit_FK"].Visible = false;
-                SupplyPermitProductDataGrid.Columns["Product"].DisplayIndex = 2;
             }
             else
             {
                 SupplyPermitProductDataGrid.Columns["Supply_Permit_FK"].Visible = true;
                 SupplyPermitSelect(null);
-                SupplyPermitProductDataGrid.Columns["Product"].DisplayIndex = 3;
             }
+            SupplyPermitProductDataGrid.Columns["Product_Date"].DisplayIndex = 2;
             SupplyPermitProductDataGrid.Columns["Supply_Permit_FK"].DisplayIndex = 0;
             SupplyPermitProductDataGrid.Columns["Supply_Permit"].DisplayIndex = 5;
         }
@@ -737,7 +890,7 @@ namespace Warehouse
             SupplyPermitIDOutput.Text = FilteredSupply.Supply_Permit.ID.ToString();
             SupplyPermitSupplierOutput.Text = FilteredSupply.Supply_Permit.Supplier.Name;
             SupplyPermitWarehouseOutput.Text = FilteredSupply.Supply_Permit.Warehouse.Name;
-            SupplyPermitProductOutput.Text = FilteredSupply.Product.Name;
+            SupplyPermitProductOutput.Text = FilteredSupply.Product_Date.Product.Name;
             SupplyPermitProductEditLocked.Text = SupplyPermitProductNewLocked.Text = FilteredSupply.Product_FK.ToString();
             SupplyPermitQtyOutput.Text = FilteredSupply.Qty.ToString();
             SupplyPermitWarehouseNewLocked.Text = SupplyPermitWarehouseEditLocked.Text = FilteredSupply.Supply_Permit.Warehouse_FK.ToString();
@@ -767,8 +920,8 @@ namespace Warehouse
                 DateTimeConverter Conv = new DateTimeConverter();
                 FilteredPermit.Date = (DateTime)Conv.ConvertFromString(SupplyPermitDateOutput.Text);
                 Entries.SaveChanges();
+                SupplyPermitDataGrid.DataSource = Entries.Supply_Permit.ToList();
                 SupplyPermitSelect(null);
-                SupplyPermitDataGrid.Refresh();
             }
             else
             {
@@ -793,8 +946,11 @@ namespace Warehouse
                     int NewProductFK = int.Parse(SupplyPermitProductNewLocked.Text);
                     DateTime NewProDate = (DateTime)Conv.ConvertFromString(SupplyPermitProDateOutput.Text);
                     int NewQty = int.Parse(SupplyPermitQtyOutput.Text);
+                    DbEntityEntry<Supply> Entry = Entries.Entry(Entries.Supplies.Where(SP=>(SP.Supply_Permit_FK == SupplyPermitFK)&&(SP.Product_FK == SupplyPermitProductFK)&&(SP.Product_Date.Production_Date == SupplyPermitDateTime)).FirstOrDefault());
                     Entries.CascadingSupplyPermit(SupplyPermitFK, SupplyPermitProductFK, SupplyPermitDateTime, NewProductFK, NewProDate, NewQty);
                     Entries.SaveChanges();
+                    Entry.Reload();
+                    SupplyPermitDataGrid_SelectionChanged(new object(), new EventArgs());
                     SupplyPermitSelect(null);
                 }
                 else
@@ -832,19 +988,443 @@ namespace Warehouse
         }
         #endregion
 
+        #region Supply Permit Selected Entry Change Date List
+        private void SupplyPermitProductOutput_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SupplyPermitProDateOutput.Items.Clear();
+            ComboBox List = (ComboBox)sender;
+            int ID = IndexList2[List.SelectedIndex];
+            string[] ProdDate = Entries.Product_Date.Where(PD => PD.Product_FK == ID).Select(PD => PD.Production_Date.ToString()).ToArray();
+            SupplyPermitProDateOutput.Items.AddRange(ProdDate);
+        }
+        #endregion
+
         #region Dynamic List Selection
         public void DynamicListSelection (object sender, EventArgs e)
         {
             ComboBox List = (ComboBox)sender;
             SupplyPermitAddGroup AddGroup = SupplyPermitAddGroup.AddGroup.Where(AG => AG.ProductList == List).FirstOrDefault();
             AddGroup.ProductID.Text = IndexList2[List.SelectedIndex].ToString();
+            int ID = IndexList2[List.SelectedIndex];
+            string[] ProdDate = Entries.Product_Date.Where(PD => PD.Product_FK == ID).Select(PD => PD.Production_Date.ToString()).ToArray();
+            AddGroup.ProDate.Items.AddRange(ProdDate);
+        }
+
+        #endregion
+
+        #region Supply Permit Add Permit
+        private void SupplyPermitAddBtn_Click(object sender, EventArgs e)
+        {
+            List<string> ProductDateFlag = new List<string>();
+            if (SupplyPermitAddGroup.AddGroup.Count > 0)
+            {
+                if (SupplyPermitPanelWarehouseLocked.Text != String.Empty && SupplyPermitPanelSupplierLocked.Text != String.Empty &&
+                    SupplyPermitPanelDate.Text != String.Empty)
+                {
+                    int i;
+                    List<SupplyPermitAddGroup> Group = SupplyPermitAddGroup.AddGroup;
+                    int ProductGroupCount = Group.Count;
+                    for (i = 0; (i < ProductGroupCount) && (Group[i].ProductID.Text != String.Empty) && (Group[i].ProDate.Text != String.Empty) && (Group[i].Qty.Text != String.Empty); i++);
+                    if (i == ProductGroupCount)
+                    {
+                        for (i = 0; (i < ProductGroupCount) && (!ProductDateFlag.Contains(SupplyPermitAddGroup.AddGroup[i].ProductID.Text + "-" + SupplyPermitAddGroup.AddGroup[i].ProDate.Text)); i++)
+                        {
+                            ProductDateFlag.Add(SupplyPermitAddGroup.AddGroup[i].ProductID.Text + "-" + SupplyPermitAddGroup.AddGroup[i].ProDate.Text);
+                        }
+                        if (i == ProductGroupCount)
+                        {
+                            DateTimeConverter Conv = new DateTimeConverter();
+                            Supply_Permit NewPermit = new Supply_Permit()
+                            {
+                                ID = Entries.Supply_Permit.Max(SP => SP.ID) + 1,
+                                Warehouse_FK = int.Parse(SupplyPermitPanelWarehouseLocked.Text),
+                                Supplier_FK = int.Parse(SupplyPermitPanelSupplierLocked.Text),
+                                Date = (DateTime)Conv.ConvertFromString(SupplyPermitPanelDate.Text),
+                            };
+                            Entries.Supply_Permit.Add(NewPermit);
+                            foreach (SupplyPermitAddGroup GP in Group)
+                            {
+                                Entries.Supplies.Add(new Supply()
+                                {
+                                    Supply_Permit_FK = NewPermit.ID,
+                                    Product_FK = int.Parse(GP.ProductID.Text),
+                                    ProDate = (DateTime)Conv.ConvertFromString(GP.ProDate.Text),
+                                    Qty = int.Parse(GP.Qty.Text)
+                                });
+                            }
+                            Entries.SaveChanges();
+                            SupplyPermitDataGrid.DataSource = Entries.Supply_Permit.ToList();
+                            SupplyPermitSelect(null);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please enter unique Product - Production Date pairs!");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please enter all Product fields!");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please enter all Supply Permit fields!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please add a Product to the Supply Permit!");
+            }
+        }
+
+
+        #endregion
+
+        #endregion
+
+        #region Movement Events
+
+        #region Movement Tab Active
+        private void MovementTab_Enter(object sender, EventArgs e)
+        {
+            MovementDataGrid.DataSource = Entries.Movements.ToList();
+            MovementDataGrid.Columns["Warehouse_From_FK"].DisplayIndex = 0;
+            MovementDataGrid.Columns["Warehouse"].DisplayIndex = 1;
+            MovementDataGrid.Columns["Warehouse_To_FK"].DisplayIndex = 2;
+            MovementDataGrid.Columns["Warehouse1"].DisplayIndex = 3;
+            MovementDataGrid.Columns["Supply_Permit_FK"].DisplayIndex = 4;
+            MovementDataGrid.Columns["Supply_Permit"].DisplayIndex = 5;
+            MovementDataGrid.Columns["Supply_Permit"].HeaderText = "Supplier_Name";
+            MovementDataGrid.Columns["Product_FK"].DisplayIndex = 6;
+            MovementDataGrid.Columns["Product_Date"].HeaderText = "Product_Name";
+            MovementDataGrid.Columns["Product_Date"].DisplayIndex = 7;
+            MovementDataGrid.Columns["ProDate"].DisplayIndex = 8;
+            MovementDataGrid.Columns["Qty"].DisplayIndex = 9;
+            MovementDataGrid.Columns["Date"].DisplayIndex = 10;
+            MovementWHToAddLocked.Text =
+            MovementWHFromAddLocked.Text =
+            MovementProductAddLocked.Text = 
+            MovementWHFromOutput.Text =
+            MovementWHFromLocked.Text =
+            MovementWHToOutput.Text =
+            MovementWHToLocked.Text =
+            MovementSupplierOutput.Text =
+            MovementSupplierLocked.Text =
+            MovementPermitOutput.Text =
+            MovementProductOutput.Text =
+            MovementProductLocked.Text =
+            MovementProDateLocked.Text =
+            MovementQtyLocked.Text =
+            MovementWHFromAdd.Text =
+            MovementWHToAdd.Text =
+            MovementPermitAdd.Text =
+            MovementQtyOutput.Text =
+            MovementProductAdd.Text =
+            MovementProDateOutput.Text =
+            MovementDateLocked.Text = String.Empty;
+            MovementWHFromAdd.Items.Clear();
+            MovementWHToAdd.Items.Clear();
+            MovementPermitAdd.Items.Clear();
+            MovementQtyOutput.Items.Clear();
+            MovementProductAdd.Items.Clear();
+            MovementProDateOutput.Items.Clear();
+            IndexList.Clear();
+            IndexList1.Clear();
+            IndexList2.Clear();
+            foreach(Warehouse WH in Entries.Warehouses)
+            {
+                IndexList.Add(WH.ID);
+                MovementWHFromAdd.Items.Add(WH.Name);
+            }
         }
         #endregion
 
+        #region Movement Row Header Click
+        private void MovementDataGrid_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewRow Row = MovementDataGrid.Rows[e.RowIndex];
+            int ID = int.Parse(Row.Cells["Supply_Permit_FK"].Value.ToString());
+            Supply_Permit FilteredSupplyPermit = Entries.Supply_Permit.FirstOrDefault(SP => SP.ID == ID);
+            MovementWHFromOutput.Text = Row.Cells["Warehouse"].Value.ToString();
+            MovementWHFromLocked.Text = Row.Cells["Warehouse_From_FK"].Value.ToString();
+            MovementWHToOutput.Text = Row.Cells["Warehouse1"].Value.ToString();
+            MovementWHToLocked.Text = Row.Cells["Warehouse_To_FK"].Value.ToString();
+            MovementSupplierOutput.Text = Row.Cells["Supply_Permit"].Value.ToString();
+            MovementSupplierLocked.Text = FilteredSupplyPermit.Supplier_FK.ToString();
+            MovementPermitOutput.Text = Row.Cells["Supply_Permit_FK"].Value.ToString();
+            MovementProductOutput.Text = Row.Cells["Product_Date"].Value.ToString();
+            MovementProductLocked.Text = Row.Cells["Product_FK"].Value.ToString();
+            MovementProDateLocked.Text = Row.Cells["ProDate"].Value.ToString();
+            MovementQtyLocked.Text = Row.Cells["Qty"].Value.ToString();
+            MovementDateLocked.Text = Row.Cells["Date"].Value.ToString();
+        }
+        #endregion
+
+        #region Movement Lists Cascading Selection
+        private void MovementWHFromAdd_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox List = (ComboBox)sender;
+            int ID = IndexList[List.SelectedIndex];
+            List<GetDetailedQty_Result> QtyResult = Entries.GetDetailedQty().Where(GDQ => (GDQ.Warehouse_ID == ID) && (GDQ.Qty > 0)).ToList();
+            IndexList1.Clear();
+            IndexList2.Clear();
+            MovementWHToAdd.Items.Clear();
+            MovementPermitAdd.Items.Clear();
+            MovementQtyOutput.Items.Clear();
+            MovementProductAdd.Items.Clear();
+            MovementProDateOutput.Items.Clear();
+            MovementWHFromAddLocked.Text = ID.ToString();
+            MovementProDateOutput.Text =
+            MovementWHToAdd.Text =
+            MovementPermitAdd.Text =
+            MovementQtyOutput.Text =
+            MovementProductAdd.Text =
+            MovementWHToAddLocked.Text =
+            MovementProductAddLocked.Text = String.Empty;
+            foreach (Warehouse WH in Entries.Warehouses.Where(W => W.ID != ID))
+            {
+                IndexList1.Add(WH.ID);
+                MovementWHToAdd.Items.Add(WH.Name);
+            }
+            foreach (int Result in QtyResult.Select(QR => QR.Supply_Permit_ID).OrderBy(QR=>QR).Distinct())
+            {
+                MovementPermitAdd.Items.Add(Result);
+            }
+        }
+
+        private void MovementPermitAdd_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int WHID = IndexList[MovementWHFromAdd.SelectedIndex];
+            int SPID = int.Parse(MovementPermitAdd.SelectedItem.ToString());
+            var QtyResult = Entries.GetDetailedQty().Where(GDQ => (GDQ.Warehouse_ID == WHID) && (GDQ.Qty > 0) && (GDQ.Supply_Permit_ID == SPID)).Select(GDQ=> new { GDQ.Product_ID, GDQ.Product_Name} ).OrderBy(GDQ=>GDQ.Product_ID).Distinct().ToList();
+            IndexList2.Clear();
+            MovementQtyOutput.Items.Clear();
+            MovementProductAdd.Items.Clear();
+            MovementProDateOutput.Items.Clear();
+            MovementProDateOutput.Text =
+            MovementQtyOutput.Text =
+            MovementProductAdd.Text =
+            MovementProductAddLocked.Text = String.Empty;
+            foreach(var Result in QtyResult)
+            {
+                IndexList2.Add(Result.Product_ID.Value);
+                MovementProductAdd.Items.Add(Result.Product_Name);
+            }
+        }
+        private void MovementWHToAdd_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            ComboBox List = (ComboBox)sender;
+            int ID = IndexList1[List.SelectedIndex];
+            MovementWHToAddLocked.Text = ID.ToString();
+        }
+
+        private void MovementProductAdd_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            ComboBox List = (ComboBox)sender;
+            int PID = IndexList2[List.SelectedIndex];
+            int WHID = IndexList[MovementWHFromAdd.SelectedIndex];
+            int SPID = int.Parse(MovementPermitAdd.SelectedItem.ToString());
+            var QtyResult = Entries.GetDetailedQty().Where(GDQ => (GDQ.Warehouse_ID == WHID) && (GDQ.Qty > 0) && (GDQ.Supply_Permit_ID == SPID) && (GDQ.Product_ID == PID)).Select(GDQ=> GDQ.Prod_Date ).OrderBy(GDQ => GDQ).Distinct().ToList();
+            MovementProductAddLocked.Text = PID.ToString();
+            MovementQtyOutput.Items.Clear();
+            MovementQtyOutput.Text = String.Empty;
+            MovementProDateOutput.Items.Clear();
+            DateTimeConverter Conv = new DateTimeConverter();
+            foreach(var Result in QtyResult)
+            {
+                MovementProDateOutput.Items.Add(Result.Value.ToShortDateString());
+            }
+        }
+
+        private void MovementProDateOutput_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            ComboBox List = (ComboBox)sender;
+            int PID = IndexList2[MovementProductAdd.SelectedIndex];
+            int WHID = IndexList[MovementWHFromAdd.SelectedIndex];
+            int SPID = int.Parse(MovementPermitAdd.SelectedItem.ToString());
+            MovementQtyOutput.Items.Clear();
+            MovementQtyOutput.Text = String.Empty;
+            DateTimeConverter Conv = new DateTimeConverter();
+            DateTime DateID = (DateTime)Conv.ConvertFromString(MovementProDateOutput.Text);
+            var QtyResult = Entries.GetDetailedQty().Where(GDQ => (GDQ.Warehouse_ID == WHID) && (GDQ.Qty > 0) && (GDQ.Supply_Permit_ID == SPID) && (GDQ.Product_ID == PID) && (GDQ.Prod_Date.Value.ToShortDateString().Contains(MovementProDateOutput.Text))).Select(GDQ => GDQ.Qty).Sum(GDQ=>GDQ);
+            for (int i = 1; i <= QtyResult; i++)
+            {
+                MovementQtyOutput.Items.Add(i.ToString());
+            }
+        }
+        #endregion
+
+        #region Movement Move Button
+        private void MovementAddBtn_Click(object sender, EventArgs e)
+        {
+            if((MovementWHFromAddLocked.Text != String.Empty) && (MovementWHToAddLocked.Text != String.Empty) &&
+                (MovementPermitAdd.Text != String.Empty) && (MovementProDateOutput.Text != String.Empty) &&
+                (MovementProductAddLocked.Text != String.Empty) && (MovementQtyOutput.Text != String.Empty)
+                && (MovementMoveDate.Text != String.Empty))
+            {
+                DateTimeConverter Conv = new DateTimeConverter();
+                DateTime NewDate = (DateTime)Conv.ConvertFromString(MovementProDateOutput.Text);
+                DateTime MoveDate = (DateTime)Conv.ConvertFromString(MovementMoveDate.Text);
+                Entries.AddMovement(int.Parse(MovementWHFromAddLocked.Text), int.Parse(MovementWHToAddLocked.Text),
+                    int.Parse(MovementPermitAdd.Text), int.Parse(MovementProductAddLocked.Text), NewDate, int.Parse(MovementQtyOutput.Text), MoveDate);
+                Entries.SaveChanges();
+                DbEntityEntry<Movement> Entry = Entries.Entry(Entries.Movements.FirstOrDefault());
+                Entry.Reload();
+                MovementTab_Enter(null, null);
+            }
+            else
+            {
+                MessageBox.Show("Please select all Movement fields!");
+            }
+        }
+
         #endregion
 
         #endregion
 
+        #region Sale Permit Events
 
+        #region Sale Permit Tab Active
+
+        #endregion
+
+        #endregion
+
+        #endregion
+
+        private void SaleTab_Enter(object sender, EventArgs e)
+        {
+            SalePermitDataGrid.DataSource = Entries.Sale_Permit.ToList();
+            SalePermitDataGrid.Columns["Sales"].Visible = false;
+            SalePermitDataGrid.Columns["Customer"].DisplayIndex = 3;
+            SalePermitDataGrid.Columns["Warehouse"].DisplayIndex = 5;
+            SalePermitSelect(null);
+            IndexList.Clear();
+            IndexList1.Clear();
+            IndexList2.Clear();
+            IndexList3.Clear();
+            SalePermitCustomerListOutput.Items.Clear();
+            SalePermitWarehouseListOutput.Items.Clear();
+            SalePermitEntryWarehouseList.Items.Clear();
+            SalePermitProductListOutput.Items.Clear();
+            SalePermitListOutput.Items.Add("All");
+            foreach (Sale_Permit SP in Entries.Sale_Permit)
+            {
+                IndexList.Add(SP.ID);
+                SalePermitListOutput.Items.Add(SP.ID);
+            }
+            foreach(Customer CS in Entries.Customers)
+            {
+                IndexList1.Add(CS.ID);
+                SalePermitCustomerListOutput.Items.Add(CS.Name);
+            }
+            foreach (Warehouse WH in Entries.Warehouses)
+            {
+                IndexList2.Add(WH.ID);
+                SalePermitWarehouseListOutput.Items.Add(WH.Name);
+                SalePermitEntryWarehouseList.Items.Add(WH.Name);
+            }
+            foreach (Product PD in Entries.Products)
+            {
+                IndexList3.Add(PD.Code);
+                SalePermitProductListOutput.Items.Add(PD.Name);
+            }
+        }
+
+        private void SalePermitSelect(Func<Sale_Permit,bool> Critera)
+        {
+            if(Critera == null)
+            {
+                SalePermitListOutput.Text =
+                SalePermitIDOutput.Text =
+                SalePermitDateOutput.Text =
+                SalePermitCustomerListOutput.Text =
+                SalePermitCustomerIDNewLocked.Text =
+                SalePermitCustomerIDEditLocked.Text =
+                SalePermitWarehouseListOutput.Text =
+                SalePermitWarehouseNewLocked.Text =
+                SalePermitWarehouseEditLocked.Text = String.Empty;
+                SalePermitEntryDataGrid.DataSource = Entries.Sales.ToList();
+            }
+            else
+            {
+                Sale_Permit FilteredSalePermit = Entries.Sale_Permit.FirstOrDefault(Critera);
+                SalePermitEntryDataGrid.DataSource = FilteredSalePermit.Sales.OrderBy(SP => SP.Product_FK).ToList();
+                SalePermitListOutput.Text = SalePermitIDOutput.Text = FilteredSalePermit.ID.ToString();
+                SalePermitDateOutput.Text = FilteredSalePermit.Date.ToShortDateString();
+                SalePermitCustomerListOutput.Text = FilteredSalePermit.Customer.Name;
+                SalePermitCustomerIDNewLocked.Text = SalePermitCustomerIDEditLocked.Text = FilteredSalePermit.Customer_FK.ToString();
+                SalePermitWarehouseListOutput.Text = FilteredSalePermit.Warehouse.Name;
+                SalePermitWarehouseNewLocked.Text = SalePermitWarehouseEditLocked.Text = FilteredSalePermit.Warehouse_FK.ToString();
+            }
+            SalePermitEntryDataGrid.ClearSelection();
+            SalePermitProductListOutput.Text =
+            SalePermitProductNewLocked.Text =
+            SalePermitProductEditLocked.Text =
+            SalePermitProDateOutput.Text =
+            SalePermitProDateEditLocked.Text =
+            SalePermitSupPermitListOutput.Text =
+            SalePermitQtyOutput.Text =
+            SalePermitEntryWarehouseList.Text =
+            SalePermitEntryWarehouseLocked.Text =
+            SalePermitCustomerEntryList.Text =
+            SalePermitEntryCustomerLocked.Text =
+            SalePermitEntryDate.Text = string.Empty;
+        }
+
+        private void SalePermitDataGrid_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            int ID = IndexList[e.RowIndex];
+            SalePermitSelect(SP=>SP.ID == ID);
+        }
+
+        private void SalePermitListOutput_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            ComboBox List = (ComboBox)sender;
+            if(List.SelectedIndex == 0)
+            {
+                SalePermitDataGrid.ClearSelection();
+                SalePermitSelect(null);
+            }
+            else
+            {
+                int ID = IndexList[List.SelectedIndex-1];
+                int SelectionID = List.SelectedIndex - 1;
+                SalePermitSelect(SP=>SP.ID == ID);
+                SalePermitDataGrid.ClearSelection();
+                SalePermitDataGrid.Rows[SelectionID].Selected = true;
+                SalePermitDataGrid_RowHeaderMouseClick(null, new DataGridViewCellMouseEventArgs(0, SelectionID,0,0, new MouseEventArgs(MouseButtons.Right,1,0,0,0)));
+            }
+        }
+
+        private void SalePermitEntryDataGrid_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            List<Sale> FilteredSales = (List<Sale>)SalePermitEntryDataGrid.DataSource;
+            Sale FilteredSale = FilteredSales[e.RowIndex];
+            SalePermitSelect(SP => SP.ID == FilteredSale.Sale_Permit_FK);
+            SalePermitProductListOutput.Text = FilteredSale.Product_Date.Product.Name;
+            SalePermitProductNewLocked.Text = SalePermitProductEditLocked.Text = FilteredSale.Product_FK.ToString();
+            SalePermitProDateOutput.Text = SalePermitProDateEditLocked.Text = FilteredSale.ProDate.ToString();
+            SalePermitSupPermitListOutput.Text = FilteredSale.Supply_Permit_FK.ToString();
+            SalePermitQtyOutput.Text = FilteredSale.Qty.ToString();
+        }
+
+        private void SalePermitDataGrid_SelectionChanged(object sender, EventArgs e)
+        {
+            if (SalePermitDataGrid.SelectedRows.Count > 1)
+            {
+                List<Sale_Permit> FilteredSalePermits = (List<Sale_Permit>)SalePermitDataGrid.DataSource;
+                List<Sale> AllSales = new List<Sale>();
+                foreach (DataGridViewRow Row in SalePermitDataGrid.SelectedRows)
+                {
+                    AllSales.AddRange(FilteredSalePermits[Row.Index].Sales.ToList());
+                }
+                SalePermitEntryDataGrid.DataSource = AllSales;
+            }
+            else
+            {
+                SalePermitSelect(null);
+            }
+        }
     }
 }

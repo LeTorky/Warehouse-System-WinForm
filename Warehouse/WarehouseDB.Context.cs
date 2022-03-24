@@ -29,6 +29,7 @@ namespace Warehouse
     
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Product_Date> Product_Date { get; set; }
         public virtual DbSet<Sale_Permit> Sale_Permit { get; set; }
         public virtual DbSet<Sale> Sales { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
@@ -38,6 +39,40 @@ namespace Warehouse
         public virtual DbSet<Unit> Units { get; set; }
         public virtual DbSet<Warehouse> Warehouses { get; set; }
         public virtual DbSet<Movement> Movements { get; set; }
+    
+        public virtual int CascadingProductDate(Nullable<int> product_FK, Nullable<System.DateTime> product_ProDate, Nullable<System.DateTime> new_ProDate)
+        {
+            var product_FKParameter = product_FK.HasValue ?
+                new ObjectParameter("Product_FK", product_FK) :
+                new ObjectParameter("Product_FK", typeof(int));
+    
+            var product_ProDateParameter = product_ProDate.HasValue ?
+                new ObjectParameter("Product_ProDate", product_ProDate) :
+                new ObjectParameter("Product_ProDate", typeof(System.DateTime));
+    
+            var new_ProDateParameter = new_ProDate.HasValue ?
+                new ObjectParameter("New_ProDate", new_ProDate) :
+                new ObjectParameter("New_ProDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CascadingProductDate", product_FKParameter, product_ProDateParameter, new_ProDateParameter);
+        }
+    
+        public virtual int CascadingProductUnit(Nullable<int> product_FK, string product_Unit, string new_Unit)
+        {
+            var product_FKParameter = product_FK.HasValue ?
+                new ObjectParameter("Product_FK", product_FK) :
+                new ObjectParameter("Product_FK", typeof(int));
+    
+            var product_UnitParameter = product_Unit != null ?
+                new ObjectParameter("Product_Unit", product_Unit) :
+                new ObjectParameter("Product_Unit", typeof(string));
+    
+            var new_UnitParameter = new_Unit != null ?
+                new ObjectParameter("New_Unit", new_Unit) :
+                new ObjectParameter("New_Unit", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CascadingProductUnit", product_FKParameter, product_UnitParameter, new_UnitParameter);
+        }
     
         public virtual int CascadingSupplyPermit(Nullable<int> supply_Permit_FK, Nullable<int> product_FK, Nullable<System.DateTime> proDate, Nullable<int> product_FK_New, Nullable<System.DateTime> proDateNew, Nullable<int> qty)
         {
@@ -76,6 +111,19 @@ namespace Warehouse
         public virtual ObjectResult<GetTotalQty_Result> GetTotalQty()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetTotalQty_Result>("GetTotalQty");
+        }
+    
+        public virtual int ResetIdentity(string table, string identity)
+        {
+            var tableParameter = table != null ?
+                new ObjectParameter("Table", table) :
+                new ObjectParameter("Table", typeof(string));
+    
+            var identityParameter = identity != null ?
+                new ObjectParameter("Identity", identity) :
+                new ObjectParameter("Identity", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ResetIdentity", tableParameter, identityParameter);
         }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
@@ -179,6 +227,39 @@ namespace Warehouse
         public virtual int sp_upgraddiagrams()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        public virtual int AddMovement(Nullable<int> warehouse_From_FK, Nullable<int> warehouse_To_FK, Nullable<int> supply_Permit_FK, Nullable<int> product_FK, Nullable<System.DateTime> proDate, Nullable<int> qty, Nullable<System.DateTime> date)
+        {
+            var warehouse_From_FKParameter = warehouse_From_FK.HasValue ?
+                new ObjectParameter("Warehouse_From_FK", warehouse_From_FK) :
+                new ObjectParameter("Warehouse_From_FK", typeof(int));
+    
+            var warehouse_To_FKParameter = warehouse_To_FK.HasValue ?
+                new ObjectParameter("Warehouse_To_FK", warehouse_To_FK) :
+                new ObjectParameter("Warehouse_To_FK", typeof(int));
+    
+            var supply_Permit_FKParameter = supply_Permit_FK.HasValue ?
+                new ObjectParameter("Supply_Permit_FK", supply_Permit_FK) :
+                new ObjectParameter("Supply_Permit_FK", typeof(int));
+    
+            var product_FKParameter = product_FK.HasValue ?
+                new ObjectParameter("Product_FK", product_FK) :
+                new ObjectParameter("Product_FK", typeof(int));
+    
+            var proDateParameter = proDate.HasValue ?
+                new ObjectParameter("ProDate", proDate) :
+                new ObjectParameter("ProDate", typeof(System.DateTime));
+    
+            var qtyParameter = qty.HasValue ?
+                new ObjectParameter("Qty", qty) :
+                new ObjectParameter("Qty", typeof(int));
+    
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddMovement", warehouse_From_FKParameter, warehouse_To_FKParameter, supply_Permit_FKParameter, product_FKParameter, proDateParameter, qtyParameter, dateParameter);
         }
     }
 }

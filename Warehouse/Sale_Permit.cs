@@ -23,8 +23,10 @@ namespace Warehouse
         public int ID { get; set; }
         public System.DateTime Date { get; set; }
         public int Customer_FK { get; set; }
+        public int Warehouse_FK { get; set; }
     
         public virtual Customer Customer { get; set; }
+        public virtual Warehouse Warehouse { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sale> Sales { get; set; }
     }

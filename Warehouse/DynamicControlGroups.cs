@@ -14,7 +14,7 @@ namespace Warehouse
         public ComboBox ProductList { get; set; }
         public TextBox ProductID { get; set; }
         public Label ProDateLabel { get; set; }
-        public TextBox ProDate { get; set; }
+        public ComboBox ProDate { get; set; }
         public Label QtyLabel { get; set; }
         public TextBox Qty { get; set; }
         public static List<SupplyPermitAddGroup> AddGroup;
@@ -40,7 +40,7 @@ namespace Warehouse
             ProductID = new TextBox();
             ProductID.Enabled = false;
             Qty = new TextBox();
-            ProDate = new TextBox();
+            ProDate = new ComboBox();
             ProductList = new ComboBox();
             ID.Top = ProductLabel.Top = ProDateLabel.Top = QtyLabel.Top = ProductID.Top = Qty.Top = ProDate.Top = ProductList.Top = Padding;
             ID.Left = 11;
